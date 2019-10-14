@@ -1,0 +1,37 @@
+<ion-app>
+
+  <ion-menu side="start" menuId='m1'> <!-- m1 is extracted to pages that need this side drawer -->
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>
+          Trinity Bar
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-list>
+        <ion-menu-toggle>
+          <ion-item routerLink="/store/tabs/dapps"> 
+            <ion-icon name="appstore"></ion-icon>
+            <ion-label padding>dApp Explorer</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item routerLink="/my-apps">
+            <ion-icon name="cloud-download"></ion-icon>
+            <ion-label padding>My dApps</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item routerLink="/about"> 
+            <ion-icon name="contacts"></ion-icon>
+            <ion-label padding>About</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet main></ion-router-outlet> <!-- main ensures the ion-menu will render wherever the main is -->
+</ion-app>
