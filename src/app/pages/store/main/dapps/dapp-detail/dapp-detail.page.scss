@@ -1,5 +1,6 @@
 .container {
   background-image: linear-gradient(to right,#e6e9f0 0%, #325169 100%);
+  padding: 1px;
 }
 
 ion-col {
@@ -27,6 +28,7 @@ ion-card {
 
     ion-card-title {
      font-size: 30px;
+     font-weight: bold;
      margin-right: 20px;
      line-height: 1;
     }
