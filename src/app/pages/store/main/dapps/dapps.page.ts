@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 import { DappsService } from '../../../../dapps.service';
 import { Dapp } from '../../../../dapps.model';
@@ -6,50 +7,23 @@ import { Dapp } from '../../../../dapps.model';
 @Component({
   selector: 'app-dapps',
   templateUrl: './dapps.page.html',
-  styleUrls: ['./dapps.page.scss'],
+  styles: ['dapps.page.scss'],
 })
 export class DappsPage implements OnInit {
-
- applications: Dapp[];
-
+  applications: Dapp[] = [];
 
   constructor(private dappsService: DappsService) {
-  }
-
-  ngOnInit() {
-    this.applications = this.dappsService.dapps;
-  }
-
-}
-
-
-/*
-//// API /////
-
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
-@Component({
-  selector: 'app-dapps',
-  templateUrl: './dapps.page.html',
-  styleUrls: ['./dapps.page.scss'],
-})
-export class DappsPage implements OnInit {
-
-  applications = [];
-
-  constructor(private http: HttpClient) {
-
-    this.http.get('/storeapi/apps/list').subscribe((response) => {
-      this.applications = this.applications.concat(response);
-      console.log(this.applications);
+    this.dappsService.fetchDapps().subscribe((apps:Dapp[]) => {
+      console.log("DApps fetched", apps);
+      this.applications = apps;
     });
   }
 
   getAppIcon(app) {
-    return "/storeapi/apps/"+app._id+"/icon"
+    return this.dappsService.getAppIcon(app)
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    //this.applications = this.dappsService.dapps;
+  }
 }
-*/

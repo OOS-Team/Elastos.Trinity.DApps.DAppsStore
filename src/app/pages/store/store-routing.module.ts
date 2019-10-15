@@ -2,6 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { StorePage } from './store.page';
+import { DappsPageModule } from './main/dapps/dapps.module';
+import { DappDetailPageModule } from './main/dapps/dapp-detail/dapp-detail.module';
+import { CategoriesPageModule } from './main/categories/categories.module';
+import { CategoryTypePageModule } from './main/categories/category-type/category-type.module'
+import { SearchPageModule } from './main/search/search.module'
 
 const routes: Routes = [
   {
@@ -14,11 +19,11 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: './main/dapps/dapps.module#DappsPageModule'
+            loadChildren: ()=>DappsPageModule
           },
           {
             path: ':dappId',
-            loadChildren: './main/dapps/dapp-detail/dapp-detail.module#DappDetailPageModule'
+            loadChildren: ()=>DappDetailPageModule
           }
         ]
       },
@@ -28,11 +33,11 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: './main/categories/categories.module#CategoriesPageModule'
+            loadChildren: ()=>CategoriesPageModule
           },
           {
             path: ':categoryType',
-            loadChildren: './main/categories/category-type/category-type.module#CategoryTypePageModule'
+            loadChildren: ()=>CategoryTypePageModule
           }
         ]
       },
@@ -42,7 +47,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: './main/search/search.module#SearchPageModule'
+            loadChildren: ()=>SearchPageModule
           },
         ]
       },
@@ -59,8 +64,8 @@ const routes: Routes = [
     redirectTo: '/store/tabs/dapps',
     pathMatch: 'full'
   },
-  { path: 'categories', loadChildren: './main/categories/categories.module#CategoriesPageModule' },
-  { path: 'category-type', loadChildren: './main/categories/category-type/category-type.module#CategoryTypePageModule' }
+  { path: 'categories', loadChildren: ()=>CategoriesPageModule },
+  { path: 'category-type', loadChildren: ()=>CategoryTypePageModule }
 ];
 
 @NgModule({

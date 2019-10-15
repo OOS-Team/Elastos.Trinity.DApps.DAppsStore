@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Dapp } from './dapps.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map, flatMap, mergeMap, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +10,7 @@ import { Dapp } from './dapps.model';
 export class DappsService {
 
   private _dapps: Dapp[] = [
-    new Dapp(
+    /*new Dapp(
      '1', // _id
      0.1, // versionCode
      '1.0', // versionName
@@ -102,8 +105,25 @@ export class DappsService {
       'Social', // category
       6, // downloadsCount
       'https://cdn.pixabay.com/photo/2016/02/18/22/18/picnic-1208229_1280.jpg'
-    )
+    )*/
   ];
+
+  constructor(private http: HttpClient) {
+    
+  }
+
+  fetchDapps(): Observable<Dapp[]> {
+    console.log("Fetching DApps");
+
+    this._dapps = [];
+    return this.http.get<Dapp[]>('https://dapp-store.elastos.org/apps/list').pipe(
+      tap(response => {
+        this._dapps = this._dapps.concat(response);
+        console.log("DApps concat", this._dapps)
+        return this._dapps
+      })
+    );
+  }
 
   get dapps() {
     return [...this._dapps];
@@ -113,18 +133,29 @@ export class DappsService {
     return {...this._dapps.find(dapp => dapp._id === id)};
   }
 
+  getAppIcon(app) {
+    return "https://dapp-store.elastos.org/apps/"+app._id+"/icon"
+  }
+
+  getAppBanner(app) {
+    return "https://dapp-store.elastos.org/apps/"+app._id+"/banner"
+  }
+
   getCategory(category: string) {
     return [...this._dapps.filter(dapp => dapp.category === category)];
   }
 
-  constructor() {}
+  downloadDapp(app) {
+    this.http.get('https://dapp-store.elastos.org/apps/'+app._id+'/download').subscribe(response => {
+      console.log(response)
+    })
+  }
 }
 
 
 /*
 //// API ////
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -133,21 +164,13 @@ export class DappsService {
 
   private applications = [];
 
-  constructor(private http: HttpClient) {
-
-    this.http.get('https://dapp-store.elastos.org/apps/list').subscribe((response) => {
-      this.applications = this.applications.concat(response);
-      console.log(this.applications);
-    });
-  }
+  
 
   get dapps() {
     return [...this.applications];
   }
 
-  getAppIcon(app) {
-    return "https://dapp-store.elastos.org/apps/"+app._id+"/icon"
-  }
+  
 }
 */
 
@@ -156,8 +179,6 @@ export class DappsService {
 
   constructor(private http: HttpClient) { }
 
-  getDapps(): Observable<Dapp[]> {
-    return this.http.get<Dapp[]>(`${this.dappsUrl}`);
-  }
+ 
 }
 */

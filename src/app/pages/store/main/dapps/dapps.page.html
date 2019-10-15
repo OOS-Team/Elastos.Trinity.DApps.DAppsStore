@@ -25,7 +25,7 @@
       >
         <ion-col size="2" size-lg="1">
           <ion-thumbnail>
-            <ion-img [src]="app.imageUrl"></ion-img>
+            <ion-img [src]="getAppIcon(app)"></ion-img>
           </ion-thumbnail>
         </ion-col>
         <ion-col size="8" size-xs="8" size-lg="10.5">
@@ -39,35 +39,6 @@
           </ion-item>
         </ion-col>
       </ion-row>
-
-      <ion-row 
-        class="dapp"
-        *ngFor="let app of applications"
-        [routerLink]="[
-          '/', 
-          'store', 
-          'tabs', 
-          'dapps', 
-          app._id
-        ]"
-      >
-        <ion-col size="2" size-lg="1">
-          <ion-thumbnail>
-            <ion-img [src]="app.imageUrl"></ion-img>
-          </ion-thumbnail>
-        </ion-col>
-        <ion-col size="8" size-xs="8" size-lg="10.5">
-          <ion-label>
-            <h2>{{ app.appName }}</h2>
-            <p>{{ app.appShortDescription }}</p>
-          </ion-label>
-        </ion-col>
-        <ion-col size="2" size-xs="2" size-lg="0.5">
-          <ion-item detail lines='none'>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-
     </ion-grid>
   </ion-list>
 </ion-content>

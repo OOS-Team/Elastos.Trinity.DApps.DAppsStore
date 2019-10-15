@@ -22,6 +22,7 @@
             <ion-grid>
               <ion-row>
                 <ion-col size="8.5" size-lg="11">
+                  <ion-img [src]="getAppBanner(dapp)"></ion-img>
                   <ion-card-title>{{ dapp.appName }}</ion-card-title>
                   <ion-card-subtitle>{{ dapp.appShortDescription }}</ion-card-subtitle>
                   <p class="category">{{ dapp.category }}</p>
@@ -32,7 +33,7 @@
                   <p>Created <strong>{{ dapp.createdAt }}</strong></p>
                 </ion-col>
                 <ion-col size="3.5" size-lg="1">
-                  <ion-button>Install</ion-button>
+                  <ion-button (click)="installApp(dapp)">Install</ion-button>
                 </ion-col>
               </ion-row>
             </ion-grid>
