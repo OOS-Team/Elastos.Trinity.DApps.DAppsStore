@@ -6,8 +6,8 @@
   "short_name": "DApp Store",
   "short_description": "Trinity DApps store",
   "description": "This is the central place to browse and install DApps for the Elastos brower.",
-  "start_url": "index.html",
-  "type": "file",
+  "start_url": "http://192.168.1.2:8100",
+  "type": "url",
   "category": "entertainment",
   "icons": [
     {
@@ -23,12 +23,13 @@
   "default_locale": "en",
   "plugins": [
     "Device",
-    "SplashScreen"
+    "SplashScreen",
+    "File"
   ],
   "urls": [
     "http://www.baidu.com/*",
     "https://www.google.com",
-    "https://dapp-store.elastos.org/apps/list"
+    "https://dapp-store.elastos.org/*"
   ],
   "background_color": "#4e8ef7",
   "theme_display": "show",

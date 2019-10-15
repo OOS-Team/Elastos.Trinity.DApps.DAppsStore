@@ -41,16 +41,13 @@ export class DappDetailPage implements OnInit {
   async installApp(dapp) {
     // Download the file
     let epkPath = await this.downloadAppEPK(dapp);
+    console.log("EPK file downloaded and saved to "+epkPath)
 
-    // Save to temporary path
-    // TODO
-
-    // Ask the app install to install the DApp
-    // TODO
-    appService.sendIntent("appinstall", {url:"trinity:///data/temp"})
+    // Ask the app installer to install the DApp
+    appService.sendIntent("appinstall", {url:"trinity:///appinstall.epk"})
   }
 
   async downloadAppEPK(dapp) {
-    this.dappsService.downloadDapp(dapp)
+    await this.dappsService.downloadDapp(dapp)
   }
 }

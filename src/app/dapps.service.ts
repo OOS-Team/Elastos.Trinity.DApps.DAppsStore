@@ -146,8 +146,46 @@ export class DappsService {
   }
 
   downloadDapp(app) {
-    this.http.get('https://dapp-store.elastos.org/apps/'+app._id+'/download').subscribe(response => {
-      console.log(response)
+    console.log("App download starting...")
+
+    return new Promise((resolve, reject)=> {
+      // Download EPK file as blob
+      this.http.get('https://dapp-store.elastos.org/apps/'+app._id+'/download', {
+        responseType: 'arraybuffer'} ).subscribe(async response => {
+        console.log("Downloaded", response)
+
+        let blob = new Blob([response], { type: "application/octet-stream"});
+        console.log("Blob", blob)
+
+        // Save to a temporary location
+        let filePath = await this._savedDownloadedBlobToTempLocation(blob)
+
+        resolve(filePath)
+      })
+    })
+  } 
+
+  _savedDownloadedBlobToTempLocation(blob) {
+    let filePath = "trinity:///temp/appinstall.epk"
+
+    return new Promise((resolve, reject) => {
+      window.requestFileSystem(window.PERSISTENT, 10241024, (fs) => {
+        fs.root.getFile(filePath, { create: true, exclusive: false }, function (fileEntry) {
+          fileEntry.createWriter((fileWriter) => {
+            fileWriter.write(blob);
+            resolve(filePath)
+          }, (err) => {
+            console.error("createWriter ERROR - "+JSON.stringify(err));
+            reject(err)
+          });
+        }, (err) => {
+          console.error("getFile ERROR - "+JSON.stringify(err));
+          reject(err)
+        });
+      }, (err) => {
+        console.error("requestFileSystem ERROR - "+JSON.stringify(err));
+        reject(err)
+      })
     })
   }
 }

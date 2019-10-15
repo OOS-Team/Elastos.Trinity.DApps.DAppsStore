@@ -12,7 +12,15 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "target": "es5",
-    "baseUrl": "./"
+    "baseUrl": "./",
+    "typeRoots": [
+      "node_modules/@types",
+      "cordova-plugin-file/types",
+    ],
+    "types": [
+      "node",
+      "cordova-plugin-file"
+    ]
   },
   "include": [
     "src/**/*.ts"
