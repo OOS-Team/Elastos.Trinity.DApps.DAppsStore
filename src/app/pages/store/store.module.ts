@@ -14,6 +14,6 @@ import { StoreRoutingModule } from './store-routing.module';
   declarations: [
     StorePage
   ],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA] // Needed to find ion-back-button, etc
+  schemas: [CUSTOM_ELEMENTS_SCHEMA] // Needed to find ion-back-button, etc
 })
 export class StorePageModule {}

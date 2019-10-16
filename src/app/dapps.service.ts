@@ -108,9 +108,7 @@ export class DappsService {
     )*/
   ];
 
-  constructor(private http: HttpClient) {
-    
-  }
+  constructor(private http: HttpClient) {}
 
   fetchDapps(): Observable<Dapp[]> {
     console.log("Fetching DApps");
@@ -119,8 +117,8 @@ export class DappsService {
     return this.http.get<Dapp[]>('https://dapp-store.elastos.org/apps/list').pipe(
       tap(response => {
         this._dapps = this._dapps.concat(response);
-        console.log("DApps concat", this._dapps)
-        return this._dapps
+        console.log("DApps concat", this._dapps);
+        return this._dapps;
       })
     );
   }
@@ -134,11 +132,11 @@ export class DappsService {
   }
 
   getAppIcon(app) {
-    return "https://dapp-store.elastos.org/apps/"+app._id+"/icon"
+    return "https://dapp-store.elastos.org/apps/"+app._id+"/icon";
   }
 
   getAppBanner(app) {
-    return "https://dapp-store.elastos.org/apps/"+app._id+"/banner"
+    return "https://dapp-store.elastos.org/apps/"+app._id+"/banner";
   }
 
   getCategory(category: string) {
@@ -146,77 +144,46 @@ export class DappsService {
   }
 
   downloadDapp(app) {
-    console.log("App download starting...")
+    console.log("App download starting...");
 
     return new Promise((resolve, reject)=> {
       // Download EPK file as blob
       this.http.get('https://dapp-store.elastos.org/apps/'+app._id+'/download', {
         responseType: 'arraybuffer'} ).subscribe(async response => {
-        console.log("Downloaded", response)
+        console.log("Downloaded", response);
 
-        let blob = new Blob([response], { type: "application/octet-stream"});
-        console.log("Blob", blob)
+        let blob = new Blob([response], { type: "application/octet-stream" });
+        console.log("Blob", blob);
 
         // Save to a temporary location
         let filePath = await this._savedDownloadedBlobToTempLocation(blob)
 
-        resolve(filePath)
-      })
-    })
-  } 
+        resolve(filePath);
+      });
+    });
+  }
 
   _savedDownloadedBlobToTempLocation(blob) {
     let filePath = "trinity:///temp/appinstall.epk"
 
     return new Promise((resolve, reject) => {
       window.requestFileSystem(window.PERSISTENT, 10241024, (fs) => {
-        fs.root.getFile(filePath, { create: true, exclusive: false }, function (fileEntry) {
+        fs.root.getFile(filePath, { create: true, exclusive: false }, (fileEntry) => {
           fileEntry.createWriter((fileWriter) => {
             fileWriter.write(blob);
-            resolve(filePath)
+            resolve(filePath);
           }, (err) => {
-            console.error("createWriter ERROR - "+JSON.stringify(err));
-            reject(err)
+            console.error("createWriter ERROR -" + JSON.stringify(err));
+            reject(err);
           });
         }, (err) => {
-          console.error("getFile ERROR - "+JSON.stringify(err));
-          reject(err)
+          console.error("getFile ERROR -" + JSON.stringify(err));
+          reject(err);
         });
       }, (err) => {
-        console.error("requestFileSystem ERROR - "+JSON.stringify(err));
-        reject(err)
-      })
-    })
+        console.error("requestFileSystem ERROR -" + JSON.stringify(err));
+        reject(err);
+      });
+    });
   }
 }
-
-
-/*
-//// API ////
-import { Injectable } from '@angular/core';
-
-@Injectable({
-  providedIn: 'root'
-})
-export class DappsService {
-
-  private applications = [];
-
-  
-
-  get dapps() {
-    return [...this.applications];
-  }
-
-  
-}
-*/
-
-/*
- dappsUrl: string = 'https://dapp-store.elastos.org/apps/list';
-
-  constructor(private http: HttpClient) { }
-
- 
-}
-*/

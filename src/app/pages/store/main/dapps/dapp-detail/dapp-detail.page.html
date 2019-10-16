@@ -22,10 +22,11 @@
             <ion-grid>
               <ion-row>
                 <ion-col size="8.5" size-lg="11">
-                  <ion-img [src]="getAppBanner(dapp)"></ion-img>
                   <ion-card-title>{{ dapp.appName }}</ion-card-title>
                   <ion-card-subtitle>{{ dapp.appShortDescription }}</ion-card-subtitle>
-                  <p class="category">{{ dapp.category }}</p>
+                  <p class="category">
+                    {{ dapp.category.charAt(0).toUpperCase() + dapp.category.slice(1) }}
+                  </p>
                   <p class="version-downloads">
                     v<strong>{{ dapp.versionName }}</strong> / 
                     <strong>{{ dapp.downloadsCount }}</strong> Downloads
@@ -38,7 +39,7 @@
               </ion-row>
             </ion-grid>
           </ion-card-header>
-          <ion-img [src]="dapp.imageUrl"></ion-img>
+          <ion-img [src]="getAppBanner(dapp)"></ion-img>
           <ion-card-content text-center>
             <ion-grid>
               <ion-row>
@@ -48,10 +49,16 @@
               </ion-row>
               <ion-row>
                 <ion-col size="6">
-                  <p class="authorName">Created by <br> <strong>{{ dapp.authorName }}</strong></p>
+                  <p class="authorName">
+                    Created by <br> 
+                    <strong>{{ dapp.authorName }}</strong>
+                  </p>
                 </ion-col>
                 <ion-col size="6">
-                  <p class="authorWebsite">Visit us @ <br> <strong>{{ dapp.authorWebsite }}</strong></p>
+                  <p class="authorWebsite">
+                    Visit us @ <br> 
+                    <strong>{{ dapp.authorWebsite }}</strong>
+                  </p>
                 </ion-col>
               </ion-row>
             </ion-grid>
@@ -59,6 +66,12 @@
         </ion-card>
       </ion-col>
     </ion-row>
+
+    <br><br><br><br>   <br><br><br><br>
+    <br><br><br><br>   <br><br><br><br>
+    <br><br><br><br>   <br><br><br><br>
+    <br><br><br><br>   <br><br><br><br>
   
   </ion-grid>
 </ion-content>
+  

@@ -5,8 +5,8 @@ import { StorePage } from './store.page';
 import { DappsPageModule } from './main/dapps/dapps.module';
 import { DappDetailPageModule } from './main/dapps/dapp-detail/dapp-detail.module';
 import { CategoriesPageModule } from './main/categories/categories.module';
-import { CategoryTypePageModule } from './main/categories/category-type/category-type.module'
-import { SearchPageModule } from './main/search/search.module'
+import { CategoryTypePageModule } from './main/categories/category-type/category-type.module';
+import { SearchPageModule } from './main/search/search.module';
 
 const routes: Routes = [
   {
@@ -19,11 +19,11 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: ()=>DappsPageModule
+            loadChildren: () => DappsPageModule
           },
           {
             path: ':dappId',
-            loadChildren: ()=>DappDetailPageModule
+            loadChildren: () => DappDetailPageModule
           }
         ]
       },
@@ -33,11 +33,11 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: ()=>CategoriesPageModule
+            loadChildren: () => CategoriesPageModule
           },
           {
             path: ':categoryType',
-            loadChildren: ()=>CategoryTypePageModule
+            loadChildren: () => CategoryTypePageModule
           }
         ]
       },
@@ -47,7 +47,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: ()=>SearchPageModule
+            loadChildren: () => SearchPageModule
           },
         ]
       },
@@ -64,8 +64,8 @@ const routes: Routes = [
     redirectTo: '/store/tabs/dapps',
     pathMatch: 'full'
   },
-  { path: 'categories', loadChildren: ()=>CategoriesPageModule },
-  { path: 'category-type', loadChildren: ()=>CategoryTypePageModule }
+  { path: 'categories', loadChildren: () => CategoriesPageModule },
+  { path: 'category-type', loadChildren: () => CategoryTypePageModule }
 ];
 
 @NgModule({

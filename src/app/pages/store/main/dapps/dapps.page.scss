@@ -31,6 +31,12 @@ ion-list {
   }
 }
 
+.list {
+  margin-top: 0;
+  margin-bottom: 5px;
+  margin-left: 10px;
+}
+
 // For non-native devices
 .dapp:hover,
 .dapp:active {

@@ -31,6 +31,6 @@ import { AppRoutingModule } from './app-routing.module';
     {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
     //{provide: ErrorHandler, useClass: IonicErrorHandler}
   ],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA] // Needed to find ion-back-button, etc
+  schemas: [CUSTOM_ELEMENTS_SCHEMA] // Needed to find ion-back-button, etc
 })
 export class AppModule {}

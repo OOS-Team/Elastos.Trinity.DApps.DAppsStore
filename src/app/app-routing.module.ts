@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
-import { StorePageModule } from './pages/store/store.module'
-import { AboutPageModule } from './pages/about/about.module'
-import { AboutPage } from './pages/about/about.page'
+import { StorePageModule } from './pages/store/store.module';
+import { AboutPageModule } from './pages/about/about.module';
 
 const routes: Routes = [
   { path: '', redirectTo: 'store', pathMatch: 'full' },
-  { path: 'store', loadChildren: ()=>StorePageModule },
-  { path: 'about', loadChildren: ()=>AboutPageModule },
+  { path: 'store', loadChildren: () => StorePageModule },
+  { path: 'about', loadChildren: () => AboutPageModule },
  // { path: 'my-apps', loadChildren: './pages/my-apps/my-apps.module#MyAppsPageModule' },
 ];
 

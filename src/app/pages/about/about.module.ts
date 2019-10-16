@@ -12,7 +12,7 @@ const routes: Routes = [
     path: '',
     component: AboutPage
   }
-]; 
+];
 
 @NgModule({
   imports: [
@@ -22,6 +22,6 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [AboutPage],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA] // Needed to find ion-back-button, etc
+  schemas: [CUSTOM_ELEMENTS_SCHEMA] // Needed to find ion-back-button, etc
 })
 export class AboutPageModule {}

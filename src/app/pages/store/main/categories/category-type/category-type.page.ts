@@ -33,4 +33,8 @@ export class CategoryTypePage implements OnInit {
     });
   }
 
+  getAppIcon(app) {
+    return this.dappsService.getAppIcon(app);
+  }
+
 }
