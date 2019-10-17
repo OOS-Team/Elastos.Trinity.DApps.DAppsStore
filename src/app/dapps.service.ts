@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Dapp } from './dapps.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map, flatMap, mergeMap, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -164,26 +164,27 @@ export class DappsService {
   }
 
   _savedDownloadedBlobToTempLocation(blob) {
-    let filePath = "trinity:///temp/appinstall.epk"
+    let fileName = "appinstall.epk"
 
     return new Promise((resolve, reject) => {
-      window.requestFileSystem(window.PERSISTENT, 10241024, (fs) => {
-        fs.root.getFile(filePath, { create: true, exclusive: false }, (fileEntry) => {
-          fileEntry.createWriter((fileWriter) => {
-            fileWriter.write(blob);
-            resolve(filePath);
+      window.resolveLocalFileSystemURL(cordova.file.dataDirectory, (dirEntry: DirectoryEntry) => {
+          dirEntry.getFile(fileName, { create: true, exclusive: false }, (fileEntry) => {
+            console.log("Downloaded file entry", fileEntry)
+            fileEntry.createWriter((fileWriter) => {
+              fileWriter.write(blob);
+              resolve("trinity:///data/"+fileName)
+            }, (err) => {
+              console.error("createWriter ERROR - "+JSON.stringify(err));
+              reject(err)
+            });
           }, (err) => {
-            console.error("createWriter ERROR -" + JSON.stringify(err));
-            reject(err);
+            console.error("getFile ERROR - "+JSON.stringify(err));
+            reject(err)
           });
-        }, (err) => {
-          console.error("getFile ERROR -" + JSON.stringify(err));
-          reject(err);
-        });
       }, (err) => {
-        console.error("requestFileSystem ERROR -" + JSON.stringify(err));
-        reject(err);
-      });
-    });
+        console.error("resolveLocalFileSystemURL ERROR - "+JSON.stringify(err));
+        reject(err)
+      })
+    })
   }
 }
