@@ -13,11 +13,18 @@
 
 <ion-content>
   <ion-list>
-    <ion-searchbar color="secondary"></ion-searchbar>
+    <ion-searchbar 
+      color="secondary" 
+      placeholder="Search DApp.."
+      animated
+      [(ngModel)]="dapp"
+      (ngModelChange)="filterDapps($event)"
+    >
+    </ion-searchbar>
     <ion-grid>
       <ion-row 
         class="dapp"
-        *ngFor="let app of dapps"
+        *ngFor="let app of filteredDapps"
         [routerLink]="[
           '/', 
           'store', 
@@ -42,12 +49,6 @@
           </ion-item>
         </ion-col>
       </ion-row>
-
-      <br><br><br><br>   <br><br><br><br>
-      <br><br><br><br>   <br><br><br><br>
-      <br><br><br><br>   <br><br><br><br>
-      <br><br><br><br>   <br><br><br><br>
-      <br><br><br>
       
     </ion-grid>
   </ion-list>

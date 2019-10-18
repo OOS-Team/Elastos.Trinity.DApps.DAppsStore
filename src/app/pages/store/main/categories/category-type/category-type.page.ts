@@ -12,6 +12,7 @@ import { Dapp } from '../../../../../dapps.model';
 export class CategoryTypePage implements OnInit {
 
   dapps: Dapp[];
+  filteredDapps: Dapp[];
   categoryType = null;
 
   constructor(
@@ -27,6 +28,7 @@ export class CategoryTypePage implements OnInit {
         return;
       }
       this.dapps = this.dappsService.getCategory(paramMap.get('categoryType'));
+      this.filteredDapps = this.dapps;
       this.categoryType = paramMap.get('categoryType');
       console.log('category' + ' ' + this.categoryType);
       console.log('dapps' + ' ' + this.dapps);
@@ -37,4 +39,10 @@ export class CategoryTypePage implements OnInit {
     return this.dappsService.getAppIcon(app);
   }
 
+  filterDapps(search) {
+    this.filteredDapps = this.dapps.filter((dapp) => {
+      return dapp.appName.toLowerCase().indexOf(search.toLowerCase()) !== -1;
+    });
+    console.log(this.filteredDapps);
+  }
 }
