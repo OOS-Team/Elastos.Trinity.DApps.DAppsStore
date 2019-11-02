@@ -11,9 +11,12 @@ import { Dapp } from '../../../../dapps.model';
 export class DappsPage implements OnInit {
   applications: Dapp[] = [];
   filteredApps: Dapp[];
+  appsLoaded = false;
 
   constructor(private dappsService: DappsService) {
+    this.appsLoaded = false;
     this.dappsService.fetchDapps().subscribe((apps: Dapp[]) => {
+      this.appsLoaded = true;
       console.log("DApps fetched", apps);
       this.applications = apps;
       this.filteredApps = this.applications;
@@ -31,5 +34,10 @@ export class DappsPage implements OnInit {
       return dapp.appName.toLowerCase().indexOf(search.toLowerCase()) !== -1;
     });
     console.log(this.filteredApps);
+  }
+
+  closeApp() {
+   // declare let appService: any;
+  // appService.close();
   }
 }

@@ -4,11 +4,13 @@
       <ion-back-button defaultHref="store/tabs/dapps">
       </ion-back-button>
     </ion-buttons>
+    <!-- 
     <ion-buttons slot="end">
       <ion-button (click)="installApp(dapp)">
         <ion-icon name="arrow-round-down" slot="icon-only"></ion-icon>
       </ion-button>
-    </ion-buttons>
+    </ion-buttons> 
+    -->
     <ion-title>{{ dapp.appName }}</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -21,7 +23,7 @@
           <ion-card-header>
             <ion-grid>
               <ion-row>
-                <ion-col size="8.5" size-lg="11">
+                <ion-col size="8.5" size-lg="10.8">
                   <ion-card-title>{{ dapp.appName }}</ion-card-title>
                   <ion-card-subtitle>{{ dapp.appShortDescription }}</ion-card-subtitle>
                   <p class="category">
@@ -31,15 +33,19 @@
                     v<strong>{{ dapp.versionName }}</strong> / 
                     <strong>{{ dapp.downloadsCount }}</strong> Downloads
                   </p>
-                  <p>Created <strong>{{ dapp.createdAt }}</strong></p>
+                  <p>Published <strong>{{ dapp.createdAt }}</strong></p>
                 </ion-col>
-                <ion-col size="3.5" size-lg="1">
-                  <ion-button (click)="installApp(dapp)">Install</ion-button>
+                <ion-col size="3.5" size-lg="1.2">
+                  <ion-button (click)="installApp(dapp)" *ngIf="!installing">Install</ion-button>
+                  <ion-button (click)="installApp(dapp)" *ngIf="installing">
+                    <ion-spinner name="bubbles"></ion-spinner>
+                  </ion-button>
                 </ion-col>
               </ion-row>
             </ion-grid>
           </ion-card-header>
-          <ion-img [src]="getAppBanner(dapp)"></ion-img>
+          <ion-img *ngIf="dappBanner" [src]="dappBanner"></ion-img>
+          <ion-img *ngIf="!dappBanner" src="/../../../assets/store/appbanner.jpg"></ion-img>
           <ion-card-content text-center>
             <ion-grid>
               <ion-row>
@@ -57,7 +63,9 @@
                 <ion-col size="6">
                   <p class="authorWebsite">
                     Visit us @ <br> 
-                    <strong>{{ dapp.authorWebsite }}</strong>
+                    <a href="{{ dapp.authorWebsite }}">
+                      <strong>{{ dapp.authorWebsite }}</strong>
+                    </a>
                   </p>
                 </ion-col>
               </ion-row>

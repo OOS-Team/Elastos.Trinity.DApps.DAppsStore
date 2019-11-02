@@ -156,7 +156,7 @@ export class DappsService {
         console.log("Blob", blob);
 
         // Save to a temporary location
-        let filePath = await this._savedDownloadedBlobToTempLocation(blob)
+        let filePath = await this._savedDownloadedBlobToTempLocation(blob);
 
         resolve(filePath);
       });
@@ -169,22 +169,22 @@ export class DappsService {
     return new Promise((resolve, reject) => {
       window.resolveLocalFileSystemURL(cordova.file.dataDirectory, (dirEntry: DirectoryEntry) => {
           dirEntry.getFile(fileName, { create: true, exclusive: false }, (fileEntry) => {
-            console.log("Downloaded file entry", fileEntry)
+            console.log("Downloaded file entry", fileEntry);
             fileEntry.createWriter((fileWriter) => {
               fileWriter.write(blob);
-              resolve("trinity:///data/"+fileName)
+              resolve("trinity:///data/"+fileName);
             }, (err) => {
               console.error("createWriter ERROR - "+JSON.stringify(err));
-              reject(err)
+              reject(err);
             });
           }, (err) => {
             console.error("getFile ERROR - "+JSON.stringify(err));
-            reject(err)
+            reject(err);
           });
       }, (err) => {
         console.error("resolveLocalFileSystemURL ERROR - "+JSON.stringify(err));
-        reject(err)
-      })
-    })
+        reject(err);
+      });
+    });
   }
 }

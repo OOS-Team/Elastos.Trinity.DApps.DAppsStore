@@ -4,20 +4,27 @@
       <ion-menu-button menu="m1"></ion-menu-button>
     </ion-buttons>
     <ion-title>Elastos DApp Store</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="close" (click)="closeApp()"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
     <ion-searchbar 
-    color="secondary" 
-    placeholder="Search DApp.."
-    animated
-    [(ngModel)]="dapp"
-    (ngModelChange)="filterDapps($event)"
+      color="secondary" 
+      placeholder="Search DApp.."
+      [(ngModel)]="dapp"
+      (ngModelChange)="filterDapps($event)"
     >
     </ion-searchbar>
-    <ion-grid>
+    <ion-grid *ngIf="!appsLoaded" text-center padding>
+      <ion-spinner name="bubbles"></ion-spinner>
+    </ion-grid>
+    <ion-grid *ngIf="appsLoaded">
       <div>
         <p class="list">Latest Releases</p>
       </div>
@@ -48,6 +55,7 @@
           </ion-item>
         </ion-col>
       </ion-row>
+
     </ion-grid>
   </ion-list>
 </ion-content>

@@ -7,17 +7,17 @@ ion-list {
   }
 
   ion-row {
-    border-bottom: solid 0.5px black;
-    border-radius: 10px;
-    margin: 4px;
-    box-shadow: inset 0px 0px 1px 1px black;
-    box-shadow: 0px 0px 2.5px 0px black;
+    border-bottom: solid 0.4px black;
+    border-radius: 2px;
+    margin: 1px;
+    box-shadow: inset 0px 0px 1px 0px black;
+    // box-shadow: 0px 0px 2.5px 0px black;
     background-color: white;
     opacity: 0.8;
   }
 
   ion-img {
-    border-radius: 10px;
+    border-radius: 2px;
   }
 
   h2 {
@@ -33,9 +33,9 @@ ion-list {
 }
 
 .list {
-  margin-top: 0;
+  margin-top: 10px;
   margin-bottom: 5px;
-  margin-left: 10px;
+  // margin-left: 5px;
 }
 
 // For non-native devices

@@ -15,6 +15,8 @@ declare let appService: any;
 export class DappDetailPage implements OnInit {
 
   dapp: Dapp;
+  dappBanner = '';
+  installing = false;
 
   constructor(
     private dappsService: DappsService,
@@ -29,22 +31,21 @@ export class DappDetailPage implements OnInit {
         return;
       }
       this.dapp = this.dappsService.getDapp(paramMap.get('dappId'));
-
-      console.log(this.dapp);
+      this.dappBanner = this.dappsService.getAppBanner(this.dapp);
+      console.log('Dapp =' + ' ' + this.dapp);
+      console.log('Dapp Banner =' + ' ' + this.dappBanner);
     });
   }
 
-  getAppBanner(app) {
-    return this.dappsService.getAppBanner(app);
-  }
-
   async installApp(dapp) {
+    this.installing = true;
     // Download the file
     const epkPath = await this.downloadAppEPK(dapp);
     console.log("EPK file downloaded and saved to " + epkPath);
 
     // Ask the app installer to install the DApp
-    appService.sendIntent("appinstall", {url: epkPath, dappStoreServerAppId: dapp._id});
+    appService.sendIntent("appinstall", {url: epkPath, dappStoreServerAppId: dapp._id})
+      .then(this.installing = false);
   }
 
   async downloadAppEPK(dapp) {
