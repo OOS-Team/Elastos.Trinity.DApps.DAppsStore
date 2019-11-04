@@ -33,7 +33,7 @@
                     v<strong>{{ dapp.versionName }}</strong> / 
                     <strong>{{ dapp.downloadsCount }}</strong> Downloads
                   </p>
-                  <p>Published <strong>{{ dapp.createdAt }}</strong></p>
+                  <p>Published <strong>{{ dapp.createdAt.slice(0, 10) }}</strong></p>
                 </ion-col>
                 <ion-col size="3.5" size-lg="1.2">
                   <ion-button (click)="installApp(dapp)" *ngIf="!installing">Install</ion-button>

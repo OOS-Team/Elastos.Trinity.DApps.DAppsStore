@@ -13,14 +13,16 @@
 
 <ion-content>
   <ion-list>
-    <ion-searchbar 
-      color="secondary" 
-      placeholder="Search DApp.."
-      animated
-      [(ngModel)]="dapp"
-      (ngModelChange)="filterDapps($event)"
-    >
-    </ion-searchbar>
+    <div class="search-container">
+      <ion-searchbar 
+        color="secondary" 
+        placeholder="Search DApp.."
+        animated
+        [(ngModel)]="dapp"
+        (ngModelChange)="filterDapps($event)"
+      >
+      </ion-searchbar>
+    </div>
     <ion-grid>
       <ion-row 
         class="dapp"

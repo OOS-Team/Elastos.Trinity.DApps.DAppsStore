@@ -37,7 +37,7 @@ export class DappsPage implements OnInit {
   }
 
   closeApp() {
-   // declare let appService: any;
-  // appService.close();
+   let appService: any;
+   appService.close();
   }
 }

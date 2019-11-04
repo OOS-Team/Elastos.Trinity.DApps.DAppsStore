@@ -14,20 +14,23 @@
 
 <ion-content>
   <ion-list>
-    <ion-searchbar 
-      color="secondary" 
-      placeholder="Search DApp.."
-      [(ngModel)]="dapp"
-      (ngModelChange)="filterDapps($event)"
-    >
-    </ion-searchbar>
+    <div class="search-container">
+      <ion-searchbar 
+        color="secondary" 
+        placeholder="Search DApp.."
+        animated
+        [(ngModel)]="dapp"
+        (ngModelChange)="filterDapps($event)"
+      >
+      </ion-searchbar>
+    </div>
+    <div>
+      <p class="section">Latest Releases</p>
+    </div>
     <ion-grid *ngIf="!appsLoaded" text-center padding>
       <ion-spinner name="bubbles"></ion-spinner>
     </ion-grid>
     <ion-grid *ngIf="appsLoaded">
-      <div>
-        <p class="list">Latest Releases</p>
-      </div>
       <ion-row 
         class="dapp"
         *ngFor="let app of filteredApps"

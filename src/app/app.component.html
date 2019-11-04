@@ -1,3 +1,5 @@
+<ion-app>
+
   <ion-menu side="start" menuId='m1'> <!-- m1 is extracted to pages that need this side drawer -->
     <ion-header>
       <ion-toolbar>
@@ -16,7 +18,7 @@
           </ion-item>
         </ion-menu-toggle>
         <ion-menu-toggle>
-          <ion-item routerLink="/my-apps" disabled> <!-- disabled till future updates -->
+          <ion-item routerLink="/my-apps" disabled>
             <ion-icon name="cloud-download"></ion-icon>
             <ion-label padding>My DApps</ion-label>
           </ion-item>
@@ -31,4 +33,7 @@
     </ion-content>
   </ion-menu>
 
-  <router-outlet main></router-outlet>
+  <ion-router-outlet main></ion-router-outlet> <!-- main given to main mages -->
+  
+</ion-app>
+  
