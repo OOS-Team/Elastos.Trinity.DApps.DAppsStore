@@ -12,4 +12,8 @@ export class MyAppsPage implements OnInit {
   ngOnInit() {
   }
 
+  closeApp() {
+    declare let appService: any;
+    appService.close();
+  }
 }

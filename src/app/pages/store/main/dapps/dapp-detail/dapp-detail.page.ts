@@ -51,4 +51,9 @@ export class DappDetailPage implements OnInit {
   async downloadAppEPK(dapp) {
     return await this.dappsService.downloadDapp(dapp);
   }
+
+  closeApp() {
+    declare let appService: any;
+    appService.close();
+  }
 }

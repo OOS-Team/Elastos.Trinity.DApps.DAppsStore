@@ -4,6 +4,11 @@
       <ion-back-button defaultHref="store/tabs/categories">
       </ion-back-button>
     </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="close" (click)="closeApp()"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>
       {{ categoryType.charAt(0).toUpperCase() + categoryType.slice(1) }}
     </ion-title>

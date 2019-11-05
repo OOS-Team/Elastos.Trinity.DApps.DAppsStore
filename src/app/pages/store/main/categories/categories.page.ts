@@ -12,4 +12,8 @@ export class CategoriesPage implements OnInit {
   ngOnInit() {
   }
 
+  closeApp() {
+    declare let appService: any;
+    appService.close();
+  }
 }

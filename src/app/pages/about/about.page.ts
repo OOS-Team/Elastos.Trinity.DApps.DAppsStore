@@ -12,4 +12,9 @@ export class AboutPage implements OnInit {
   ngOnInit() {
   }
 
+  closeApp() {
+    declare let appService: any;
+    appService.close();
+  }
+
 }

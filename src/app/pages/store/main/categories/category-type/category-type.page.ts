@@ -45,4 +45,9 @@ export class CategoryTypePage implements OnInit {
     });
     console.log(this.filteredDapps);
   }
+
+  closeApp() {
+    declare let appService: any;
+    appService.close();
+  }
 }
