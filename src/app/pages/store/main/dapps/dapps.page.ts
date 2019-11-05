@@ -32,11 +32,23 @@ export class DappsPage implements OnInit {
   }
 
   filterDapps(search) {
+    this.appsLoaded = false;
+    this.dappsService.fetchFilteredDapps(search).subscribe((apps: Dapp[]) => {
+      this.appsLoaded = true;
+      this.filteredApps = apps;
+    });
+    if (search.length === 0) {
+      this.filteredApps = this.applications;
+    }
+  }
+
+  /* filterDapps(search) {
     this.filteredApps = this.applications.filter((dapp) => {
       return dapp.appName.toLowerCase().indexOf(search.toLowerCase()) !== -1;
     });
     console.log(this.filteredApps);
-  }
+  } */
+
 
   closeApp() {
    appService.close();

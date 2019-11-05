@@ -18,6 +18,11 @@ ion-list {
   ion-grid {
     padding-top: 0px;
 
+    ion-spinner {
+      margin-top: 10px;
+      color: white;
+    }
+
     .dapp {
       border: solid 0.4px black;
       border-radius: 2px;

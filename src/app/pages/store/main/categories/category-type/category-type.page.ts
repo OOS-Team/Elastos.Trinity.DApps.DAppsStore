@@ -16,6 +16,7 @@ export class CategoryTypePage implements OnInit {
   dapps: Dapp[];
   filteredDapps: Dapp[];
   categoryType = null;
+  appsLoaded = false;
 
   constructor(
     private dappsService: DappsService,
@@ -24,7 +25,9 @@ export class CategoryTypePage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.appsLoaded = false;
     this.route.paramMap.subscribe(paramMap => {
+      this.appsLoaded = true;
       if (!paramMap.has('categoryType')) {
         this.navCtrl.navigateBack('/store/tabs/categories');
         return;
@@ -41,11 +44,22 @@ export class CategoryTypePage implements OnInit {
     return this.dappsService.getAppIcon(app);
   }
 
-  filterDapps(search) {
+  /* filterDapps(search) {
     this.filteredDapps = this.dapps.filter((dapp) => {
       return dapp.appName.toLowerCase().indexOf(search.toLowerCase()) !== -1;
     });
     console.log(this.filteredDapps);
+  } */
+
+  filterDapps(search) {
+    this.appsLoaded = false;
+    this.dappsService.fetchFilteredDapps(search).subscribe((apps: Dapp[]) => {
+      this.appsLoaded = true;
+      this.filteredDapps = apps.filter(app => app.category === this.categoryType);
+    });
+    if (search.length === 0) {
+      this.filteredDapps = this.dapps;
+    }
   }
 
   closeApp() {

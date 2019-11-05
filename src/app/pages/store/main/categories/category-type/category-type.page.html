@@ -28,7 +28,10 @@
       >
       </ion-searchbar>
     </div>
-    <ion-grid>
+    <ion-grid *ngIf="!appsLoaded" text-center padding>
+      <ion-spinner name="bubbles"></ion-spinner>
+    </ion-grid>
+    <ion-grid *ngIf="appsLoaded">
       <ion-row 
         class="dapp"
         *ngFor="let app of filteredDapps"

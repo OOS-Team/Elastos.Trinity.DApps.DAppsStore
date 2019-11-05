@@ -108,6 +108,9 @@ export class DappsService {
     )*/
   ];
 
+  searchUrl = 'https://dapp-store.elastos.org/apps/list?s=';
+  search = '';
+
   constructor(private http: HttpClient) {}
 
   fetchDapps(): Observable<Dapp[]> {
@@ -121,6 +124,12 @@ export class DappsService {
         return this._dapps;
       })
     );
+  }
+
+  fetchFilteredDapps(_search): Observable<Dapp[]> {
+    this.search = _search;
+    console.log('Searching from service.. ' + this.search);
+    return this.http.get<Dapp[]>(`${this.searchUrl}${this.search}`);
   }
 
   get dapps() {
