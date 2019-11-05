@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { DappsService } from '../../../../dapps.service';
 import { Dapp } from '../../../../dapps.model';
 
+declare let appService: any;
+
 @Component({
   selector: 'app-dapps',
   templateUrl: './dapps.page.html',
@@ -37,7 +39,6 @@ export class DappsPage implements OnInit {
   }
 
   closeApp() {
-   declare let appService: any;
    appService.close();
   }
 }

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
+declare let appService: any;
+
 @Component({
   selector: 'app-my-apps',
   templateUrl: './my-apps.page.html',
-  styles: ['./my-apps.page.scss'],
+  styleUrls: ['./my-apps.page.scss'],
 })
 export class MyAppsPage implements OnInit {
 
@@ -13,7 +15,6 @@ export class MyAppsPage implements OnInit {
   }
 
   closeApp() {
-    declare let appService: any;
     appService.close();
   }
 }

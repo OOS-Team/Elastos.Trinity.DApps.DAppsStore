@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+declare let appService: any;
+
 @Component({
   selector: 'app-about',
   templateUrl: './about.page.html',
@@ -13,7 +15,6 @@ export class AboutPage implements OnInit {
   }
 
   closeApp() {
-    declare let appService: any;
     appService.close();
   }
 
