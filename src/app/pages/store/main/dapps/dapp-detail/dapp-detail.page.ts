@@ -42,10 +42,11 @@ export class DappDetailPage implements OnInit {
     // Download the file
     const epkPath = await this.downloadAppEPK(dapp);
     console.log("EPK file downloaded and saved to " + epkPath);
-
+    if (epkPath) {
+      this.installing = false;
+    }
     // Ask the app installer to install the DApp
-    appService.sendIntent("appinstall", {url: epkPath, dappStoreServerAppId: dapp._id})
-      .then(this.installing = false);
+    appService.sendIntent("appinstall", {url: epkPath, dappStoreServerAppId: dapp._id});
   }
 
   async downloadAppEPK(dapp) {
