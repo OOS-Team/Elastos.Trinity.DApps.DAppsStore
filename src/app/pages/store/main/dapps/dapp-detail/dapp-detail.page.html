@@ -28,16 +28,17 @@
                     {{ dapp.category.charAt(0).toUpperCase() + dapp.category.slice(1) }}
                   </p>
                   <p class="version-downloads">
-                    v<strong>{{ dapp.versionName }}</strong> / 
+                    v<strong>{{ dapp.versionName }}</strong> /
                     <strong>{{ dapp.downloadsCount }}</strong> Downloads
                   </p>
                   <p>Published <strong>{{ dapp.createdAt.slice(0, 10) }}</strong></p>
                 </ion-col>
                 <ion-col size="3.5" size-lg="1.2">
-                  <ion-button (click)="installApp(dapp)" *ngIf="!installing">Install</ion-button>
+                  <ion-button (click)="installApp(dapp)" *ngIf="!installing && !installed">Install</ion-button>
                   <ion-button (click)="installApp(dapp)" *ngIf="installing">
                     <ion-spinner name="bubbles"></ion-spinner>
                   </ion-button>
+                  <ion-button *ngIf="!installing && installed" disabled>Installed</ion-button>
                 </ion-col>
               </ion-row>
             </ion-grid>
@@ -54,13 +55,13 @@
               <ion-row>
                 <ion-col size="6">
                   <p class="authorName">
-                    Created by <br> 
+                    Created by <br>
                     <strong>{{ dapp.authorName }}</strong>
                   </p>
                 </ion-col>
                 <ion-col size="6">
                   <p class="authorWebsite">
-                    Visit us @ <br> 
+                    Visit us @ <br>
                     <a href="{{ dapp.authorWebsite }}">
                       <strong>{{ dapp.authorWebsite }}</strong>
                     </a>
@@ -72,7 +73,6 @@
         </ion-card>
       </ion-col>
     </ion-row>
-  
+
   </ion-grid>
 </ion-content>
-  
