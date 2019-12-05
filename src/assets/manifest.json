@@ -1,5 +1,5 @@
 {
-  "id": "elastos.trinity.dappstore",
+  "id": "org.elastos.trinity.dapp.dappstore",
   "version": "0.0.1",
   "version_code": 1,
   "name": "DApp Store",

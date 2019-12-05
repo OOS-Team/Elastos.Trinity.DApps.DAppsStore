@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Dapp } from '../../../../../dapps.model';
 
-declare let appService: any;
+declare let appManager: any;
 
 @Component({
   selector: 'app-category-type',
@@ -56,6 +56,6 @@ export class CategoryTypePage implements OnInit {
   }
 
   closeApp() {
-    appService.close();
+    appManager.close();
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-declare let appService: any;
+declare let appManager: any;
 
 @Component({
   selector: 'app-categories',
@@ -15,6 +15,6 @@ export class CategoriesPage implements OnInit {
   }
 
   closeApp() {
-    appService.close();
+    appManager.close();
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-declare let appService: any;
+declare let appManager: any;
 
 @Component({
   selector: 'app-my-apps',
@@ -15,6 +15,6 @@ export class MyAppsPage implements OnInit {
   }
 
   closeApp() {
-    appService.close();
+    appManager.close();
   }
 }

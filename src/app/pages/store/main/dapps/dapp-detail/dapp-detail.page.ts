@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Dapp } from '../../../../../dapps.model';
 import { DappsService } from '../../../../../dapps.service';
 
-declare let appService: any;
+declare let appManager: any;
 
 @Component({
   selector: 'app-dapp-detail',
@@ -46,7 +46,7 @@ export class DappDetailPage implements OnInit {
     console.log("EPK file downloaded and saved to " + epkPath);
 
     // Ask the app installer to install the DApp
-    appService.sendIntent("appinstall", {url: epkPath, dappStoreServerAppId: dapp._id});
+    appManager.sendIntent("appinstall", {url: epkPath, dappStoreServerAppId: dapp._id});
   }
 
   async downloadAppEPK(dapp) {
