@@ -6,7 +6,7 @@
   "short_name": "DApp Store",
   "short_description": "DApp Store",
   "description": "Elastos Trinity DApp Store",
-  "start_url": "index.heml",
+  "start_url": "index.html",
   "type": "file",
   "category": "finance",
   "icons": [
