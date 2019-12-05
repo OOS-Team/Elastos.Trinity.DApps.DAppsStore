@@ -101,6 +101,6 @@ export class DappDetailPage implements OnInit {
   }
 
   closeApp() {
-    appService.close();
+    appManager.close();
   }
 }
