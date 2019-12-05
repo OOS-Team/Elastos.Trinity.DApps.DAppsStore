@@ -16,7 +16,7 @@ export class DappsPage implements OnInit {
   // General
   applications: Dapp[] = [];
   filteredApps: Dapp[] = [];
-  appsLoaded = false;
+  appsLoaded: boolean = false;
 
   // Categories
   finance: Dapp[] = [];

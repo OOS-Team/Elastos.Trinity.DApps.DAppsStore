@@ -1,58 +1,22 @@
 ion-list {
-  background-image: linear-gradient(to right, rgb(20, 20, 20) 0%, #325169 100%);
-  min-height: 100%;
 
   .search-container {
-    position: sticky;
-    top: 0px;
-    z-index: 1;
+    padding: 12px;
+  }
 
-    ion-searchbar {
-      padding: 5px;
-      padding-top: 0px;
-      padding-bottom: 5px;
-      margin: 0px;
+  .btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    ion-button {
+      --border-radius: 30px;
+      --box-shadow: none;
+
+      ion-label {
+        font-size: 9px;
+        padding: 0 5px;
+      }
     }
   }
-  
-  ion-grid {
-    padding-top: 0px;
-
-    ion-spinner {
-      margin-top: 10px;
-      color: white;
-    }
-
-    .dapp {
-      border: solid 0.4px black;
-      border-radius: 2px;
-      margin: 1px;
-      box-shadow: inset 0px 0px 1px 0px black;
-      background-color: white !important;
-      opacity: 0.8;
-    }
-  
-    ion-img {
-      border-radius: 2px;
-    }
-  
-    h2 {
-      font-weight: bold;
-      font-size: 19px;
-      padding-left: 2.5px;
-    }
-  
-    p {
-      font-size: 13px;
-      padding-left: 2.5px;
-    }
-
-  }
-}
-
-// For non-native devices
-.dapp:hover,
-.dapp:active {
-  transform: scale(1.01);
-  transition: transform 200ms ease-in-out;
 }

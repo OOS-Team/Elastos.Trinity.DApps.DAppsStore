@@ -25,14 +25,15 @@ ion-header {
 
     .segment-button-checked{
       background: #FFF;
-      color: #007AFF;
-      border-bottom: 1px solid #007AFF
+      color: #007AFF !important;
+      border-bottom: 1px solid #007AFF;
     }
 
     ion-segment-button {
 
       ion-label {
         margin: 0;
+        color: #959595;
       }
     }
   }
@@ -134,9 +135,3 @@ ion-list {
   }
 }
 
-// For non-native devices
-.dapp:hover,
-.dapp:active {
-  transform: scale(1.01);
-  transition: transform 200ms ease-in-out;
-}

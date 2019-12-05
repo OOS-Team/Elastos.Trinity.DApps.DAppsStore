@@ -1,0 +1,22 @@
+ion-list {
+
+  .search-container {
+    padding: 12px;
+  }
+
+  .btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    ion-button {
+      --border-radius: 30px;
+      --box-shadow: none;
+
+      ion-label {
+        font-size: 9px;
+        padding: 0 5px;
+      }
+    }
+  }
+}
