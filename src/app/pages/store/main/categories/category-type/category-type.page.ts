@@ -17,6 +17,7 @@ export class CategoryTypePage implements OnInit {
   filteredDapps: Dapp[];
   categoryType = null;
   appsLoaded = false;
+  dapp: string;
 
   constructor(
     private dappsService: DappsService,
