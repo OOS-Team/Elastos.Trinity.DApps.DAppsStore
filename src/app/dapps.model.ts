@@ -14,5 +14,7 @@ export class Dapp {
     public category: string,
     public downloadsCount: number,
     public imageUrl: string,
+    public installing: boolean,
+    public installed: boolean
   ) {}
 }

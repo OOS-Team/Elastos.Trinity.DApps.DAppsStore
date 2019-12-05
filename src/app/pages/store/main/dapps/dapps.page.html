@@ -1,64 +1,991 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button menu="m1"></ion-menu-button>
+
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start" padding class="header-btns">
+      <ion-icon name="arrow-back" mode="ios"></ion-icon>
     </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-button (click)="closeApp()">
-        <ion-icon name="close"></ion-icon>
+    <ion-buttons slot="end" class="header-btns">
+      <ion-button>
+        <ion-menu-button menu="m1"></ion-menu-button>
       </ion-button>
     </ion-buttons>
-    <ion-title>Elastos DApp Store</ion-title>
+    <ion-title>Apps</ion-title>
   </ion-toolbar>
+
+  <ion-segment mode="ios">
+    <ion-slides [options]="slideOpts">
+      <ion-slide>
+        <ion-segment-button
+          value="new"
+          text-capitalize=“false”
+          [routerLink]="[
+          '/',
+          'store',
+          'tabs',
+          'categories',
+          'new'
+          ]"
+        >
+          <ion-label>New</ion-label>
+        </ion-segment-button>
+      </ion-slide>
+      <ion-slide>
+        <ion-segment-button
+          value="popular"
+          text-capitalize=“false”
+          [routerLink]="[
+          '/',
+          'store',
+          'tabs',
+          'categories',
+          'popular'
+          ]"
+        >
+          <ion-label>Popular</ion-label>
+        </ion-segment-button>
+      </ion-slide>
+      <ion-slide>
+        <ion-segment-button
+          value="finance"
+          text-capitalize=“false”
+          [routerLink]="[
+          '/',
+          'store',
+          'tabs',
+          'categories',
+          'finance'
+          ]"
+        >
+          <ion-label>Finance</ion-label>
+        </ion-segment-button>
+      </ion-slide>
+      <ion-slide>
+        <ion-segment-button
+          value="utility"
+          text-capitalize=“false”
+          [routerLink]="[
+          '/',
+          'store',
+          'tabs',
+          'categories',
+          'utility'
+          ]"
+        >
+          <ion-label>Utility</ion-label>
+        </ion-segment-button>
+      </ion-slide>
+      <ion-slide>
+        <ion-segment-button
+          value="social"
+          text-capitalize=“false”
+          [routerLink]="[
+          '/',
+          'store',
+          'tabs',
+          'categories',
+          'social'
+          ]"
+        >
+          <ion-label>Social</ion-label>
+        </ion-segment-button>
+      </ion-slide>
+      <ion-slide>
+        <ion-segment-button
+          value="productivity"
+          text-capitalize=“false”
+          [routerLink]="[
+          '/',
+          'store',
+          'tabs',
+          'categories',
+          'productivity'
+          ]"
+        >
+          <ion-label>Productivity</ion-label>
+        </ion-segment-button>
+      </ion-slide>
+      <ion-slide>
+        <ion-segment-button
+          value="business"
+          text-capitalize=“false”
+          [routerLink]="[
+          '/',
+          'store',
+          'tabs',
+          'categories',
+          'business'
+          ]"
+        >
+          <ion-label>Business</ion-label>
+        </ion-segment-button>
+      </ion-slide>
+      <ion-slide>
+        <ion-segment-button
+          value="entertainment"
+          text-capitalize=“false”
+          [routerLink]="[
+          '/',
+          'store',
+          'tabs',
+          'categories',
+          'entertainment'
+          ]"
+        >
+          <ion-label>Entertainment</ion-label>
+        </ion-segment-button>
+      </ion-slide>
+      <ion-slide>
+        <ion-segment-button
+          value="games"
+          text-capitalize=“false”
+          [routerLink]="[
+          '/',
+          'store',
+          'tabs',
+          'categories',
+          'games'
+          ]"
+        >
+          <ion-label>Games</ion-label>
+        </ion-segment-button>
+      </ion-slide>
+      <ion-slide>
+        <ion-segment-button
+          value="music"
+          text-capitalize=“false”
+          [routerLink]="[
+          '/',
+          'store',
+          'tabs',
+          'categories',
+          'music'
+          ]"
+        >
+          <ion-label>Music</ion-label>
+        </ion-segment-button>
+      </ion-slide>
+      <ion-slide>
+        <ion-segment-button
+          value="casino"
+          text-capitalize=“false”
+          [routerLink]="[
+          '/',
+          'store',
+          'tabs',
+          'categories',
+          'casino'
+          ]"
+        >
+          <ion-label>Casino</ion-label>
+        </ion-segment-button>
+      </ion-slide>
+      <ion-slide>
+        <ion-segment-button
+          value="travel"
+          text-capitalize=“false”
+          [routerLink]="[
+          '/',
+          'store',
+          'tabs',
+          'categories',
+          'travel'
+          ]"
+        >
+          <ion-label>Travel</ion-label>
+        </ion-segment-button>
+      </ion-slide>
+      <ion-slide>
+        <ion-segment-button
+          value="lifestyle"
+          text-capitalize=“false”
+          [routerLink]="[
+          '/',
+          'store',
+          'tabs',
+          'categories',
+          'lifestyle'
+          ]"
+        >
+          <ion-label>Lifestyle</ion-label>
+        </ion-segment-button>
+      </ion-slide>
+    </ion-slides>
+  </ion-segment>
+
+
 </ion-header>
 
 <ion-content>
-  <ion-list>
+  <ion-list *ngIf="!appsLoaded" text-center padding>
+    <br><br><br><br>
+    <ion-spinner name="bubbles"></ion-spinner>
+  </ion-list>
+
+  <ion-list *ngIf="appsLoaded" padding>
+
     <div class="search-container">
-      <ion-searchbar 
-        color="secondary" 
-        placeholder="Search DApp.."
-        animated
+      <ion-searchbar
+        mode="ios"
+        color="secondary"
+        placeholder=" Search for Application"
         [(ngModel)]="dapp"
         (ngModelChange)="filterDapps($event)"
       >
       </ion-searchbar>
     </div>
-    <div>
-      <p class="section">Latest Releases</p>
+    <div class="section">
+      <p>Newest Releases</p>
     </div>
-    <ion-grid *ngIf="!appsLoaded" text-center padding>
-      <ion-spinner name="bubbles"></ion-spinner>
-    </ion-grid>
-    <ion-grid *ngIf="appsLoaded">
-      <ion-row 
-        class="dapp"
-        *ngFor="let app of filteredApps"
-        [routerLink]="[
-          '/', 
-          'store', 
-          'tabs', 
-          'dapps', 
-          app._id
-        ]"
-      >
-        <ion-col size="2" size-lg="1">
-          <ion-thumbnail>
-            <ion-img [src]="getAppIcon(app)"></ion-img>
-          </ion-thumbnail>
-        </ion-col>
-        <ion-col size="8" size-xs="8" size-lg="10.5">
-          <ion-label>
-            <h2>{{ app.appName }}</h2>
-            <p>{{ app.appShortDescription }}</p>
-          </ion-label>
-        </ion-col>
-        <ion-col size="2" size-xs="2" size-lg="0.5">
-          <ion-item detail lines='none'>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+    <ion-virtual-scroll [items]="filteredApps"  approxItemHeight="120px">
+      <ion-item *ngFor="let app of filteredApps.slice(0, 3)">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col
+              size="2.25"
+              size-lg="2.25"
+              class="img-container"
+              [routerLink]="[
+                '/',
+                'store',
+                'tabs',
+                'dapps',
+                app._id
+              ]"
+            >
+              <ion-thumbnail>
+                <ion-img [src]="getAppIcon(app)"></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col
+              size="6.25"
+              size-xs="6.25"
+              class="node-content"
+              [routerLink]="[
+                '/',
+                'store',
+                'tabs',
+                'dapps',
+                app._id
+              ]"
+            >
+              <ion-label>
+                <h2>{{ app.appName }}</h2>
+                <p>{{ app.appShortDescription }}</p>
+              </ion-label>
+            </ion-col>
+            <ion-col size="3.5" size-xs="3.5" class="btn-container">
+              <ion-button  color="tertiary" (click)="installApp(app)" *ngIf="!app.installing && !app.installed">
+                <ion-label>Install</ion-label>
+              </ion-button>
+              <ion-button color="tertiary" *ngIf="app.installing">
+                <ion-label>
+                  <ion-spinner name="dots"></ion-spinner>
+                </ion-label>
+              </ion-button>
+              <ion-button  color="tertiary" *ngIf="!app.installing && app.installed" disabled>
+                <ion-label>Installed</ion-label>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-virtual-scroll>
 
-    </ion-grid>
+    <div class="section">
+      <p>Popular</p>
+    </div>
+    <ion-virtual-scroll [items]="filteredApps"  approxItemHeight="120px">
+      <ion-item *ngFor="let app of filteredApps.slice(0, 3)">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col
+              size="2.25"
+              size-lg="2.25"
+              class="img-container"
+              [routerLink]="[
+                '/',
+                'store',
+                'tabs',
+                'dapps',
+                app._id
+              ]"
+            >
+              <ion-thumbnail>
+                <ion-img [src]="getAppIcon(app)"></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col
+              size="6.25"
+              size-xs="6.25"
+              class="node-content"
+              [routerLink]="[
+                '/',
+                'store',
+                'tabs',
+                'dapps',
+                app._id
+              ]"
+            >
+              <ion-label>
+                <h2>{{ app.appName }}</h2>
+                <p>{{ app.appShortDescription }}</p>
+              </ion-label>
+            </ion-col>
+            <ion-col size="3.5" size-xs="3.5" class="btn-container">
+              <ion-button  color="tertiary" (click)="installApp(app)" *ngIf="!app.installing && !app.installed">
+                <ion-label>Install</ion-label>
+              </ion-button>
+              <ion-button color="tertiary" *ngIf="app.installing">
+                <ion-label>
+                  <ion-spinner name="dots"></ion-spinner>
+                </ion-label>
+              </ion-button>
+              <ion-button  color="tertiary" *ngIf="!app.installing && app.installed" disabled>
+                <ion-label>Installed</ion-label>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-virtual-scroll>
+
+    <div class="section" *ngIf="finance.length > 0">
+      <p>Finance</p>
+    </div>
+    <ion-virtual-scroll [items]="filteredApps"  approxItemHeight="120px">
+      <ion-item *ngFor="let app of finance.slice(0,3)">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col
+              size="2.25"
+              size-lg="2.25"
+              class="img-container"
+              [routerLink]="[
+                '/',
+                'store',
+                'tabs',
+                'dapps',
+                app._id
+              ]"
+            >
+              <ion-thumbnail>
+                <ion-img [src]="getAppIcon(app)"></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col
+              size="6.25"
+              size-xs="6.25"
+              class="node-content"
+              [routerLink]="[
+                '/',
+                'store',
+                'tabs',
+                'dapps',
+                app._id
+              ]"
+            >
+              <ion-label>
+                <h2>{{ app.appName }}</h2>
+                <p>{{ app.appShortDescription }}</p>
+              </ion-label>
+            </ion-col>
+            <ion-col size="3.5" size-xs="3.5" class="btn-container">
+              <ion-button  color="tertiary" (click)="installApp(app)" *ngIf="!app.installing && !app.installed">
+                <ion-label>Install</ion-label>
+              </ion-button>
+              <ion-button color="tertiary" *ngIf="app.installing">
+                <ion-label>
+                  <ion-spinner name="dots"></ion-spinner>
+                </ion-label>
+              </ion-button>
+              <ion-button  color="tertiary" *ngIf="!app.installing && app.installed" disabled>
+                <ion-label>Installed</ion-label>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-virtual-scroll>
+
+    <div class="section" *ngIf="utility.length > 0">
+      <p>Utility</p>
+    </div>
+    <ion-virtual-scroll [items]="filteredApps"  approxItemHeight="120px">
+      <ion-item *ngFor="let app of utility.slice(0,3)">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col
+              size="2.25"
+              size-lg="2.25"
+              class="img-container"
+              [routerLink]="[
+                '/',
+                'store',
+                'tabs',
+                'dapps',
+                app._id
+              ]"
+            >
+              <ion-thumbnail>
+                <ion-img [src]="getAppIcon(app)"></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col
+              size="6.25"
+              size-xs="6.25"
+              class="node-content"
+              [routerLink]="[
+                '/',
+                'store',
+                'tabs',
+                'dapps',
+                app._id
+              ]"
+            >
+              <ion-label>
+                <h2>{{ app.appName }}</h2>
+                <p>{{ app.appShortDescription }}</p>
+              </ion-label>
+            </ion-col>
+            <ion-col size="3.5" size-xs="3.5" class="btn-container">
+              <ion-button  color="tertiary" (click)="installApp(app)" *ngIf="!app.installing && !app.installed">
+                <ion-label>Install</ion-label>
+              </ion-button>
+              <ion-button color="tertiary" *ngIf="app.installing">
+                <ion-label>
+                  <ion-spinner name="dots"></ion-spinner>
+                </ion-label>
+              </ion-button>
+              <ion-button  color="tertiary" *ngIf="!app.installing && app.installed" disabled>
+                <ion-label>Installed</ion-label>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-virtual-scroll>
+
+    <div class="section" *ngIf="social.length > 0">
+      <p>Social</p>
+    </div>
+    <ion-virtual-scroll [items]="filteredApps"  approxItemHeight="120px">
+      <ion-item *ngFor="let app of social.slice(0,3)">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col
+              size="2.25"
+              size-lg="2.25"
+              class="img-container"
+              [routerLink]="[
+                '/',
+                'store',
+                'tabs',
+                'dapps',
+                app._id
+              ]"
+            >
+              <ion-thumbnail>
+                <ion-img [src]="getAppIcon(app)"></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col
+              size="6.25"
+              size-xs="6.25"
+              class="node-content"
+              [routerLink]="[
+                '/',
+                'store',
+                'tabs',
+                'dapps',
+                app._id
+              ]"
+            >
+              <ion-label>
+                <h2>{{ app.appName }}</h2>
+                <p>{{ app.appShortDescription }}</p>
+              </ion-label>
+            </ion-col>
+            <ion-col size="3.5" size-xs="3.5" class="btn-container">
+              <ion-button  color="tertiary" (click)="installApp(app)" *ngIf="!app.installing && !app.installed">
+                <ion-label>Install</ion-label>
+              </ion-button>
+              <ion-button color="tertiary" *ngIf="app.installing">
+                <ion-label>
+                  <ion-spinner name="dots"></ion-spinner>
+                </ion-label>
+              </ion-button>
+              <ion-button  color="tertiary" *ngIf="!app.installing && app.installed" disabled>
+                <ion-label>Installed</ion-label>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-virtual-scroll>
+
+    <div class="section" *ngIf="productivity.length > 0">
+      <p>Productivity</p>
+    </div>
+    <ion-virtual-scroll [items]="filteredApps"  approxItemHeight="120px">
+      <ion-item *ngFor="let app of productivity.slice(0,3)">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col
+              size="2.25"
+              size-lg="2.25"
+              class="img-container"
+              [routerLink]="[
+                '/',
+                'store',
+                'tabs',
+                'dapps',
+                app._id
+              ]"
+            >
+              <ion-thumbnail>
+                <ion-img [src]="getAppIcon(app)"></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col
+              size="6.25"
+              size-xs="6.25"
+              class="node-content"
+              [routerLink]="[
+                '/',
+                'store',
+                'tabs',
+                'dapps',
+                app._id
+              ]"
+            >
+              <ion-label>
+                <h2>{{ app.appName }}</h2>
+                <p>{{ app.appShortDescription }}</p>
+              </ion-label>
+            </ion-col>
+            <ion-col size="3.5" size-xs="3.5" class="btn-container">
+              <ion-button  color="tertiary" (click)="installApp(app)" *ngIf="!app.installing && !app.installed">
+                <ion-label>Install</ion-label>
+              </ion-button>
+              <ion-button color="tertiary" *ngIf="app.installing">
+                <ion-label>
+                  <ion-spinner name="dots"></ion-spinner>
+                </ion-label>
+              </ion-button>
+              <ion-button  color="tertiary" *ngIf="!app.installing && app.installed" disabled>
+                <ion-label>Installed</ion-label>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-virtual-scroll>
+
+    <div class="section" *ngIf="business.length > 0">
+      <p>Business</p>
+    </div>
+    <ion-virtual-scroll [items]="filteredApps"  approxItemHeight="120px">
+      <ion-item *ngFor="let app of business.slice(0,3)">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col
+              size="2.25"
+              size-lg="2.25"
+              class="img-container"
+              [routerLink]="[
+                '/',
+                'store',
+                'tabs',
+                'dapps',
+                app._id
+              ]"
+            >
+              <ion-thumbnail>
+                <ion-img [src]="getAppIcon(app)"></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col
+              size="6.25"
+              size-xs="6.25"
+              class="node-content"
+              [routerLink]="[
+                '/',
+                'store',
+                'tabs',
+                'dapps',
+                app._id
+              ]"
+            >
+              <ion-label>
+                <h2>{{ app.appName }}</h2>
+                <p>{{ app.appShortDescription }}</p>
+              </ion-label>
+            </ion-col>
+            <ion-col size="3.5" size-xs="3.5" class="btn-container">
+              <ion-button  color="tertiary" (click)="installApp(app)" *ngIf="!app.installing && !app.installed">
+                <ion-label>Install</ion-label>
+              </ion-button>
+              <ion-button color="tertiary" *ngIf="app.installing">
+                <ion-label>
+                  <ion-spinner name="dots"></ion-spinner>
+                </ion-label>
+              </ion-button>
+              <ion-button  color="tertiary" *ngIf="!app.installing && app.installed" disabled>
+                <ion-label>Installed</ion-label>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-virtual-scroll>
+
+    <div class="section" *ngIf="entertainment.length > 0">
+      <p>Entertainment</p>
+    </div>
+    <ion-virtual-scroll [items]="filteredApps"  approxItemHeight="120px">
+      <ion-item *ngFor="let app of entertainment.slice(0,3)">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col
+              size="2.25"
+              size-lg="2.25"
+              class="img-container"
+              [routerLink]="[
+                '/',
+                'store',
+                'tabs',
+                'dapps',
+                app._id
+              ]"
+            >
+              <ion-thumbnail>
+                <ion-img [src]="getAppIcon(app)"></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col
+              size="6.25"
+              size-xs="6.25"
+              class="node-content"
+              [routerLink]="[
+                '/',
+                'store',
+                'tabs',
+                'dapps',
+                app._id
+              ]"
+            >
+              <ion-label>
+                <h2>{{ app.appName }}</h2>
+                <p>{{ app.appShortDescription }}</p>
+              </ion-label>
+            </ion-col>
+            <ion-col size="3.5" size-xs="3.5" class="btn-container">
+              <ion-button  color="tertiary" (click)="installApp(app)" *ngIf="!app.installing && !app.installed">
+                <ion-label>Install</ion-label>
+              </ion-button>
+              <ion-button color="tertiary" *ngIf="app.installing">
+                <ion-label>
+                  <ion-spinner name="dots"></ion-spinner>
+                </ion-label>
+              </ion-button>
+              <ion-button  color="tertiary" *ngIf="!app.installing && app.installed" disabled>
+                <ion-label>Installed</ion-label>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-virtual-scroll>
+
+    <div class="section" *ngIf="games.length > 0">
+      <p>Games</p>
+    </div>
+    <ion-virtual-scroll [items]="filteredApps"  approxItemHeight="120px">
+      <ion-item *ngFor="let app of games.slice(0,3)">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col
+              size="2.25"
+              size-lg="2.25"
+              class="img-container"
+              [routerLink]="[
+                '/',
+                'store',
+                'tabs',
+                'dapps',
+                app._id
+              ]"
+            >
+              <ion-thumbnail>
+                <ion-img [src]="getAppIcon(app)"></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col
+              size="6.25"
+              size-xs="6.25"
+              class="node-content"
+              [routerLink]="[
+                '/',
+                'store',
+                'tabs',
+                'dapps',
+                app._id
+              ]"
+            >
+              <ion-label>
+                <h2>{{ app.appName }}</h2>
+                <p>{{ app.appShortDescription }}</p>
+              </ion-label>
+            </ion-col>
+            <ion-col size="3.5" size-xs="3.5" class="btn-container">
+              <ion-button  color="tertiary" (click)="installApp(app)" *ngIf="!app.installing && !app.installed">
+                <ion-label>Install</ion-label>
+              </ion-button>
+              <ion-button color="tertiary" *ngIf="app.installing">
+                <ion-label>
+                  <ion-spinner name="dots"></ion-spinner>
+                </ion-label>
+              </ion-button>
+              <ion-button  color="tertiary" *ngIf="!app.installing && app.installed" disabled>
+                <ion-label>Installed</ion-label>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-virtual-scroll>
+
+    <div class="section" *ngIf="music.length > 0">
+      <p>Music</p>
+    </div>
+    <ion-virtual-scroll [items]="filteredApps"  approxItemHeight="120px">
+      <ion-item *ngFor="let app of music.slice(0,3)">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col
+              size="2.25"
+              size-lg="2.25"
+              class="img-container"
+              [routerLink]="[
+                '/',
+                'store',
+                'tabs',
+                'dapps',
+                app._id
+              ]"
+            >
+              <ion-thumbnail>
+                <ion-img [src]="getAppIcon(app)"></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col
+              size="6.25"
+              size-xs="6.25"
+              class="node-content"
+              [routerLink]="[
+                '/',
+                'store',
+                'tabs',
+                'dapps',
+                app._id
+              ]"
+            >
+              <ion-label>
+                <h2>{{ app.appName }}</h2>
+                <p>{{ app.appShortDescription }}</p>
+              </ion-label>
+            </ion-col>
+            <ion-col size="3.5" size-xs="3.5" class="btn-container">
+              <ion-button  color="tertiary" (click)="installApp(app)" *ngIf="!app.installing && !app.installed">
+                <ion-label>Install</ion-label>
+              </ion-button>
+              <ion-button color="tertiary" *ngIf="app.installing">
+                <ion-label>
+                  <ion-spinner name="dots"></ion-spinner>
+                </ion-label>
+              </ion-button>
+              <ion-button  color="tertiary" *ngIf="!app.installing && app.installed" disabled>
+                <ion-label>Installed</ion-label>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-virtual-scroll>
+
+    <div class="section" *ngIf="casino.length > 0">
+      <p>Casino</p>
+    </div>
+    <ion-virtual-scroll [items]="filteredApps"  approxItemHeight="120px">
+      <ion-item *ngFor="let app of casino.slice(0,3)">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col
+              size="2.25"
+              size-lg="2.25"
+              class="img-container"
+              [routerLink]="[
+                '/',
+                'store',
+                'tabs',
+                'dapps',
+                app._id
+              ]"
+            >
+              <ion-thumbnail>
+                <ion-img [src]="getAppIcon(app)"></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col
+              size="6.25"
+              size-xs="6.25"
+              class="node-content"
+              [routerLink]="[
+                '/',
+                'store',
+                'tabs',
+                'dapps',
+                app._id
+              ]"
+            >
+              <ion-label>
+                <h2>{{ app.appName }}</h2>
+                <p>{{ app.appShortDescription }}</p>
+              </ion-label>
+            </ion-col>
+            <ion-col size="3.5" size-xs="3.5" class="btn-container">
+              <ion-button  color="tertiary" (click)="installApp(app)" *ngIf="!app.installing && !app.installed">
+                <ion-label>Install</ion-label>
+              </ion-button>
+              <ion-button color="tertiary" *ngIf="app.installing">
+                <ion-label>
+                  <ion-spinner name="dots"></ion-spinner>
+                </ion-label>
+              </ion-button>
+              <ion-button  color="tertiary" *ngIf="!app.installing && app.installed" disabled>
+                <ion-label>Installed</ion-label>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-virtual-scroll>
+
+    <div class="section" *ngIf="travel.length > 0">
+      <p>Travel</p>
+    </div>
+    <ion-virtual-scroll [items]="filteredApps"  approxItemHeight="120px">
+      <ion-item *ngFor="let app of travel.slice(0,3)">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col
+              size="2.25"
+              size-lg="2.25"
+              class="img-container"
+              [routerLink]="[
+                '/',
+                'store',
+                'tabs',
+                'dapps',
+                app._id
+              ]"
+            >
+              <ion-thumbnail>
+                <ion-img [src]="getAppIcon(app)"></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col
+              size="6.25"
+              size-xs="6.25"
+              class="node-content"
+              [routerLink]="[
+                '/',
+                'store',
+                'tabs',
+                'dapps',
+                app._id
+              ]"
+            >
+              <ion-label>
+                <h2>{{ app.appName }}</h2>
+                <p>{{ app.appShortDescription }}</p>
+              </ion-label>
+            </ion-col>
+            <ion-col size="3.5" size-xs="3.5" class="btn-container">
+              <ion-button  color="tertiary" (click)="installApp(app)" *ngIf="!app.installing && !app.installed">
+                <ion-label>Install</ion-label>
+              </ion-button>
+              <ion-button color="tertiary" *ngIf="app.installing">
+                <ion-label>
+                  <ion-spinner name="dots"></ion-spinner>
+                </ion-label>
+              </ion-button>
+              <ion-button  color="tertiary" *ngIf="!app.installing && app.installed" disabled>
+                <ion-label>Installed</ion-label>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-virtual-scroll>
+
+    <div class="section" *ngIf="lifestyle.length > 0">
+      <p>Lifestyle</p>
+    </div>
+    <ion-virtual-scroll [items]="filteredApps"  approxItemHeight="120px">
+      <ion-item *ngFor="let app of lifestyle.slice(0,3)">
+        <ion-grid no-padding>
+          <ion-row no-padding>
+            <ion-col
+              size="2.25"
+              size-lg="2.25"
+              class="img-container"
+              [routerLink]="[
+                '/',
+                'store',
+                'tabs',
+                'dapps',
+                app._id
+              ]"
+            >
+              <ion-thumbnail>
+                <ion-img [src]="getAppIcon(app)"></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col
+              size="6.25"
+              size-xs="6.25"
+              class="node-content"
+              [routerLink]="[
+                '/',
+                'store',
+                'tabs',
+                'dapps',
+                app._id
+              ]"
+            >
+              <ion-label>
+                <h2>{{ app.appName }}</h2>
+                <p>{{ app.appShortDescription }}</p>
+              </ion-label>
+            </ion-col>
+            <ion-col size="3.5" size-xs="3.5" class="btn-container">
+              <ion-button  color="tertiary" (click)="installApp(app)" *ngIf="!app.installing && !app.installed">
+                <ion-label>Install</ion-label>
+              </ion-button>
+              <ion-button color="tertiary" *ngIf="app.installing">
+                <ion-label>
+                  <ion-spinner name="dots"></ion-spinner>
+                </ion-label>
+              </ion-button>
+              <ion-button  color="tertiary" *ngIf="!app.installing && app.installed" disabled>
+                <ion-label>Installed</ion-label>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-virtual-scroll>
+
   </ion-list>
 </ion-content>

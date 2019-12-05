@@ -44,13 +44,6 @@ export class CategoryTypePage implements OnInit {
     return this.dappsService.getAppIcon(app);
   }
 
-  /* filterDapps(search) {
-    this.filteredDapps = this.dapps.filter((dapp) => {
-      return dapp.appName.toLowerCase().indexOf(search.toLowerCase()) !== -1;
-    });
-    console.log(this.filteredDapps);
-  } */
-
   filterDapps(search) {
     this.appsLoaded = false;
     this.dappsService.fetchFilteredDapps(search).subscribe((apps: Dapp[]) => {

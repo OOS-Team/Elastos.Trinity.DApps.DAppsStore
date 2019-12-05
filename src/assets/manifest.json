@@ -6,7 +6,7 @@
   "short_name": "DApp Store",
   "short_description": "DApp Store",
   "description": "Elastos Trinity DApp Store",
-  "start_url": "http://192.168.43.133:8100",
+  "start_url": "http://192.168.1.133:8100",
   "type": "url",
   "category": "finance",
   "icons": [

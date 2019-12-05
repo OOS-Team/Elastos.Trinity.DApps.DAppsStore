@@ -17,12 +17,12 @@
   --ion-color-secondary-shade: #e0e0e0;
   --ion-color-secondary-tint: #ffffff;
 
-  --ion-color-tertiary: #7044ff;
-  --ion-color-tertiary-rgb: 112,68,255;
-  --ion-color-tertiary-contrast: #ffffff;
-  --ion-color-tertiary-contrast-rgb: 255,255,255;
-  --ion-color-tertiary-shade: #633ce0;
-  --ion-color-tertiary-tint: #7e57ff;
+  --ion-color-tertiary: #EFF5FD;
+  --ion-color-tertiary-rgb: 239,245,253;
+  --ion-color-tertiary-contrast: #007AFF;
+  --ion-color-tertiary-contrast-rgb: 0,0,0;
+  --ion-color-tertiary-shade: #d2d8df;
+  --ion-color-tertiary-tint: #f1f6fd;
 
   --ion-color-success: #10dc60;
   --ion-color-success-rgb: 16,220,96;
@@ -66,14 +66,6 @@
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
 
-  --ion-toolbar-background: var(--ion-color-primary, black);
-  --ion-toolbar-color: var(--ion-color-primary-contrast);
-}
-
-.ios { // ios
-  --ion-color-primary: linear-gradient(120deg, rgb(0, 0, 0) 0%,  #21313d 100%);
-}
-
-.plt-android { // android
-  --ion-color-primary: linear-gradient(120deg, rgb(0, 0, 0) 0%,  #21313d 100%);
+  --ion-toolbar-background: white;
+  --ion-toolbar-color: black;
 }
