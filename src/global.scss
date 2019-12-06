@@ -38,6 +38,8 @@
   font-family: 'Raleway', sans-serif;
 }
 
+
+// ** Header ** //
 ion-header {
 
   ion-toolbar {
@@ -75,26 +77,28 @@ ion-header {
   }
 }
 
+// ** Search Container ** //
+.search-container {
+  position: sticky;
+  top: 0px;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  background: #FAFAFA;
+  padding: 12px 0;
+
+  ion-searchbar {
+    width: 80%;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+// ** Content ** //
 ion-list {
   background: #FAFAFA;
   min-height: 100%;
   padding: 0;
-
-  .search-container {
-    position: sticky;
-    top: 0px;
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    background: #FAFAFA;
-    padding: 12px 0 0;
-
-    ion-searchbar {
-      width: 80%;
-      padding: 0;
-      margin: 0;
-    }
-  }
 
   ion-item {
     --inner-padding-end: 0px;
