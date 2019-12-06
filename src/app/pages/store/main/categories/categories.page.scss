@@ -1,43 +1,23 @@
-ion-col {
-  padding: 0;
-  margin: 0px;
+ion-grid {
+  min-height: 100%;
+  background: #FAFAFA;
 }
 
-ion-grid {
-  background-image: linear-gradient(to right, rgb(20, 20, 20) 0%, #325169 100%);
-  padding: 5px;
-  min-height: 100%;
+.box-container {
+  display: flex;
+  justify-content: flex-end;
 
-  ion-card {
-    border-radius: 2px;
-    padding: 0px;
-    margin: 3px;
-    opacity: 0.8;
-  
-    ion-card-header {
-      background-color: white;
-      padding: 10px;
-
-      ion-card-title {
-        font-weight: bold;
-        font-size: 25px;
-        color: rgb(63, 63, 63) !important;
-      }
-
-      ion-card-subtitle {
-        margin: 0;
-      }
-    }
-  
-    ion-img {
-      width: 100%;
-    }
+  .box {
+    min-width: 10px;
+    min-height: 10px;
+    background: black;
   }
 }
 
-// For non-native devices
-.category:hover,
-.category:active {
-  transform: scale(1.01);
-  transition: transform 200ms ease-in-out;
+.category {
+  padding-left: 0;
+
+  ion-label {
+    font-family: 'Raleway:600', sans-serif;
+  }
 }

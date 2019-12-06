@@ -1,5 +1,3 @@
-
-
 <ion-header>
   <ion-toolbar mode="ios">
     <ion-buttons
@@ -22,206 +20,6 @@
     </ion-buttons>
     <ion-title>{{ categoryType.charAt(0).toUpperCase() + categoryType.slice(1) }}</ion-title>
   </ion-toolbar>
-
-  <!-- <ion-segment mode="ios">
-    <ion-slides [options]="slideOpts">
-      <ion-slide>
-        <ion-segment-button
-          value="new"
-          text-capitalize=“false”
-          [routerLink]="[
-          '/',
-          'store',
-          'tabs',
-          'categories',
-          'new'
-          ]"
-        >
-          <ion-label>New</ion-label>
-        </ion-segment-button>
-      </ion-slide>
-      <ion-slide>
-        <ion-segment-button
-          value="popular"
-          text-capitalize=“false”
-          [routerLink]="[
-          '/',
-          'store',
-          'tabs',
-          'categories',
-          'popular'
-          ]"
-        >
-          <ion-label>Popular</ion-label>
-        </ion-segment-button>
-      </ion-slide>
-      <ion-slide>
-        <ion-segment-button
-          value="finance"
-          text-capitalize=“false”
-          [routerLink]="[
-          '/',
-          'store',
-          'tabs',
-          'categories',
-          'finance'
-          ]"
-        >
-          <ion-label>Finance</ion-label>
-        </ion-segment-button>
-      </ion-slide>
-      <ion-slide>
-        <ion-segment-button
-          value="utility"
-          text-capitalize=“false”
-          [routerLink]="[
-          '/',
-          'store',
-          'tabs',
-          'categories',
-          'utility'
-          ]"
-        >
-          <ion-label>Utility</ion-label>
-        </ion-segment-button>
-      </ion-slide>
-      <ion-slide>
-        <ion-segment-button
-          value="social"
-          text-capitalize=“false”
-          [routerLink]="[
-          '/',
-          'store',
-          'tabs',
-          'categories',
-          'social'
-          ]"
-        >
-          <ion-label>Social</ion-label>
-        </ion-segment-button>
-      </ion-slide>
-      <ion-slide>
-        <ion-segment-button
-          value="productivity"
-          text-capitalize=“false”
-          [routerLink]="[
-          '/',
-          'store',
-          'tabs',
-          'categories',
-          'productivity'
-          ]"
-        >
-          <ion-label>Productivity</ion-label>
-        </ion-segment-button>
-      </ion-slide>
-      <ion-slide>
-        <ion-segment-button
-          value="business"
-          text-capitalize=“false”
-          [routerLink]="[
-          '/',
-          'store',
-          'tabs',
-          'categories',
-          'business'
-          ]"
-        >
-          <ion-label>Business</ion-label>
-        </ion-segment-button>
-      </ion-slide>
-      <ion-slide>
-        <ion-segment-button
-          value="entertainment"
-          text-capitalize=“false”
-          [routerLink]="[
-          '/',
-          'store',
-          'tabs',
-          'categories',
-          'entertainment'
-          ]"
-        >
-          <ion-label>Entertainment</ion-label>
-        </ion-segment-button>
-      </ion-slide>
-      <ion-slide>
-        <ion-segment-button
-          value="games"
-          text-capitalize=“false”
-          [routerLink]="[
-          '/',
-          'store',
-          'tabs',
-          'categories',
-          'games'
-          ]"
-        >
-          <ion-label>Games</ion-label>
-        </ion-segment-button>
-      </ion-slide>
-      <ion-slide>
-        <ion-segment-button
-          value="music"
-          text-capitalize=“false”
-          [routerLink]="[
-          '/',
-          'store',
-          'tabs',
-          'categories',
-          'music'
-          ]"
-        >
-          <ion-label>Music</ion-label>
-        </ion-segment-button>
-      </ion-slide>
-      <ion-slide>
-        <ion-segment-button
-          value="casino"
-          text-capitalize=“false”
-          [routerLink]="[
-          '/',
-          'store',
-          'tabs',
-          'categories',
-          'casino'
-          ]"
-        >
-          <ion-label>Casino</ion-label>
-        </ion-segment-button>
-      </ion-slide>
-      <ion-slide>
-        <ion-segment-button
-          value="travel"
-          text-capitalize=“false”
-          [routerLink]="[
-          '/',
-          'store',
-          'tabs',
-          'categories',
-          'travel'
-          ]"
-        >
-          <ion-label>Travel</ion-label>
-        </ion-segment-button>
-      </ion-slide>
-      <ion-slide>
-        <ion-segment-button
-          value="lifestyle"
-          text-capitalize=“false”
-          [routerLink]="[
-          '/',
-          'store',
-          'tabs',
-          'categories',
-          'lifestyle'
-          ]"
-        >
-          <ion-label>Lifestyle</ion-label>
-        </ion-segment-button>
-      </ion-slide>
-    </ion-slides>
-  </ion-segment> -->
 </ion-header>
 
 <ion-content>
@@ -242,7 +40,6 @@
       >
       </ion-searchbar>
     </div>
-    <ion-virtual-scroll [items]="filteredApps"  approxItemHeight="120px">
       <ion-item *ngFor="let app of filteredApps">
         <ion-grid no-padding>
           <ion-row>
@@ -273,7 +70,7 @@
                 'dapps',
                 app._id
               ]"
-            >
+              >
               <ion-label>
                 <h2>{{ app.appName }}</h2>
                 <p>{{ app.appShortDescription }}</p>
@@ -295,7 +92,6 @@
           </ion-row>
         </ion-grid>
       </ion-item>
-    </ion-virtual-scroll>
   </ion-list>
 
 </ion-content>

@@ -9,6 +9,22 @@ declare let appManager: any;
 })
 export class CategoriesPage implements OnInit {
 
+  categories = [
+    'new',
+    'popular',
+    'finance',
+    'utility',
+    'social',
+    'productivity',
+    'business',
+    'entertainment',
+    'games',
+    'music',
+    'casino',
+    'travel',
+    'lifestyle'
+  ];
+
   constructor() { }
 
   ngOnInit() {

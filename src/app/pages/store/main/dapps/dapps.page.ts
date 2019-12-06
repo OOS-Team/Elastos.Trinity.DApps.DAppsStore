@@ -18,7 +18,24 @@ export class DappsPage implements OnInit {
   filteredApps: Dapp[] = [];
   appsLoaded: boolean = false;
 
-  // Categories
+  // Segment
+  categories = [
+    'new',
+    'popular',
+    'finance',
+    'utility',
+    'social',
+    'productivity',
+    'business',
+    'entertainment',
+    'games',
+    'music',
+    'casino',
+    'travel',
+    'lifestyle'
+  ];
+
+  // Sections
   finance: Dapp[] = [];
   utility: Dapp[] = [];
   social: Dapp[] = [];

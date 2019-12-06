@@ -16,9 +16,9 @@ declare let appManager: any;
 export class DappDetailPage implements OnInit {
 
   dapp: Dapp;
-  dappBanner = '';
-  installing = false;
-  installed = false;
+  dappBanner: string = '';
+  installing: boolean = false;
+  installed: boolean = false;
 
   constructor(
     private dappsService: DappsService,
@@ -35,8 +35,8 @@ export class DappDetailPage implements OnInit {
       }
       this.dapp = this.dappsService.getDapp(paramMap.get('dappId'));
       this.dappBanner = this.dappsService.getAppBanner(this.dapp);
-      console.log('Dapp =' + ' ' + this.dapp);
-      console.log('Dapp Banner =' + ' ' + this.dappBanner);
+      console.log('Dapp', this.dapp);
+      console.log('Dapp Banner', this.dappBanner);
     });
   }
 

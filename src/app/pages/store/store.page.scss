@@ -2,12 +2,17 @@
   font-family: 'Raleway', sans-serif;
 }
 
-ion-icon {
-  color: #989aa2;
-}
+ion-tab-bar {
+  height: 10%;
 
-ion-label {
-  font-size: 10px;
-  font-weight: bold;
-  color: #989aa2;
+  ion-icon {
+    color: #989aa2;
+    font-size: 40px;
+  }
+
+  ion-label {
+    font-size: 8px;
+    font-weight: bold;
+    color: #989aa2;
+  }
 }

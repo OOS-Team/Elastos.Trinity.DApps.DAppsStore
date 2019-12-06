@@ -44,8 +44,8 @@ export class CategoryTypePage implements OnInit {
       this.dapps = this.dappsService.getCategory(paramMap.get('categoryType'));
       this.filteredApps = this.dapps;
       this.categoryType = paramMap.get('categoryType');
-      console.log('category' + ' ' + this.categoryType);
-      console.log('dapps' + ' ' + this.dapps);
+      console.log('category', this.categoryType);
+      console.log('dapps', this.dapps);
     });
   }
 

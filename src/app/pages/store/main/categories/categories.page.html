@@ -1,240 +1,44 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button menu="m1"></ion-menu-button>
+  <ion-toolbar mode="ios">
+    <ion-buttons
+      slot="start"
+      padding
+      class="header-btns"
+      [routerLink]="[
+      '/',
+      'store',
+      'tabs',
+      'dapps'
+      ]"
+    >
+      <ion-icon name="arrow-back" mode="ios"></ion-icon>
     </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-button (click)="closeApp()">
-        <ion-icon name="close"></ion-icon>
+    <ion-buttons slot="end" class="header-btns">
+      <ion-button>
+        <ion-menu-button menu="m1"></ion-menu-button>
       </ion-button>
     </ion-buttons>
     <ion-title>Categories</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content text-center>
-  <ion-grid>
-
-    <ion-row>
-      <ion-col size="12">
-        <ion-card
-        class="category"
-        [routerLink]="[
-          '/', 
-          'store', 
-          'tabs', 
-          'categories', 
-          'finance'
-        ]"
-        >
-         <!--  <ion-img src="/../../../assets/category-images/finance.jpg"></ion-img> -->
-          <ion-card-header>
-            <ion-card-title>Finance</ion-card-title>
-          </ion-card-header>
-        </ion-card>
+<ion-content>
+  <ion-grid color="light">
+    <ion-row
+      *ngFor="let category of categories"
+      [routerLink]="[
+        '/',
+        'store',
+        'tabs',
+        'categories',
+        category
+        ]">
+      <ion-col size="2" class="box-container" padding>
+        <span class="box">oo</span>
+      </ion-col>
+      <ion-col size="10" class="category" padding>
+        <ion-label>{{ category.charAt(0).toUpperCase() + category.slice(1) }}</ion-label>
       </ion-col>
     </ion-row>
-
-    <ion-row>
-      <ion-col size="12">
-        <ion-card
-          class="category"
-          [routerLink]="[
-            '/', 
-            'store', 
-            'tabs', 
-            'categories', 
-            'business'
-          ]"
-        >
-          <!-- <ion-img src="/../../../assets/category-images/business.jpg"></ion-img> -->
-          <ion-card-header>
-            <ion-card-title>Business</ion-card-title>
-          </ion-card-header>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col size="12">
-        <ion-card
-          class="category"
-          [routerLink]="[
-            '/', 
-            'store', 
-            'tabs', 
-            'categories', 
-            'lifestyle'
-          ]"
-        >
-         <!--  <ion-img src="/../../../assets/category-images/lifestyle.jpg"></ion-img> -->
-          <ion-card-header>
-            <ion-card-title>Lifestyle</ion-card-title>
-          </ion-card-header>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col size="12">
-        <ion-card
-          class="category"
-          [routerLink]="[
-            '/', 
-            'store', 
-            'tabs', 
-            'categories', 
-            'entertainment'
-          ]"
-        >
-         <!--  <ion-img src="/../../../assets/category-images/entertainment.jpg"></ion-img> -->
-          <ion-card-header>
-            <ion-card-title>Entertainment</ion-card-title>
-          </ion-card-header>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col size="12">
-        <ion-card
-          class="category"
-          [routerLink]="[
-            '/', 
-            'store', 
-            'tabs', 
-            'categories', 
-            'games'
-          ]"
-        >
-         <!--  <ion-img src="/../../../assets/category-images/game.jpg"></ion-img> -->
-          <ion-card-header>
-            <ion-card-title>Games</ion-card-title>
-          </ion-card-header>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col size="12">
-        <ion-card
-          class="category"
-          [routerLink]="[
-            '/', 
-            'store', 
-            'tabs', 
-            'categories', 
-            'casino'
-          ]"
-        >
-         <!--  <ion-img src="/../../../assets/category-images/casino.jpg"></ion-img> -->
-          <ion-card-header>
-            <ion-card-title>Casino</ion-card-title>
-          </ion-card-header>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col size="12">
-        <ion-card
-          class="category"
-          [routerLink]="[
-            '/', 
-            'store', 
-            'tabs', 
-            'categories', 
-            'social'
-          ]"
-        >
-         <!--  <ion-img src="/../../../assets/category-images/social.jpg"></ion-img> -->
-          <ion-card-header>
-            <ion-card-title>Social</ion-card-title>
-          </ion-card-header>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col size="12">
-        <ion-card
-          class="category"
-          [routerLink]="[
-            '/', 
-            'store', 
-            'tabs', 
-            'categories', 
-            'utility'
-          ]"
-        >
-          <!-- <ion-img src="/../../../assets/category-images/utility.jpg"></ion-img> -->
-          <ion-card-header>
-            <ion-card-title>Utility</ion-card-title>
-          </ion-card-header>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col size="12">
-        <ion-card
-          class="category"
-          [routerLink]="[
-            '/', 
-            'store', 
-            'tabs', 
-            'categories', 
-            'music'
-          ]"
-        >
-          <!-- <ion-img src="/../../../assets/category-images/utility.jpg"></ion-img> -->
-          <ion-card-header>
-            <ion-card-title>Music</ion-card-title>
-          </ion-card-header>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col size="12">
-        <ion-card
-          class="category"
-          [routerLink]="[
-            '/', 
-            'store', 
-            'tabs', 
-            'categories', 
-            'travel'
-          ]"
-        >
-          <!-- <ion-img src="/../../../assets/category-images/utility.jpg"></ion-img> -->
-          <ion-card-header>
-            <ion-card-title>Travel</ion-card-title>
-          </ion-card-header>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col size="12">
-        <ion-card
-          class="category"
-          [routerLink]="[
-            '/', 
-            'store', 
-            'tabs', 
-            'categories', 
-            'productivity'
-          ]"
-        >
-          <!-- <ion-img src="/../../../assets/category-images/utility.jpg"></ion-img> -->
-          <ion-card-header>
-            <ion-card-title>Productivity</ion-card-title>
-          </ion-card-header>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-     
   </ion-grid>
 </ion-content>
-  

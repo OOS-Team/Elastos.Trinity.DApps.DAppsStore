@@ -4,19 +4,6 @@
 
 ion-header {
 
-  ion-toolbar {
-    margin-top: 20px;
-
-    .header-btns {
-      font-size: 25px;
-    }
-
-    ion-title {
-      font-size: 23px;
-      font-weight: bold;
-    }
-  }
-
   ion-segment {
     margin-top: 10px;
     color: #959595;
@@ -61,73 +48,80 @@ ion-list {
   }
 
   .section {
-    display: flex;
-    justify-content: center;
 
-    p {
-      width: 85%;
-      margin: 12px 0;
-      font-weight: bold !important;
-      font-size: 18px !important;
-      color: black;
+    .section-title {
+      p {
+        margin: 12px 0;
+        font-size: 18px;
+        font-weight: bold;
+      }
+    }
+
+    .section-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      p {
+        margin: 12px 0;
+        font-size: 13px !important;
+        color: #007AFF !important;
+        font-weight: bold;
+      }
     }
   }
 
-  ion-virtual-scroll {
-    display: inline;
+  ion-item {
+    --inner-padding-end: 0px;
+    --padding-start: 0px;
 
-    ion-item {
-      --inner-padding-end: 0px;
-      --padding-start: 0px;
+    ion-row {
+      padding: 5px 0;
 
-      ion-row {
-        padding: 5px 0;
+      .img-container {
+        display: flex;
+        justify-content: flex-end;
 
-        .img-container {
-          display: flex;
-          justify-content: flex-end;
+        ion-thumbnail {
+          border-radius: 15px !important;
+          border: solid 1px black;
 
-          ion-thumbnail {
-            border-radius: 15px !important;
-            border: solid 1px black;
-
-            ion-img {
-              border-radius: 15px;
-            }
+          ion-img {
+            border-radius: 15px;
           }
         }
+      }
 
-        .node-content {
-          display: flex;
-          align-items: center;
+      .node-content {
+        display: flex;
+        align-items: center;
 
-            h2 {
-              font-size: 16px;
-              font-family: 'Raleway:500', sans-serif;
-              font-weight: normal;
-              margin: 0;
-            }
+          h2 {
+            font-size: 16px;
+            font-family: 'Raleway:500', sans-serif;
+            font-weight: normal;
+            margin: 0;
+          }
 
-            p {
-              font-size: 10px !important;
-              color: #959595;
-              margin: 0;
-            }
-        }
+          p {
+            font-size: 10px !important;
+            color: #959595;
+            margin: 0;
+          }
+      }
 
-        .btn-container {
-          display: flex;
-          justify-content: center;
-          align-items: center;
+      .btn-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-          ion-button {
-            --border-radius: 30px;
-            --box-shadow: none;
+        ion-button {
+          --border-radius: 30px;
+          --box-shadow: none;
 
-            ion-label {
-              font-size: 9px;
-              padding: 0 5px;
-            }
+          ion-label {
+            font-size: 9px;
+            padding: 0 5px;
           }
         }
       }
