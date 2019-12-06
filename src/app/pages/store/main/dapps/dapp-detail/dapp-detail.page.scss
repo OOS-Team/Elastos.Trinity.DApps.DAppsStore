@@ -1,14 +1,20 @@
 * {
-  font-family: 'Raleway:600', sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
 
 ion-grid {
 
+  p {
+    color: #ADB3BD;
+  }
+
   ion-row {
+    margin-left: 10px;
+    margin-right: 10px;
+
     .img-container {
       display: flex;
       align-items: center;
-      justify-content: flex-end;
 
       ion-thumbnail {
         border-radius: 15px !important;
@@ -21,16 +27,82 @@ ion-grid {
     }
 
     .dapp-content {
-      h1 {
-        margin: 0 0 2px;;
+      padding: 0;
+      display: flex;
+      align-items: center;
+
+      h2 {
+        margin: 0;
         font-size: 16px;
+        font-weight: 500;
       }
 
       p {
         margin: 0;
         font-size: 9px;
-        color: #ADB3BD;
       }
+    }
+
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      ion-button {
+        --border-radius: 30px;
+        --box-shadow: none;
+        width: 100%;
+        height: 40px;
+
+        ion-label {
+          font-size: 12px;
+          padding: 0 5px;
+          font-weight: bold;
+        }
+      }
+    }
+
+    .section {
+      h2 {
+        font-size: 16px;
+        margin: 0;
+        font-weight: 600;
+      }
+    }
+
+    .app-description {
+      p {
+        margin: 0;
+        font-size: 12px !important;
+      }
+    }
+
+    .app-banner {
+      div {
+        margin: 0;
+        padding: 0;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+    }
+  }
+
+  .details {
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(216, 216, 216);
+    margin-left: 15px;
+    margin-right: 15px;
+
+    h4 {
+      font-size: 12px !important;
+      font-weight: 600;
+      margin: 16px 0;
+    }
+
+    p {
+      font-size: 12px !important;
+      font-weight: 600;
+      margin: 16px 0;
     }
   }
 }

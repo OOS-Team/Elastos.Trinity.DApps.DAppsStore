@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header no-border>
   <ion-toolbar mode="ios">
     <ion-buttons
       slot="start"
@@ -18,12 +18,13 @@
         <ion-menu-button menu="m1"></ion-menu-button>
       </ion-button>
     </ion-buttons>
-    <ion-title>{{ dapp.appName }}</ion-title>
+    <ion-title></ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-grid padding-top>
+  <ion-grid padding>
+
     <ion-row>
       <ion-col size="2.5" class="img-container">
         <ion-thumbnail>
@@ -31,11 +32,85 @@
           <ion-img *ngIf="!dappBanner" src="/../../../assets/store/appbanner.jpg"></ion-img>
         </ion-thumbnail>
       </ion-col>
-      <ion-col size="9.5" class="dapp-content" padding>
-        <h1>{{ dapp.appName }}</h1>
-        <p>{{ dapp.appShortDescription }}</p>
+      <ion-col size="9.5" class="dapp-content" align-items-center>
+        <ion-label>
+          <h2>{{ dapp.appName }}</h2>
+          <p>{{ dapp.appShortDescription }}</p>
+        </ion-label>
       </ion-col>
     </ion-row>
+
+    <ion-row padding-top>
+      <ion-col size="12" class="btn-container">
+        <ion-button color="tertiary">
+          <ion-label>Install</ion-label>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row padding-top>
+      <ion-col size="12" class="section">
+        <h2>Description</h2>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12" class="app-description">
+        <p>{{ dapp.appDescription }}</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12" class="app-banner">
+        <div>
+          <ion-img *ngIf="dappBanner" [src]="dappBanner"></ion-img>
+          <ion-img *ngIf="!dappBanner" src="/../../../assets/store/appbanner.jpg"></ion-img>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row padding-top>
+      <ion-col size="12" class="section">
+        <h2>App Details</h2>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="details">
+      <h4>Category</h4>
+      <p>{{ dapp.category.charAt(0).toUpperCase() + dapp.category.slice(1) }}</p>
+    </ion-row>
+
+    <ion-row class="details">
+      <h4>Published</h4>
+      <p>{{ dapp.createdAt.slice(0, 10) }}</p>
+    </ion-row>
+
+    <ion-row class="details">
+      <h4>Version</h4>
+      <p>{{ dapp.versionName }}</p>
+    </ion-row>
+
+    <ion-row class="details">
+      <h4>Downloads</h4>
+      <p>{{ dapp.downloadsCount }}</p>
+    </ion-row>
+
+    <ion-row padding-top>
+      <ion-col size="12" class="section">
+        <h2>Developer Details</h2>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="details">
+      <h4>Author</h4>
+      <p>{{ dapp.authorName }}</p>
+    </ion-row>
+
+    <ion-row class="details">
+      <h4>Website</h4>
+      <p><a href="{{ dapp.authorWebsite }}"> {{ dapp.authorWebsite }}</a></p>
+    </ion-row>
+
   </ion-grid>
 </ion-content>
 
