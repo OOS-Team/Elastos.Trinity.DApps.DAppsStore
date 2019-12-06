@@ -14,204 +14,22 @@
 
   <ion-segment mode="ios">
     <ion-slides [options]="slideOpts">
-      <ion-slide>
+      <ion-slide *ngFor="let category of categories">
         <ion-segment-button
-          value="new"
+          value="{{ category }}"
           text-capitalize=“false”
           [routerLink]="[
-          '/',
-          'store',
-          'tabs',
-          'categories',
-          'new'
-          ]"
-        >
-          <ion-label>New</ion-label>
-        </ion-segment-button>
-      </ion-slide>
-      <ion-slide>
-        <ion-segment-button
-          value="popular"
-          text-capitalize=“false”
-          [routerLink]="[
-          '/',
-          'store',
-          'tabs',
-          'categories',
-          'popular'
-          ]"
-        >
-          <ion-label>Popular</ion-label>
-        </ion-segment-button>
-      </ion-slide>
-      <ion-slide>
-        <ion-segment-button
-          value="finance"
-          text-capitalize=“false”
-          [routerLink]="[
-          '/',
-          'store',
-          'tabs',
-          'categories',
-          'finance'
-          ]"
-        >
-          <ion-label>Finance</ion-label>
-        </ion-segment-button>
-      </ion-slide>
-      <ion-slide>
-        <ion-segment-button
-          value="utility"
-          text-capitalize=“false”
-          [routerLink]="[
-          '/',
-          'store',
-          'tabs',
-          'categories',
-          'utility'
-          ]"
-        >
-          <ion-label>Utility</ion-label>
-        </ion-segment-button>
-      </ion-slide>
-      <ion-slide>
-        <ion-segment-button
-          value="social"
-          text-capitalize=“false”
-          [routerLink]="[
-          '/',
-          'store',
-          'tabs',
-          'categories',
-          'social'
-          ]"
-        >
-          <ion-label>Social</ion-label>
-        </ion-segment-button>
-      </ion-slide>
-      <ion-slide>
-        <ion-segment-button
-          value="productivity"
-          text-capitalize=“false”
-          [routerLink]="[
-          '/',
-          'store',
-          'tabs',
-          'categories',
-          'productivity'
-          ]"
-        >
-          <ion-label>Productivity</ion-label>
-        </ion-segment-button>
-      </ion-slide>
-      <ion-slide>
-        <ion-segment-button
-          value="business"
-          text-capitalize=“false”
-          [routerLink]="[
-          '/',
-          'store',
-          'tabs',
-          'categories',
-          'business'
-          ]"
-        >
-          <ion-label>Business</ion-label>
-        </ion-segment-button>
-      </ion-slide>
-      <ion-slide>
-        <ion-segment-button
-          value="entertainment"
-          text-capitalize=“false”
-          [routerLink]="[
-          '/',
-          'store',
-          'tabs',
-          'categories',
-          'entertainment'
-          ]"
-        >
-          <ion-label>Entertainment</ion-label>
-        </ion-segment-button>
-      </ion-slide>
-      <ion-slide>
-        <ion-segment-button
-          value="games"
-          text-capitalize=“false”
-          [routerLink]="[
-          '/',
-          'store',
-          'tabs',
-          'categories',
-          'games'
-          ]"
-        >
-          <ion-label>Games</ion-label>
-        </ion-segment-button>
-      </ion-slide>
-      <ion-slide>
-        <ion-segment-button
-          value="music"
-          text-capitalize=“false”
-          [routerLink]="[
-          '/',
-          'store',
-          'tabs',
-          'categories',
-          'music'
-          ]"
-        >
-          <ion-label>Music</ion-label>
-        </ion-segment-button>
-      </ion-slide>
-      <ion-slide>
-        <ion-segment-button
-          value="casino"
-          text-capitalize=“false”
-          [routerLink]="[
-          '/',
-          'store',
-          'tabs',
-          'categories',
-          'casino'
-          ]"
-        >
-          <ion-label>Casino</ion-label>
-        </ion-segment-button>
-      </ion-slide>
-      <ion-slide>
-        <ion-segment-button
-          value="travel"
-          text-capitalize=“false”
-          [routerLink]="[
-          '/',
-          'store',
-          'tabs',
-          'categories',
-          'travel'
-          ]"
-        >
-          <ion-label>Travel</ion-label>
-        </ion-segment-button>
-      </ion-slide>
-      <ion-slide>
-        <ion-segment-button
-          value="lifestyle"
-          text-capitalize=“false”
-          [routerLink]="[
-          '/',
-          'store',
-          'tabs',
-          'categories',
-          'lifestyle'
-          ]"
-        >
-          <ion-label>Lifestyle</ion-label>
+            '/',
+            'store',
+            'tabs',
+            'categories',
+            category
+            ]">
+          <ion-label>{{ category }}</ion-label>
         </ion-segment-button>
       </ion-slide>
     </ion-slides>
   </ion-segment>
-
 
 </ion-header>
 
@@ -234,9 +52,8 @@
       </ion-searchbar>
     </div>
     <div class="section">
-      <p>Newest Releases</p>
+      <p>New Releases</p>
     </div>
-    <ion-virtual-scroll [items]="filteredApps"  approxItemHeight="120px">
       <ion-item *ngFor="let app of filteredApps.slice(0, 3)">
         <ion-grid no-padding>
           <ion-row>
@@ -289,12 +106,10 @@
           </ion-row>
         </ion-grid>
       </ion-item>
-    </ion-virtual-scroll>
 
     <div class="section">
       <p>Popular</p>
     </div>
-    <ion-virtual-scroll [items]="filteredApps"  approxItemHeight="120px">
       <ion-item *ngFor="let app of filteredApps.slice(0, 3)">
         <ion-grid no-padding>
           <ion-row>
@@ -347,12 +162,10 @@
           </ion-row>
         </ion-grid>
       </ion-item>
-    </ion-virtual-scroll>
 
     <div class="section" *ngIf="finance.length > 0">
       <p>Finance</p>
     </div>
-    <ion-virtual-scroll [items]="filteredApps"  approxItemHeight="120px">
       <ion-item *ngFor="let app of finance.slice(0,3)">
         <ion-grid no-padding>
           <ion-row>
@@ -405,12 +218,10 @@
           </ion-row>
         </ion-grid>
       </ion-item>
-    </ion-virtual-scroll>
 
     <div class="section" *ngIf="utility.length > 0">
       <p>Utility</p>
     </div>
-    <ion-virtual-scroll [items]="filteredApps"  approxItemHeight="120px">
       <ion-item *ngFor="let app of utility.slice(0,3)">
         <ion-grid no-padding>
           <ion-row>
@@ -463,12 +274,10 @@
           </ion-row>
         </ion-grid>
       </ion-item>
-    </ion-virtual-scroll>
 
     <div class="section" *ngIf="social.length > 0">
       <p>Social</p>
     </div>
-    <ion-virtual-scroll [items]="filteredApps"  approxItemHeight="120px">
       <ion-item *ngFor="let app of social.slice(0,3)">
         <ion-grid no-padding>
           <ion-row>
@@ -521,12 +330,10 @@
           </ion-row>
         </ion-grid>
       </ion-item>
-    </ion-virtual-scroll>
 
     <div class="section" *ngIf="productivity.length > 0">
       <p>Productivity</p>
     </div>
-    <ion-virtual-scroll [items]="filteredApps"  approxItemHeight="120px">
       <ion-item *ngFor="let app of productivity.slice(0,3)">
         <ion-grid no-padding>
           <ion-row>
@@ -579,12 +386,10 @@
           </ion-row>
         </ion-grid>
       </ion-item>
-    </ion-virtual-scroll>
 
     <div class="section" *ngIf="business.length > 0">
       <p>Business</p>
     </div>
-    <ion-virtual-scroll [items]="filteredApps"  approxItemHeight="120px">
       <ion-item *ngFor="let app of business.slice(0,3)">
         <ion-grid no-padding>
           <ion-row>
@@ -637,12 +442,10 @@
           </ion-row>
         </ion-grid>
       </ion-item>
-    </ion-virtual-scroll>
 
     <div class="section" *ngIf="entertainment.length > 0">
       <p>Entertainment</p>
     </div>
-    <ion-virtual-scroll [items]="filteredApps"  approxItemHeight="120px">
       <ion-item *ngFor="let app of entertainment.slice(0,3)">
         <ion-grid no-padding>
           <ion-row>
@@ -695,12 +498,10 @@
           </ion-row>
         </ion-grid>
       </ion-item>
-    </ion-virtual-scroll>
 
     <div class="section" *ngIf="games.length > 0">
       <p>Games</p>
     </div>
-    <ion-virtual-scroll [items]="filteredApps"  approxItemHeight="120px">
       <ion-item *ngFor="let app of games.slice(0,3)">
         <ion-grid no-padding>
           <ion-row>
@@ -753,12 +554,10 @@
           </ion-row>
         </ion-grid>
       </ion-item>
-    </ion-virtual-scroll>
 
     <div class="section" *ngIf="music.length > 0">
       <p>Music</p>
     </div>
-    <ion-virtual-scroll [items]="filteredApps"  approxItemHeight="120px">
       <ion-item *ngFor="let app of music.slice(0,3)">
         <ion-grid no-padding>
           <ion-row>
@@ -811,12 +610,10 @@
           </ion-row>
         </ion-grid>
       </ion-item>
-    </ion-virtual-scroll>
 
     <div class="section" *ngIf="casino.length > 0">
       <p>Casino</p>
     </div>
-    <ion-virtual-scroll [items]="filteredApps"  approxItemHeight="120px">
       <ion-item *ngFor="let app of casino.slice(0,3)">
         <ion-grid no-padding>
           <ion-row>
@@ -869,12 +666,10 @@
           </ion-row>
         </ion-grid>
       </ion-item>
-    </ion-virtual-scroll>
 
     <div class="section" *ngIf="travel.length > 0">
       <p>Travel</p>
     </div>
-    <ion-virtual-scroll [items]="filteredApps"  approxItemHeight="120px">
       <ion-item *ngFor="let app of travel.slice(0,3)">
         <ion-grid no-padding>
           <ion-row>
@@ -927,12 +722,10 @@
           </ion-row>
         </ion-grid>
       </ion-item>
-    </ion-virtual-scroll>
 
     <div class="section" *ngIf="lifestyle.length > 0">
       <p>Lifestyle</p>
     </div>
-    <ion-virtual-scroll [items]="filteredApps"  approxItemHeight="120px">
       <ion-item *ngFor="let app of lifestyle.slice(0,3)">
         <ion-grid no-padding>
           <ion-row>
@@ -985,7 +778,6 @@
           </ion-row>
         </ion-grid>
       </ion-item>
-    </ion-virtual-scroll>
 
   </ion-list>
 </ion-content>
