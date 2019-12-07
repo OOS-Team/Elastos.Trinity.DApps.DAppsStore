@@ -16,6 +16,7 @@ declare let appManager: any;
 export class DappDetailPage implements OnInit {
 
   dapp: Dapp;
+  dappIcon: string = '';
   dappBanner: string = '';
 
   constructor(
@@ -32,9 +33,9 @@ export class DappDetailPage implements OnInit {
         return;
       }
       this.dapp = this.dappsService.getDapp(paramMap.get('dappId'));
+      this.dappIcon = this.dappsService.getAppIcon(this.dapp);
       this.dappBanner = this.dappsService.getAppBanner(this.dapp);
       console.log('Dapp', this.dapp);
-      console.log('Dapp Banner', this.dappBanner);
     });
   }
 
