@@ -16,6 +16,7 @@ export class DappsPage implements OnInit {
   // General
   applications: Dapp[] = [];
   filteredApps: Dapp[] = [];
+  dapp: string = '';
   appsLoaded: boolean = false;
 
   // Segment
@@ -80,16 +81,31 @@ export class DappsPage implements OnInit {
 
   ngOnInit() {}
 
+  ionViewWillEnter() {
+    this.applications = this.dappsService.dapps;
+  }
+
   getAppIcon(app) {
     return this.dappsService.getAppIcon(app);
   }
 
   // search
-  filterDapps(search) {
+  filterDapps(search: string) {
     this.appsLoaded = false;
     this.dappsService.fetchFilteredDapps(search).subscribe((apps: Dapp[]) => {
       this.appsLoaded = true;
       this.filteredApps = apps;
+      this.finance = apps.filter(app => app.category === 'finance');
+      this.utility = apps.filter(app => app.category === 'utility');
+      this.social = apps.filter(app => app.category === 'social');
+      this.productivity = apps.filter(app => app.category === 'productivity');
+      this.business = apps.filter(app => app.category === 'business');
+      this.entertainment = apps.filter(app => app.category === 'entertainment');
+      this.games = apps.filter(app => app.category === 'games');
+      this.music = apps.filter(app => app.category === 'music');
+      this.casino = apps.filter(app => app.category === 'casino');
+      this.travel = apps.filter(app => app.category === 'travel');
+      this.lifestyle = apps.filter(app => app.category === 'lifestyle');
     });
     if (search.length === 0) {
       this.filteredApps = this.applications;

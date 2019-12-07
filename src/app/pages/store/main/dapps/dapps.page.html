@@ -1,7 +1,16 @@
 <ion-header no-border>
 
   <ion-toolbar mode="ios">
-    <ion-buttons slot="start" padding class="header-btns">
+    <ion-buttons
+      slot="start"
+      padding
+      class="header-btns"
+      [routerLink]="[
+        '/',
+        'store',
+        'tabs',
+        'home'
+      ]">
       <ion-icon name="arrow-back" mode="ios"></ion-icon>
     </ion-buttons>
     <ion-buttons slot="end" class="header-btns">
@@ -24,8 +33,8 @@
             'tabs',
             'categories',
             category
-            ]">
-          <ion-label>{{ category }}</ion-label>
+          ]">
+            <ion-label>{{ category }}</ion-label>
         </ion-segment-button>
       </ion-slide>
     </ion-slides>
@@ -38,7 +47,7 @@
   <div class="search-container">
     <ion-searchbar
       mode="ios"
-      color="secondary"
+      color="medium"
       placeholder=" Search for Application"
       [(ngModel)]="dapp"
       (ngModelChange)="filterDapps($event)"
@@ -52,7 +61,7 @@
   </ion-list>
 
   <ion-list *ngIf="appsLoaded" no-padding>
-    <ion-row class="section">
+    <ion-row class="section" *ngIf="filteredApps.length > 0">
       <ion-col offset="0.75" size="7.75" class="section-title" no-padding>
         <p class="first-section">New Releases</p>
       </ion-col>
@@ -67,7 +76,7 @@
         </p>
       </ion-col>
     </ion-row>
-    <ion-item *ngFor="let app of filteredApps.slice(0, 3)">
+    <ion-item *ngFor="let app of filteredApps.slice(0, 3)" lines="none">
       <ion-grid no-padding>
         <ion-row>
           <ion-col
@@ -120,7 +129,7 @@
       </ion-grid>
     </ion-item>
 
-    <ion-row class="section">
+    <ion-row class="section" *ngIf="filteredApps.length > 0">
       <ion-col offset="0.75" size="7.75" class="section-title" no-padding>
         <p>Popular</p>
       </ion-col>
@@ -135,7 +144,7 @@
         </p>
       </ion-col>
     </ion-row>
-    <ion-item *ngFor="let app of filteredApps.slice(0, 3)">
+    <ion-item *ngFor="let app of filteredApps.slice(0, 3)" lines="none">
       <ion-grid no-padding>
         <ion-row>
           <ion-col
@@ -203,7 +212,7 @@
         </p>
       </ion-col>
     </ion-row>
-    <ion-item *ngFor="let app of finance.slice(0,3)">
+    <ion-item *ngFor="let app of finance.slice(0,3)" lines="none">
       <ion-grid no-padding>
         <ion-row>
           <ion-col
@@ -271,7 +280,7 @@
         </p>
       </ion-col>
     </ion-row>
-    <ion-item *ngFor="let app of utility.slice(0,3)">
+    <ion-item *ngFor="let app of utility.slice(0,3)" lines="none">
       <ion-grid no-padding>
         <ion-row>
           <ion-col
@@ -339,7 +348,7 @@
         </p>
       </ion-col>
     </ion-row>
-    <ion-item *ngFor="let app of social.slice(0,3)">
+    <ion-item *ngFor="let app of social.slice(0,3)" lines="none">
       <ion-grid no-padding>
         <ion-row>
           <ion-col
@@ -407,7 +416,7 @@
         </p>
       </ion-col>
     </ion-row>
-    <ion-item *ngFor="let app of productivity.slice(0,3)">
+    <ion-item *ngFor="let app of productivity.slice(0,3)" lines="none">
       <ion-grid no-padding>
         <ion-row>
           <ion-col
@@ -475,7 +484,7 @@
         </p>
       </ion-col>
     </ion-row>
-    <ion-item *ngFor="let app of business.slice(0,3)">
+    <ion-item *ngFor="let app of business.slice(0,3)" lines="none">
       <ion-grid no-padding>
         <ion-row>
           <ion-col
@@ -543,7 +552,7 @@
         </p>
       </ion-col>
     </ion-row>
-    <ion-item *ngFor="let app of entertainment.slice(0,3)">
+    <ion-item *ngFor="let app of entertainment.slice(0,3)" lines="none">
       <ion-grid no-padding>
         <ion-row>
           <ion-col
@@ -611,7 +620,7 @@
         </p>
       </ion-col>
     </ion-row>
-    <ion-item *ngFor="let app of games.slice(0,3)">
+    <ion-item *ngFor="let app of games.slice(0,3)" lines="none">
       <ion-grid no-padding>
         <ion-row>
           <ion-col
@@ -679,7 +688,7 @@
         </p>
       </ion-col>
     </ion-row>
-    <ion-item *ngFor="let app of music.slice(0,3)">
+    <ion-item *ngFor="let app of music.slice(0,3)" lines="none">
       <ion-grid no-padding>
         <ion-row>
           <ion-col
@@ -747,7 +756,7 @@
         </p>
       </ion-col>
     </ion-row>
-    <ion-item *ngFor="let app of casino.slice(0,3)">
+    <ion-item *ngFor="let app of casino.slice(0,3)" lines="none">
       <ion-grid no-padding>
         <ion-row>
           <ion-col
@@ -815,7 +824,7 @@
         </p>
       </ion-col>
     </ion-row>
-    <ion-item *ngFor="let app of travel.slice(0,3)">
+    <ion-item *ngFor="let app of travel.slice(0,3)" lines="none">
       <ion-grid no-padding>
         <ion-row>
           <ion-col
@@ -883,7 +892,7 @@
         </p>
       </ion-col>
     </ion-row>
-    <ion-item *ngFor="let app of lifestyle.slice(0,3)">
+    <ion-item *ngFor="let app of lifestyle.slice(0,3)" lines="none">
       <ion-grid no-padding>
         <ion-row>
           <ion-col
