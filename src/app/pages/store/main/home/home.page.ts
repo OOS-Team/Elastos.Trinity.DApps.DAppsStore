@@ -1,72 +1,41 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { NavController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 
-import { DappsService } from '../../../../../dapps.service';
-import { Dapp } from '../../../../../dapps.model';
+import { Dapp } from 'src/app/dapps.model';
+import { DappsService } from 'src/app/dapps.service';
+
 
 declare let appManager: any;
 
 @Component({
-  selector: 'app-category-type',
-  templateUrl: './category-type.page.html',
-  styleUrls: ['./category-type.page.scss'],
+  selector: 'app-home',
+  templateUrl: './home.page.html',
+  styleUrls: ['./home.page.scss'],
 })
-export class CategoryTypePage implements OnInit {
+export class HomePage implements OnInit {
 
-  dapps: Dapp[];
-  filteredApps: Dapp[];
-  dapp: string = '';
-  categoryType: string = '';
+  applications: Dapp[] = [];
   appsLoaded: boolean = false;
-
-  slideOpts = {
-    initialSlide: 0,
-    speed: 500,
-    slidesPerView: 3.5
-  };
 
   constructor(
     private dappsService: DappsService,
-    private route: ActivatedRoute,
-    private navCtrl: NavController,
     private http: HttpClient
-  ) { }
-
-  ngOnInit() {
+  ) {
     this.appsLoaded = false;
-    this.route.paramMap.subscribe(paramMap => {
+    this.dappsService.fetchDapps().subscribe((apps: Dapp[]) => {
       this.appsLoaded = true;
-      if (!paramMap.has('categoryType')) {
-        this.navCtrl.navigateBack('/store/tabs/categories');
-        return;
-      }
-      this.dapps = this.dappsService.getCategory(paramMap.get('categoryType'));
-      this.filteredApps = this.dapps;
-      this.categoryType = paramMap.get('categoryType');
-      console.log('category', this.categoryType);
-      console.log('dapps', this.filteredApps);
+      this.applications = apps;
     });
+  }
+
+  ngOnInit() {}
+
+  ionViewWillEnter() {
+    this.applications = this.dappsService.dapps;
   }
 
   getAppIcon(app) {
     return this.dappsService.getAppIcon(app);
-  }
-
-  filterDapps(search: string) {
-    this.appsLoaded = false;
-    this.dappsService.fetchFilteredDapps(search).subscribe((apps: Dapp[]) => {
-      this.appsLoaded = true;
-      this.filteredApps = apps.filter(app => app.category === this.categoryType);
-    });
-    if (search.length === 0) {
-      this.filteredApps = this.dapps;
-    }
-  }
-
-  closeApp() {
-    appManager.close();
   }
 
   // installation

@@ -1,23 +1,23 @@
 ion-grid {
   min-height: 100%;
   background: #FAFAFA;
-}
 
-.box-container {
-  display: flex;
-  justify-content: flex-end;
+  .box-container {
+    display: flex;
+    justify-content: flex-end;
 
-  .box {
-    min-width: 10px;
-    min-height: 10px;
-    background: black;
+    .box {
+      min-width: 10px;
+      min-height: 10px;
+      background: black;
+    }
   }
-}
 
-.category {
-  padding-left: 0;
+  .category {
+    padding-left: 0;
 
-  ion-label {
-    font-family: 'Raleway:600', sans-serif;
+    ion-label {
+      font-weight: 500;
+    }
   }
 }

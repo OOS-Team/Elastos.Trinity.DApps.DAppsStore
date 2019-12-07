@@ -16,7 +16,8 @@ export class SearchPage implements OnInit {
   // General
   dapps: Dapp[];
   filteredApps: Dapp[];
-  appsLoaded = false;
+  dapp: string = '';
+  appsLoaded: boolean = false;
 
   slideOpts = {
     initialSlide: 0,
@@ -37,6 +38,10 @@ export class SearchPage implements OnInit {
   }
 
   ngOnInit() {}
+
+  ionViewWillEnter() {
+    this.dapps = this.dappsService.dapps;
+  }
 
   getAppIcon(app) {
     return this.dappsService.getAppIcon(app);

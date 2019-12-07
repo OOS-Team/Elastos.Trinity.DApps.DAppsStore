@@ -1,0 +1,148 @@
+ion-grid {
+  background: #FAFAFA;
+
+  ion-card {
+    border-radius: 20px;
+    box-shadow: 0 0 20px 20px #F2F2F2;
+    margin-bottom: 30px;
+
+    ion-card-title {
+      font-weight: 900;
+      font-size: 36px;
+    }
+
+    ion-card-subtitle {
+      font-size: 15px;
+      font-weight: 600;
+      color: black;
+    }
+  }
+
+  .showcase-app {
+    padding: 0 16px 16px;
+
+    .img-container {
+      padding: 0;
+      display: flex;
+      align-items: center;
+
+      ion-thumbnail {
+        border-radius: 15px !important;
+        border: solid 1px black;
+
+        ion-img {
+          border-radius: 15px;
+        }
+      }
+    }
+
+    .dapp-content {
+      padding: 0;
+      display: flex;
+      align-items: center;
+
+      h2 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+        color: black;
+      }
+
+      p {
+        margin: 0;
+        font-size: 9px;
+      }
+    }
+  }
+
+  .section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgb(216, 216, 216);
+
+    .section-title {
+      margin: 6px 0;
+      padding: 0;
+      font-size: 18px !important;
+      font-weight: bold;
+      color: black;
+
+      p {
+        margin: 0;
+      }
+    }
+
+    .section-btn {
+      margin: 6px 0;
+      padding: 0;
+      font-size: 13px !important;
+      color: #007AFF !important;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+
+      p {
+        margin: 0;
+      }
+    }
+  }
+
+  ion-item {
+    --inner-padding-end: 0px;
+    --padding-start: 0px;
+    border-bottom: 1px solid rgb(230, 230, 230);
+
+    ion-row {
+      padding: 5px 0;
+
+      .img-container {
+        display: flex;
+        justify-content: flex-end;
+
+        ion-thumbnail {
+          border-radius: 15px !important;
+          border: solid 1px black;
+
+          ion-img {
+            border-radius: 15px;
+          }
+        }
+      }
+
+      .node-content {
+        display: flex;
+        align-items: center;
+
+          h2 {
+            font-size: 16px;
+            font-family: 'Raleway:500', sans-serif;
+            font-weight: normal;
+            margin: 0;
+          }
+
+          p {
+            font-size: 10px !important;
+            color: #959595;
+            margin: 0;
+          }
+      }
+
+      .btn-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        ion-button {
+          --border-radius: 30px;
+          --box-shadow: none;
+
+          ion-label {
+            font-size: 9px;
+            padding: 0 5px;
+          }
+        }
+      }
+    }
+  }
+}

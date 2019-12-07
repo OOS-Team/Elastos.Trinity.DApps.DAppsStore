@@ -7,6 +7,7 @@ import { DappDetailPageModule } from './main/dapps/dapp-detail/dapp-detail.modul
 import { CategoriesPageModule } from './main/categories/categories.module';
 import { CategoryTypePageModule } from './main/categories/category-type/category-type.module';
 import { SearchPageModule } from './main/search/search.module';
+import { HomePageModule } from './main/home/home.module';
 
 const routes: Routes = [
   {
@@ -14,6 +15,16 @@ const routes: Routes = [
     component: StorePage,
     children: [
       // 1st Tab
+      {
+        path: 'home',
+        children: [
+          {
+            path: '',
+            loadChildren: () => HomePageModule
+          }
+        ]
+      },
+      // 2nd Tab
       {
         path: 'dapps',
         children: [
@@ -27,7 +38,7 @@ const routes: Routes = [
           }
         ]
       },
-      // 2nd Tab
+      // 3rd Tab
       {
         path: 'categories',
         children: [
@@ -41,7 +52,7 @@ const routes: Routes = [
           }
         ]
       },
-      // 3rd Tab
+      // 4th Tab
       {
         path: 'search',
         children: [
@@ -54,18 +65,16 @@ const routes: Routes = [
        //  Default Tab
       {
         path: '',
-        redirectTo: '/store/tabs/dapps',
+        redirectTo: '/store/tabs/home',
         pathMatch: 'full'
       },
     ]
   },
   {
     path: '',
-    redirectTo: '/store/tabs/dapps',
+    redirectTo: '/store/tabs/home',
     pathMatch: 'full'
   },
-  { path: 'categories', loadChildren: () => CategoriesPageModule },
-  { path: 'category-type', loadChildren: () => CategoryTypePageModule }
 ];
 
 @NgModule({

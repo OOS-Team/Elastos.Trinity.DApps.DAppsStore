@@ -5,12 +5,11 @@
       padding
       class="header-btns"
       [routerLink]="[
-      '/',
-      'store',
-      'tabs',
-      'dapps'
-      ]"
-    >
+        '/',
+        'store',
+        'tabs',
+        'categories'
+      ]">
       <ion-icon name="arrow-back" mode="ios"></ion-icon>
     </ion-buttons>
     <ion-buttons slot="end" class="header-btns">
@@ -27,7 +26,7 @@
   <div class="search-container">
     <ion-searchbar
       mode="ios"
-      color="secondary"
+      color="medium"
       placeholder=" Search for Application"
       [(ngModel)]="dapp"
       (ngModelChange)="filterDapps($event)"
@@ -41,7 +40,7 @@
   </ion-list>
 
   <ion-list *ngIf="appsLoaded" no-padding>
-    <ion-item *ngFor="let app of filteredApps">
+    <ion-item *ngFor="let app of filteredApps" lines="none">
       <ion-grid no-padding>
         <ion-row>
           <ion-col
@@ -54,8 +53,7 @@
               'tabs',
               'dapps',
               app._id
-            ]"
-          >
+            ]">
             <ion-thumbnail>
               <ion-img [src]="getAppIcon(app)"></ion-img>
             </ion-thumbnail>
@@ -70,8 +68,7 @@
               'tabs',
               'dapps',
               app._id
-            ]"
-          >
+            ]">
             <ion-label>
               <h2>{{ app.appName }}</h2>
               <p>{{ app.appShortDescription }}</p>

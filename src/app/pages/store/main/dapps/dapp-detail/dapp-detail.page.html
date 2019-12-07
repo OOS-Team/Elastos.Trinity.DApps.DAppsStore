@@ -42,8 +42,16 @@
 
     <ion-row padding-top>
       <ion-col size="12" class="btn-container">
-        <ion-button color="tertiary">
+        <ion-button  color="tertiary" (click)="installApp(dapp)" *ngIf="!dapp.installing && !dapp.installed">
           <ion-label>Install</ion-label>
+        </ion-button>
+        <ion-button color="tertiary" *ngIf="dapp.installing">
+          <ion-label>
+            <ion-spinner name="dots"></ion-spinner>
+          </ion-label>
+        </ion-button>
+        <ion-button  color="tertiary" *ngIf="!dapp.installing && dapp.installed" disabled>
+          <ion-label>Installed</ion-label>
         </ion-button>
       </ion-col>
     </ion-row>

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Dapp } from './dapps.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+
+import { Dapp } from './dapps.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +11,13 @@ import { tap } from 'rxjs/operators';
 export class DappsService {
 
   private _dapps: Dapp[] = [];
-  searchUrl = 'https://dapp-store.elastos.org/apps/list?s=';
-  search = '';
+  searchUrl: string = 'https://dapp-store.elastos.org/apps/list?s=';
+  search: string = '';
 
   constructor(private http: HttpClient) {}
 
   fetchDapps(): Observable<Dapp[]> {
     console.log("Fetching DApps");
-
     this._dapps = [];
     return this.http.get<Dapp[]>('https://dapp-store.elastos.org/apps/list').pipe(
       tap(response => {
@@ -28,7 +28,7 @@ export class DappsService {
     );
   }
 
-  fetchFilteredDapps(_search): Observable<Dapp[]> {
+  fetchFilteredDapps(_search: string): Observable<Dapp[]> {
     this.search = _search;
     console.log('Searching from service.. ' + this.search);
     return this.http.get<Dapp[]>(`${this.searchUrl}${this.search}`);

@@ -17,8 +17,6 @@ export class DappDetailPage implements OnInit {
 
   dapp: Dapp;
   dappBanner: string = '';
-  installing: boolean = false;
-  installed: boolean = false;
 
   constructor(
     private dappsService: DappsService,
@@ -40,6 +38,7 @@ export class DappDetailPage implements OnInit {
     });
   }
 
+  // installation
   async installApp(dapp) {
     // Download the file
     const epkPath = await this.downloadAppEPK(dapp);
@@ -55,7 +54,7 @@ export class DappDetailPage implements OnInit {
 
   downloadDapp(app) {
     console.log("App download starting...");
-    this.installing = true;
+    app.installing = true;
 
     return new Promise((resolve, reject) => {
       // Download EPK file as blob
@@ -64,8 +63,8 @@ export class DappDetailPage implements OnInit {
         console.log("Downloaded", response);
         let blob = new Blob([response], { type: "application/octet-stream" });
         console.log("Blob", blob);
-        this.installing = false;
-        this.installed = true;
+        app.installing = false;
+        app.installed = true;
 
         // Save to a temporary location
         let filePath = await this._savedDownloadedBlobToTempLocation(blob);
