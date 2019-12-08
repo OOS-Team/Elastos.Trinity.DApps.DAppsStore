@@ -68,8 +68,8 @@
 
   --ion-toolbar-background: white;
   --ion-toolbar-color: black;
-
-  $segment-button-md-text-color: #007AFF;
 }
 
-$segment-button-md-text-color: #007AFF !important;
+:focus {
+  outline: none;
+}
