@@ -24,8 +24,8 @@ export class CategoryTypePage implements OnInit {
 
   slideOpts = {
     initialSlide: 0,
-    speed: 500,
-    slidesPerView: 4
+    speed: 100,
+    slidesPerView: 4,
   };
 
   constructor(
