@@ -15,8 +15,9 @@ declare let appManager: any;
 })
 export class CategoryTypePage implements OnInit {
 
-  dapps: Dapp[];
-  filteredApps: Dapp[];
+  dapps: Dapp[] = [];
+  filteredApps: Dapp[] = [];
+  categories: any[];
   dapp: string = '';
   categoryType: string = '';
   appsLoaded: boolean = false;
@@ -24,7 +25,7 @@ export class CategoryTypePage implements OnInit {
   slideOpts = {
     initialSlide: 0,
     speed: 500,
-    slidesPerView: 3.5
+    slidesPerView: 4
   };
 
   constructor(
@@ -32,10 +33,12 @@ export class CategoryTypePage implements OnInit {
     private route: ActivatedRoute,
     private navCtrl: NavController,
     private http: HttpClient
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.appsLoaded = false;
+    this.categories = this.dappsService.categories;
+    this.slideOpts.initialSlide = this.dappsService.index;
     this.route.paramMap.subscribe(paramMap => {
       this.appsLoaded = true;
       if (!paramMap.has('categoryType')) {
@@ -54,6 +57,7 @@ export class CategoryTypePage implements OnInit {
     return this.dappsService.getAppIcon(app);
   }
 
+  // Search
   filterDapps(search: string) {
     this.appsLoaded = false;
     this.dappsService.fetchFilteredDapps(search).subscribe((apps: Dapp[]) => {
@@ -65,11 +69,16 @@ export class CategoryTypePage implements OnInit {
     }
   }
 
+  // Set initial category button
+  showCategory(index) {
+    this.dappsService.setCatIndex(index);
+  }
+
   closeApp() {
     appManager.close();
   }
 
-  // installation
+  // Install app
   async installApp(dapp) {
     // Download the file
     const epkPath = await this.downloadAppEPK(dapp);

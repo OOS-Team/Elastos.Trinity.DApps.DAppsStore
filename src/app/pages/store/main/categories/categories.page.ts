@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DappsService } from 'src/app/dapps.service';
 
 declare let appManager: any;
 
@@ -9,25 +10,12 @@ declare let appManager: any;
 })
 export class CategoriesPage implements OnInit {
 
-  categories = [
-    'new',
-    'popular',
-    'finance',
-    'utility',
-    'social',
-    'productivity',
-    'business',
-    'entertainment',
-    'games',
-    'music',
-    'casino',
-    'travel',
-    'lifestyle'
-  ];
+  categories: any[];
 
-  constructor() { }
+  constructor(private dappsService: DappsService) { }
 
   ngOnInit() {
+    this.categories = this.dappsService.categories;
   }
 
   closeApp() {

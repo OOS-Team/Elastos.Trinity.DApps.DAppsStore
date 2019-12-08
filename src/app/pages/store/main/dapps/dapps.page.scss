@@ -1,31 +1,14 @@
-* {
-  font-family: 'Raleway', sans-serif;
-}
-
 // ** Header ** //
 ion-header {
 
-  ion-segment {
+  ion-label {
+    margin: 16px 0 12px;
+    font-size: 13px;
     color: #959595;
-    border: 0;
-    border-radius: 0;
+  }
 
-    ion-segment-button {
-
-      ion-label {
-        margin: 0;
-        color: #959595;
-      }
-    }
-
-    .segment-button-checked{
-      background: #FFF;
-      border-bottom: 1px solid #007AFF;
-
-      ion-label {
-        color: #007AFF !important;
-      }
-    }
+  .highlight {
+    color: #007AFF !important;
   }
 }
 

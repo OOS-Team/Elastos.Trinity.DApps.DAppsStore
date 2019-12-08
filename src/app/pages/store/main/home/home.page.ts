@@ -20,15 +20,15 @@ export class HomePage implements OnInit {
   constructor(
     private dappsService: DappsService,
     private http: HttpClient
-  ) {
+  ) {}
+
+  ngOnInit() {
     this.appsLoaded = false;
     this.dappsService.fetchDapps().subscribe((apps: Dapp[]) => {
       this.appsLoaded = true;
       this.applications = apps;
     });
   }
-
-  ngOnInit() {}
 
   ionViewWillEnter() {
     this.applications = this.dappsService.dapps;
@@ -38,7 +38,7 @@ export class HomePage implements OnInit {
     return this.dappsService.getAppIcon(app);
   }
 
-  // installation
+  // Install app
   async installApp(dapp) {
     // Download the file
     const epkPath = await this.downloadAppEPK(dapp);

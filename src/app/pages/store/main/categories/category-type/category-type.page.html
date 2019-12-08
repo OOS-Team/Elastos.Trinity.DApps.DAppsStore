@@ -20,6 +20,26 @@
     </ion-buttons>
     <ion-title>{{ categoryType.charAt(0).toUpperCase() + categoryType.slice(1) }}</ion-title>
   </ion-toolbar>
+
+  <ion-slides [options]="slideOpts">
+    <ion-slide
+      *ngFor="let category of categories"
+      (click)="showCategory(categories.indexOf(category))"
+      [routerLink]="[
+        '/',
+        'store',
+        'tabs',
+        'categories',
+        category
+      ]">
+      <div [class.highlight]="categoryType === category">
+        <ion-label>
+          {{ category.charAt(0).toUpperCase() + category.slice(1) }}
+        </ion-label>
+      </div>
+    </ion-slide>
+  </ion-slides>
+
 </ion-header>
 
 <ion-content>

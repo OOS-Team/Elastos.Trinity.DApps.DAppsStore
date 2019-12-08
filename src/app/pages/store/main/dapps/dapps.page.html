@@ -21,24 +21,22 @@
     <ion-title>Apps</ion-title>
   </ion-toolbar>
 
-  <ion-segment mode="ios">
-    <ion-slides [options]="slideOpts">
-      <ion-slide *ngFor="let category of categories">
-        <ion-segment-button
-          value="{{ category }}"
-          text-capitalize=“false”
-          [routerLink]="[
-            '/',
-            'store',
-            'tabs',
-            'categories',
-            category
-          ]">
-            <ion-label>{{ category }}</ion-label>
-        </ion-segment-button>
-      </ion-slide>
-    </ion-slides>
-  </ion-segment>
+  <ion-slides [options]="slideOpts">
+    <ion-slide
+      *ngFor="let category of categories"
+      (click)="showCategory(categories.indexOf(category))"
+      [routerLink]="[
+        '/',
+        'store',
+        'tabs',
+        'categories',
+        category
+      ]">
+      <ion-label>
+        {{ category.charAt(0).toUpperCase() + category.slice(1) }}
+      </ion-label>
+    </ion-slide>
+  </ion-slides>
 
 </ion-header>
 

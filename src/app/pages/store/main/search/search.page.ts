@@ -14,21 +14,17 @@ declare let appManager: any;
 export class SearchPage implements OnInit {
 
   // General
-  dapps: Dapp[];
-  filteredApps: Dapp[];
+  dapps: Dapp[] = [];
+  filteredApps: Dapp[] = [];
   dapp: string = '';
   appsLoaded: boolean = false;
-
-  slideOpts = {
-    initialSlide: 0,
-    speed: 500,
-    slidesPerView: 3.5
-  };
 
   constructor(
     private dappsService: DappsService,
     private http: HttpClient
-  ) {
+  ) {}
+
+  ngOnInit() {
     this.appsLoaded = false;
     this.dappsService.fetchDapps().subscribe((apps: Dapp[]) => {
       this.appsLoaded = true;
@@ -36,8 +32,6 @@ export class SearchPage implements OnInit {
       this.dapps = apps;
     });
   }
-
-  ngOnInit() {}
 
   ionViewWillEnter() {
     this.dapps = this.dappsService.dapps;
@@ -47,7 +41,7 @@ export class SearchPage implements OnInit {
     return this.dappsService.getAppIcon(app);
   }
 
-  // search
+  // Search
   filterDapps(search) {
     this.appsLoaded = false;
     if (!search) {
@@ -61,7 +55,7 @@ export class SearchPage implements OnInit {
     }
   }
 
-  // installation
+  // Install app
   async installApp(dapp) {
     // Download the file
     const epkPath = await this.downloadAppEPK(dapp);

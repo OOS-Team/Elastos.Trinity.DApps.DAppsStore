@@ -13,6 +13,23 @@ export class DappsService {
   private _dapps: Dapp[] = [];
   searchUrl: string = 'https://dapp-store.elastos.org/apps/list?s=';
   search: string = '';
+  catIndex: number;
+
+  _categories = [
+    'new',
+    'popular',
+    'finance',
+    'utility',
+    'social',
+    'productivity',
+    'business',
+    'entertainment',
+    'games',
+    'music',
+    'casino',
+    'travel',
+    'lifestyle'
+  ];
 
   constructor(private http: HttpClient) {}
 
@@ -38,6 +55,10 @@ export class DappsService {
     return [...this._dapps];
   }
 
+  get categories() {
+    return [...this._categories];
+  }
+
   getDapp(id: string) {
     return {...this._dapps.find(dapp => dapp._id === id)};
   }
@@ -51,6 +72,24 @@ export class DappsService {
   }
 
   getCategory(category: string) {
-    return [...this._dapps.filter(dapp => dapp.category === category)];
+    if (category === 'new') {
+      return [...this._dapps];
+    }
+    if (category === 'popular') {
+      return [...this.dapps].sort((a, b) => {
+        return b.downloadsCount - a.downloadsCount;
+      })
+    }
+    else {
+      return [...this._dapps.filter(dapp => dapp.category === category)];
+    }
+  }
+
+  setCatIndex(index) {
+    this.catIndex = index;
+  }
+
+  get index() {
+    return this.catIndex;
   }
 }

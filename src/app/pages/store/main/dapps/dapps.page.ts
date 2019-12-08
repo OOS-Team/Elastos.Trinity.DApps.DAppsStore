@@ -16,27 +16,12 @@ export class DappsPage implements OnInit {
   // General
   applications: Dapp[] = [];
   filteredApps: Dapp[] = [];
+  categories: any[];
   dapp: string = '';
   appsLoaded: boolean = false;
 
-  // Segment
-  categories = [
-    'new',
-    'popular',
-    'finance',
-    'utility',
-    'social',
-    'productivity',
-    'business',
-    'entertainment',
-    'games',
-    'music',
-    'casino',
-    'travel',
-    'lifestyle'
-  ];
-
   // Sections
+  popular: Dapp[] = [];
   finance: Dapp[] = [];
   utility: Dapp[] = [];
   social: Dapp[] = [];
@@ -52,14 +37,17 @@ export class DappsPage implements OnInit {
   slideOpts = {
     initialSlide: 0,
     speed: 500,
-    slidesPerView: 3.5
+    slidesPerView: 4
   };
 
   constructor(
     private dappsService: DappsService,
     private http: HttpClient
-  ) {
+  ) {}
+
+  ngOnInit() {
     this.appsLoaded = false;
+    this.categories = this.dappsService.categories;
     this.dappsService.fetchDapps().subscribe((apps: Dapp[]) => {
       this.appsLoaded = true;
       console.log("DApps fetched", apps);
@@ -79,8 +67,6 @@ export class DappsPage implements OnInit {
     });
   }
 
-  ngOnInit() {}
-
   ionViewWillEnter() {
     this.applications = this.dappsService.dapps;
   }
@@ -89,7 +75,7 @@ export class DappsPage implements OnInit {
     return this.dappsService.getAppIcon(app);
   }
 
-  // search
+  // Search
   filterDapps(search: string) {
     this.appsLoaded = false;
     this.dappsService.fetchFilteredDapps(search).subscribe((apps: Dapp[]) => {
@@ -112,7 +98,12 @@ export class DappsPage implements OnInit {
     }
   }
 
-  // installation
+  // Set initial category button in category-type page
+  showCategory(index) {
+    this.dappsService.setCatIndex(index);
+  }
+
+  // Install app
   async installApp(dapp) {
     // Download the file
     const epkPath = await this.downloadAppEPK(dapp);

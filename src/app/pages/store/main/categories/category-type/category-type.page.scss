@@ -1,3 +1,21 @@
+ion-header {
+
+  ion-label {
+    margin: 16px 0 12px;
+    font-size: 13px;
+    color: #959595;
+  }
+
+  .highlight {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #007AFF;
+
+    ion-label {
+      color: #007AFF !important;
+    }
+  }
+}
+
 .search-container {
   padding: 12px 0;
 }
