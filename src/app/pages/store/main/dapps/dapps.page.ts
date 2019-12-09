@@ -20,20 +20,6 @@ export class DappsPage implements OnInit {
   dapp: string = '';
   appsLoaded: boolean = false;
 
-  // Sections
-  popular: Dapp[] = [];
-  finance: Dapp[] = [];
-  utility: Dapp[] = [];
-  social: Dapp[] = [];
-  productivity: Dapp[] = [];
-  business: Dapp[] = [];
-  entertainment: Dapp[] = [];
-  games: Dapp[] = [];
-  music: Dapp[] = [];
-  casino: Dapp[] = [];
-  travel: Dapp[] = [];
-  lifestyle: Dapp[] = [];
-
   slideOpts = {
     initialSlide: 0,
     speed: 100,
@@ -53,17 +39,6 @@ export class DappsPage implements OnInit {
       console.log("DApps fetched", apps);
       this.applications = apps;
       this.filteredApps = this.applications;
-      this.finance = this.filteredApps.filter(app => app.category === 'finance');
-      this.utility = this.filteredApps.filter(app => app.category === 'utility');
-      this.social = this.filteredApps.filter(app => app.category === 'social');
-      this.productivity = this.filteredApps.filter(app => app.category === 'productivity');
-      this.business = this.filteredApps.filter(app => app.category === 'business');
-      this.entertainment = this.filteredApps.filter(app => app.category === 'entertainment');
-      this.games = this.filteredApps.filter(app => app.category === 'games');
-      this.music = this.filteredApps.filter(app => app.category === 'music');
-      this.casino = this.filteredApps.filter(app => app.category === 'casino');
-      this.travel = this.filteredApps.filter(app => app.category === 'travel');
-      this.lifestyle = this.filteredApps.filter(app => app.category === 'lifestyle');
     });
   }
 
@@ -81,20 +56,23 @@ export class DappsPage implements OnInit {
     this.dappsService.fetchFilteredDapps(search).subscribe((apps: Dapp[]) => {
       this.appsLoaded = true;
       this.filteredApps = apps;
-      this.finance = apps.filter(app => app.category === 'finance');
-      this.utility = apps.filter(app => app.category === 'utility');
-      this.social = apps.filter(app => app.category === 'social');
-      this.productivity = apps.filter(app => app.category === 'productivity');
-      this.business = apps.filter(app => app.category === 'business');
-      this.entertainment = apps.filter(app => app.category === 'entertainment');
-      this.games = apps.filter(app => app.category === 'games');
-      this.music = apps.filter(app => app.category === 'music');
-      this.casino = apps.filter(app => app.category === 'casino');
-      this.travel = apps.filter(app => app.category === 'travel');
-      this.lifestyle = apps.filter(app => app.category === 'lifestyle');
     });
     if (search.length === 0) {
       this.filteredApps = this.applications;
+    }
+  }
+
+  // Filter apps for each category
+  getApps(cat) {
+    if (cat === 'new') {
+      return this.filteredApps;
+    }
+    if (cat === 'popular') {
+      return this.filteredApps.sort((a, b) => {
+        return b.downloadsCount - a.downloadsCount;
+      });
+    } else {
+      return this.filteredApps.filter(app => app.category === cat);
     }
   }
 

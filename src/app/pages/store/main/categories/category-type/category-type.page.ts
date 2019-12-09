@@ -62,7 +62,11 @@ export class CategoryTypePage implements OnInit {
     this.appsLoaded = false;
     this.dappsService.fetchFilteredDapps(search).subscribe((apps: Dapp[]) => {
       this.appsLoaded = true;
-      this.filteredApps = apps.filter(app => app.category === this.categoryType);
+      if (this.categoryType === 'new' || 'popular') {
+        this.filteredApps = apps;
+      } else {
+        this.filteredApps = apps.filter(app => app.category === this.categoryType);
+      }
     });
     if (search.length === 0) {
       this.filteredApps = this.dapps;
