@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { HttpClient } from '@angular/common/http';
 
 import { DappsService } from '../../../../../dapps.service';
 import { Dapp } from '../../../../../dapps.model';
+import { HttpClient } from '@angular/common/http';
 
 declare let appManager: any;
 
@@ -16,11 +16,11 @@ declare let appManager: any;
 export class CategoryTypePage implements OnInit {
 
   dapps: Dapp[] = [];
-  filteredApps: Dapp[] = [];
-  categories: any[];
   dapp: string = '';
+  categories: any[];
   categoryType: string = '';
-  appsLoaded: boolean = false;
+  categoryTab: string = '';
+  appsLoaded: boolean = true;
 
   slideOpts = {
     initialSlide: 0,
@@ -36,21 +36,24 @@ export class CategoryTypePage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.appsLoaded = false;
     this.categories = this.dappsService.categories;
     this.slideOpts.initialSlide = this.dappsService.index;
     this.route.paramMap.subscribe(paramMap => {
-      this.appsLoaded = true;
       if (!paramMap.has('categoryType')) {
         this.navCtrl.navigateBack('/store/tabs/categories');
         return;
       }
       this.dapps = this.dappsService.getCategory(paramMap.get('categoryType'));
-      this.filteredApps = this.dapps;
+      this.categoryTab = paramMap.get('categoryType');
       this.categoryType = paramMap.get('categoryType');
       console.log('category', this.categoryType);
-      console.log('dapps', this.filteredApps);
     });
+  }
+
+  changeCat(cat) {
+    this.categoryTab = cat;
+    this.categoryType = cat;
+    this.dapps = this.dappsService.getCategory(cat);
   }
 
   getAppIcon(app) {
@@ -62,24 +65,19 @@ export class CategoryTypePage implements OnInit {
     this.appsLoaded = false;
     this.dappsService.fetchFilteredDapps(search).subscribe((apps: Dapp[]) => {
       this.appsLoaded = true;
-      if (this.categoryType === 'new' || 'popular') {
-        this.filteredApps = apps;
-      } else {
-        this.filteredApps = apps.filter(app => app.category === this.categoryType);
+      this.dapps = apps.filter(app => app.category === this.categoryType);
+      console.log('Search reults', this.dapps);
+      if (search.length === 0) {
+        this.dapps = this.dapps
+        console.log('Search is empty', this.dapps);
+      }
+      if (this.categoryType === 'new') {
+        this.dapps = apps;
+      }
+      if (this.categoryType === 'popular') {
+        this.dapps = apps;
       }
     });
-    if (search.length === 0) {
-      this.filteredApps = this.dapps;
-    }
-  }
-
-  // Set initial category button
-  showCategory(index) {
-    this.dappsService.setCatIndex(index);
-  }
-
-  closeApp() {
-    appManager.close();
   }
 
   // Install app
@@ -141,5 +139,9 @@ export class CategoryTypePage implements OnInit {
         reject(err);
       });
     });
+  }
+
+  closeApp() {
+    appManager.close();
   }
 }

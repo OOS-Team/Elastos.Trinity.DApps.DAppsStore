@@ -24,14 +24,8 @@
   <ion-slides [options]="slideOpts">
     <ion-slide
       *ngFor="let category of categories"
-      (click)="showCategory(categories.indexOf(category))"
-      [routerLink]="[
-        '/',
-        'store',
-        'tabs',
-        'categories',
-        category
-      ]">
+      (click)="changeCat(category)"
+      >
       <div [class.highlight]="categoryType === category">
         <ion-label>
           {{ category.charAt(0).toUpperCase() + category.slice(1) }}
@@ -43,7 +37,6 @@
 </ion-header>
 
 <ion-content>
-
   <div class="search-container">
     <ion-searchbar
       mode="ios"
@@ -61,7 +54,7 @@
   </ion-list>
 
   <ion-list *ngIf="appsLoaded" no-padding>
-    <ion-item *ngFor="let app of filteredApps" lines="none">
+    <ion-item *ngFor="let app of dapps" lines="none">
       <ion-grid no-padding>
         <ion-row>
           <ion-col

@@ -47,7 +47,7 @@ export class DappsService {
 
   fetchFilteredDapps(_search: string): Observable<Dapp[]> {
     this.search = _search;
-    console.log('Searching from service.. ' + this.search);
+    console.log('Searching from service.. ', this.search);
     return this.http.get<Dapp[]>(`${this.searchUrl}${this.search}`);
   }
 

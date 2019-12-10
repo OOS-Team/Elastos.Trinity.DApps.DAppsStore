@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { Dapp } from 'src/app/dapps.model';
 import { DappsService } from 'src/app/dapps.service';
 
-
 declare let appManager: any;
 
 @Component({

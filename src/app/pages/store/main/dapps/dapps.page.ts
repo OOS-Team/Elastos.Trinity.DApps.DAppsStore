@@ -15,7 +15,6 @@ export class DappsPage implements OnInit {
 
   // General
   applications: Dapp[] = [];
-  filteredApps: Dapp[] = [];
   categories: any[];
   dapp: string = '';
   appsLoaded: boolean = false;
@@ -38,7 +37,6 @@ export class DappsPage implements OnInit {
       this.appsLoaded = true;
       console.log("DApps fetched", apps);
       this.applications = apps;
-      this.filteredApps = this.applications;
     });
   }
 
@@ -55,24 +53,24 @@ export class DappsPage implements OnInit {
     this.appsLoaded = false;
     this.dappsService.fetchFilteredDapps(search).subscribe((apps: Dapp[]) => {
       this.appsLoaded = true;
-      this.filteredApps = apps;
+      this.applications = apps;
     });
     if (search.length === 0) {
-      this.filteredApps = this.applications;
+      this.applications = this.applications;
     }
   }
 
   // Filter apps for each category
   getApps(cat) {
     if (cat === 'new') {
-      return this.filteredApps;
+      return this.applications;
     }
     if (cat === 'popular') {
-      return this.filteredApps.sort((a, b) => {
+      return this.applications.sort((a, b) => {
         return b.downloadsCount - a.downloadsCount;
       });
     } else {
-      return this.filteredApps.filter(app => app.category === cat);
+      return this.applications.filter(app => app.category === cat);
     }
   }
 
