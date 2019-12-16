@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastController } from '@ionic/angular';
 
 import { DappsService } from '../../../../dapps.service';
 import { Dapp } from '../../../../dapps.model';
@@ -20,6 +21,7 @@ export class SearchPage implements OnInit {
 
   constructor(
     private dappsService: DappsService,
+    public toastController: ToastController
   ) {}
 
   ngOnInit() {
@@ -69,14 +71,34 @@ export class SearchPage implements OnInit {
         console.log('App installed');
         dapp.installing = false;
         dapp.installed = true;
+        this.installSuccess(dapp);
       }, (err) => {
         console.log('App install failed', err)
         dapp.installing = false;
+        this.installFailed(dapp);
       }
     );
   }
 
   async downloadAppEPK(dapp) {
     return await this.dappsService.downloadDapp(dapp);
+  }
+
+  async installSuccess(dapp) {
+    const toast = await this.toastController.create({
+      message: 'Installed ' + dapp.appName,
+      color: "primary",
+      duration: 2000
+    });
+    toast.present();
+  }
+
+  async installFailed(dapp) {
+    const toast = await this.toastController.create({
+      message: 'Failed to install ' + dapp.appName,
+      color: "primary",
+      duration: 2000
+    });
+    toast.present();
   }
 }
