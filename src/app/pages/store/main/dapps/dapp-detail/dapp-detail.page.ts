@@ -44,63 +44,27 @@ export class DappDetailPage implements OnInit {
 
   // installation
   async installApp(dapp) {
+    dapp.installing = true;
+
     // Download the file
     const epkPath = await this.downloadAppEPK(dapp);
     console.log("EPK file downloaded and saved to " + epkPath);
 
     // Ask the app installer to install the DApp
-    appManager.sendIntent("appinstall", {url: epkPath, dappStoreServerAppId: dapp._id});
+    appManager.sendIntent(
+      'appinstall',
+      { url: epkPath, dappStoreServerAppId: dapp._id },
+      () => {
+        console.log('App installed');
+        dapp.installed = true;
+      }, (err) => {
+        console.log('App install failed', err)
+      }
+    );
   }
 
   async downloadAppEPK(dapp) {
-    return await this.downloadDapp(dapp);
-  }
-
-  downloadDapp(app) {
-    console.log("App download starting...");
-    app.installing = true;
-
-    return new Promise((resolve, reject) => {
-      // Download EPK file as blob
-      this.http.get('https://dapp-store.elastos.org/apps/'+app._id+'/download', {
-        responseType: 'arraybuffer'} ).subscribe(async response => {
-        console.log("Downloaded", response);
-        let blob = new Blob([response], { type: "application/octet-stream" });
-        console.log("Blob", blob);
-        app.installing = false;
-        app.installed = true;
-
-        // Save to a temporary location
-        let filePath = await this._savedDownloadedBlobToTempLocation(blob);
-
-        resolve(filePath);
-      });
-    });
-  }
-
-  _savedDownloadedBlobToTempLocation(blob) {
-    let fileName = "appinstall.epk"
-
-    return new Promise((resolve, reject) => {
-      window.resolveLocalFileSystemURL(cordova.file.dataDirectory, (dirEntry: DirectoryEntry) => {
-          dirEntry.getFile(fileName, { create: true, exclusive: false }, (fileEntry) => {
-            console.log("Downloaded file entry", fileEntry);
-            fileEntry.createWriter((fileWriter) => {
-              fileWriter.write(blob);
-              resolve("trinity:///data/"+fileName);
-            }, (err) => {
-              console.error("createWriter ERROR - "+JSON.stringify(err));
-              reject(err);
-            });
-          }, (err) => {
-            console.error("getFile ERROR - "+JSON.stringify(err));
-            reject(err);
-          });
-      }, (err) => {
-        console.error("resolveLocalFileSystemURL ERROR - "+JSON.stringify(err));
-        reject(err);
-      });
-    });
+    return await this.dappsService.downloadDapp(dapp);
   }
 
   closeApp() {

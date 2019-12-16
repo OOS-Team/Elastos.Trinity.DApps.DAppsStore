@@ -92,4 +92,48 @@ export class DappsService {
   get index() {
     return this.catIndex;
   }
+
+  downloadDapp(app) {
+    console.log("App download starting...");
+
+    return new Promise((resolve, reject) => {
+      // Download EPK file as blob
+      this.http.get('https://dapp-store.elastos.org/apps/'+app._id+'/download', {
+        responseType: 'arraybuffer'} ).subscribe(async response => {
+        console.log("Downloaded", response);
+        let blob = new Blob([response], { type: "application/octet-stream" });
+        console.log("Blob", blob);
+
+        // Save to a temporary location
+        let filePath = await this._savedDownloadedBlobToTempLocation(blob);
+
+        resolve(filePath);
+      });
+    });
+  }
+
+  _savedDownloadedBlobToTempLocation(blob) {
+    let fileName = "appinstall.epk"
+
+    return new Promise((resolve, reject) => {
+      window.resolveLocalFileSystemURL(cordova.file.dataDirectory, (dirEntry: DirectoryEntry) => {
+          dirEntry.getFile(fileName, { create: true, exclusive: false }, (fileEntry) => {
+            console.log("Downloaded file entry", fileEntry);
+            fileEntry.createWriter((fileWriter) => {
+              fileWriter.write(blob);
+              resolve("trinity:///data/"+fileName);
+            }, (err) => {
+              console.error("createWriter ERROR - "+JSON.stringify(err));
+              reject(err);
+            });
+          }, (err) => {
+            console.error("getFile ERROR - "+JSON.stringify(err));
+            reject(err);
+          });
+      }, (err) => {
+        console.error("resolveLocalFileSystemURL ERROR - "+JSON.stringify(err));
+        reject(err);
+      });
+    });
+  }
 }
