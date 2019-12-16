@@ -2,12 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { StorePage } from './store.page';
-import { DappsPageModule } from './main/dapps/dapps.module';
-import { DappDetailPageModule } from './main/dapps/dapp-detail/dapp-detail.module';
-import { CategoriesPageModule } from './main/categories/categories.module';
-import { CategoryTypePageModule } from './main/categories/category-type/category-type.module';
-import { SearchPageModule } from './main/search/search.module';
-import { HomePageModule } from './main/home/home.module';
 
 const routes: Routes = [
   {
@@ -20,7 +14,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => HomePageModule
+            loadChildren: './main/home/home.module#HomePageModule'
           }
         ]
       },
@@ -30,11 +24,11 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => DappsPageModule
+            loadChildren: './main/dapps/dapps.module#DappsPageModule'
           },
           {
             path: ':dappId',
-            loadChildren: () => DappDetailPageModule
+            loadChildren: './main/dapps/dapp-detail/dapp-detail.module#DappDetailPageModule'
           }
         ]
       },
@@ -44,11 +38,11 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => CategoriesPageModule
+            loadChildren: './main/categories/categories.module#CategoriesPageModule'
           },
           {
             path: ':categoryType',
-            loadChildren: () => CategoryTypePageModule
+            loadChildren: './main/categories/category-type/category-type.module#CategoryTypePageModule'
           }
         ]
       },
@@ -58,7 +52,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: () => SearchPageModule
+            loadChildren: './main/search/search.module#SearchPageModule'
           },
         ]
       },
