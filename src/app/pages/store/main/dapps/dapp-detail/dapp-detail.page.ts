@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
+import { ImageLoaderService } from 'ionic-image-loader';
 
 import { Dapp } from '../../../../../dapps.model';
 import { DappsService } from '../../../../../dapps.service';
@@ -23,8 +24,9 @@ export class DappDetailPage implements OnInit {
     private dappsService: DappsService,
     private http: HttpClient,
     private route: ActivatedRoute,
-    private navCtrl: NavController
-  ) { }
+    private navCtrl: NavController,
+    private imageLoader: ImageLoaderService
+  ) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe(paramMap => {
@@ -37,6 +39,7 @@ export class DappDetailPage implements OnInit {
       this.dappBanner = this.dappsService.getAppBanner(this.dapp);
       console.log('Dapp', this.dapp);
     });
+    this.imageLoader.preload('/../../../assets/store/appbanner.jpg');
   }
 
   // installation

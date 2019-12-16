@@ -2,6 +2,8 @@ import { NgModule, ErrorHandler, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { IonicImageLoader } from 'ionic-image-loader';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 import { IonicRouteStrategy } from '@ionic/angular';
 import { IonicModule } from '@ionic/angular';
@@ -19,6 +21,7 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(),
+    IonicImageLoader.forRoot(),
     AppRoutingModule
  ],
   bootstrap: [AppComponent],
@@ -28,6 +31,7 @@ import { AppRoutingModule } from './app-routing.module';
   providers: [
     StatusBar,
     SplashScreen,
+    WebView,
     {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
     //{provide: ErrorHandler, useClass: IonicErrorHandler}
   ],

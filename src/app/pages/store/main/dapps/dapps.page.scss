@@ -8,7 +8,12 @@ ion-header {
   }
 
   .highlight {
-    color: #007AFF !important;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #007AFF;
+
+    ion-label {
+      color: #007AFF !important;
+    }
   }
 }
 
@@ -64,44 +69,7 @@ ion-list {
   }
 
   ion-item {
-    --inner-padding-end: 0px;
-    --padding-start: 0px;
-    border-bottom: 1px solid rgb(230, 230, 230);
-
     ion-row {
-      padding: 5px 0;
-
-      .img-container {
-        display: flex;
-        justify-content: flex-end;
-
-        ion-thumbnail {
-          border-radius: 15px !important;
-          border: solid 1px black;
-
-          ion-img {
-            border-radius: 15px;
-          }
-        }
-      }
-
-      .node-content {
-        display: flex;
-        align-items: center;
-
-          h2 {
-            font-size: 16px;
-            font-weight: 500;
-            margin: 0;
-          }
-
-          p {
-            font-size: 10px !important;
-            color: #959595;
-            margin: 0;
-          }
-      }
-
       .btn-container {
         display: flex;
         justify-content: center;

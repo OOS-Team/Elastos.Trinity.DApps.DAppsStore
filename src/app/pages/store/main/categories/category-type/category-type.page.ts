@@ -19,7 +19,6 @@ export class CategoryTypePage implements OnInit {
   dapp: string = '';
   categories: any[];
   categoryType: string = '';
-  categoryTab: string = '';
   appsLoaded: boolean = true;
 
   slideOpts = {
@@ -44,14 +43,12 @@ export class CategoryTypePage implements OnInit {
         return;
       }
       this.dapps = this.dappsService.getCategory(paramMap.get('categoryType'));
-      this.categoryTab = paramMap.get('categoryType');
       this.categoryType = paramMap.get('categoryType');
       console.log('category', this.categoryType);
     });
   }
 
   changeCat(cat) {
-    this.categoryTab = cat;
     this.categoryType = cat;
     this.dapps = this.dappsService.getCategory(cat);
   }

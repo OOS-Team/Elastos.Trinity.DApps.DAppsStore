@@ -13,9 +13,9 @@
       <ion-icon name="arrow-back" mode="ios"></ion-icon>
     </ion-buttons>
     <ion-buttons slot="end" class="header-btns">
-      <ion-button>
-        <ion-menu-button menu="m1"></ion-menu-button>
-      </ion-button>
+      <ion-menu-toggle>
+        <ion-icon src="../assets/icon/menu.svg"></ion-icon>
+      </ion-menu-toggle>
     </ion-buttons>
     <ion-title>Home</ion-title>
   </ion-toolbar>
@@ -24,7 +24,7 @@
 <ion-content no-padding>
   <ion-grid padding>
     <ion-card>
-      <ion-img src="/../../../assets/store/appbanner.jpg"></ion-img>
+      <img-loader src="/../../../assets/store/appbanner.jpg" useImg></img-loader>
       <ion-card-header style="padding-bottom: 24px">
         <ion-card-subtitle>Welcome</ion-card-subtitle>
         <ion-card-title>elastOS <br>App Store</ion-card-title>
@@ -32,16 +32,14 @@
     </ion-card>
 
     <ion-card>
-      <ion-img src="/../../../assets/store/appbanner.jpg"></ion-img>
+      <img-loader src="/../../../assets/store/appbanner.jpg" useImg></img-loader>
       <ion-card-header>
         <ion-card-title>App <br>Showcase</ion-card-title>
       </ion-card-header>
 
       <ion-row *ngFor="let app of applications.slice(1, 2)" class="showcase-app">
         <ion-col size="2.5" class="img-container">
-          <ion-thumbnail>
-            <ion-img [src]="getAppIcon(app)"></ion-img>
-          </ion-thumbnail>
+          <img-loader [src]="getAppIcon(app)" useImg></img-loader>
         </ion-col>
         <ion-col size="9.5" class="dapp-content" align-items-center>
           <ion-label>
@@ -84,9 +82,7 @@
                   'dapps',
                   app._id
                 ]">
-                <ion-thumbnail>
-                  <ion-img [src]="getAppIcon(app)"></ion-img>
-                </ion-thumbnail>
+                  <img-loader [src]="getAppIcon(app)" useImg></img-loader>
               </ion-col>
               <ion-col
                 size="6.25"

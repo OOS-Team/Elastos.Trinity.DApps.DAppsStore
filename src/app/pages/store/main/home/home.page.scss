@@ -26,13 +26,12 @@ ion-grid {
       display: flex;
       align-items: center;
 
-      ion-thumbnail {
+      img-loader {
         border-radius: 15px !important;
+        overflow: hidden;
         border: solid 1px black;
-
-        ion-img {
-          border-radius: 15px;
-        }
+        height: 48px;
+        width: 48px;
       }
     }
 
@@ -100,13 +99,12 @@ ion-grid {
         display: flex;
         justify-content: flex-end;
 
-        ion-thumbnail {
+        img-loader {
           border-radius: 15px !important;
+          overflow: hidden;
           border: solid 1px black;
-
-          ion-img {
-            border-radius: 15px;
-          }
+          height: 48px;
+          width: 48px;
         }
       }
 
