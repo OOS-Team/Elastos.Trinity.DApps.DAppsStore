@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { HttpClient } from '@angular/common/http';
 import { ImageLoaderService } from 'ionic-image-loader';
 
 import { Dapp } from '../../../../../dapps.model';
@@ -22,7 +21,6 @@ export class DappDetailPage implements OnInit {
 
   constructor(
     private dappsService: DappsService,
-    private http: HttpClient,
     private route: ActivatedRoute,
     private navCtrl: NavController,
     private imageLoader: ImageLoaderService
@@ -42,7 +40,7 @@ export class DappDetailPage implements OnInit {
     this.imageLoader.preload('/../../../assets/store/appbanner.jpg');
   }
 
-  // installation
+  // Install app
   async installApp(dapp) {
     dapp.installing = true;
 
@@ -56,9 +54,11 @@ export class DappDetailPage implements OnInit {
       { url: epkPath, dappStoreServerAppId: dapp._id },
       () => {
         console.log('App installed');
+        dapp.installing = false;
         dapp.installed = true;
       }, (err) => {
         console.log('App install failed', err)
+        dapp.installing = false;
       }
     );
   }

@@ -4,7 +4,6 @@ import { NavController } from '@ionic/angular';
 
 import { DappsService } from '../../../../../dapps.service';
 import { Dapp } from '../../../../../dapps.model';
-import { HttpClient } from '@angular/common/http';
 
 declare let appManager: any;
 
@@ -31,7 +30,6 @@ export class CategoryTypePage implements OnInit {
     private dappsService: DappsService,
     private route: ActivatedRoute,
     private navCtrl: NavController,
-    private http: HttpClient
   ) {}
 
   ngOnInit() {
@@ -91,9 +89,11 @@ export class CategoryTypePage implements OnInit {
       { url: epkPath, dappStoreServerAppId: dapp._id },
       () => {
         console.log('App installed');
+        dapp.installing = false;
         dapp.installed = true;
       }, (err) => {
         console.log('App install failed', err)
+        dapp.installing = false;
       }
     );
   }

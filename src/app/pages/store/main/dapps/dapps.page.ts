@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
 import { DappsService } from '../../../../dapps.service';
 import { Dapp } from '../../../../dapps.model';
@@ -27,7 +26,6 @@ export class DappsPage implements OnInit {
 
   constructor(
     private dappsService: DappsService,
-    private http: HttpClient
   ) {}
 
   ngOnInit() {
@@ -93,9 +91,11 @@ export class DappsPage implements OnInit {
       { url: epkPath, dappStoreServerAppId: dapp._id },
       () => {
         console.log('App installed');
+        dapp.installing = false;
         dapp.installed = true;
       }, (err) => {
         console.log('App install failed', err)
+        dapp.installing = false;
       }
     );
   }

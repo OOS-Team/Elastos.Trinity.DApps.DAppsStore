@@ -85,7 +85,7 @@ export class DappsService {
     }
   }
 
-  setCatIndex(index) {
+  setCatIndex(index: number) {
     this.catIndex = index;
   }
 
