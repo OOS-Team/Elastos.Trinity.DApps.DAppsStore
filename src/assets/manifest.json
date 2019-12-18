@@ -7,7 +7,7 @@
   "short_description": "DApp Store",
   "description": "Elastos Trinity DApp Store",
   "start_url": "index.html",
-  "type": "file",
+  "type": "app",
   "category": "finance",
   "icons": [
     {
