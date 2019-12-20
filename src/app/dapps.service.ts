@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { File } from '@ionic-native/file/ngx';
 
 import { Dapp } from './dapps.model';
-import { ThrowStmt } from '@angular/compiler';
 
 declare let appManager: any;
 
@@ -35,10 +33,7 @@ export class DappsService {
     'lifestyle'
   ];
 
-  constructor(private http: HttpClient, private file: File) {
-    this.file.checkDir(this.file.dataDirectory, 'mydir')
-      .then(_ => console.log('Directory exists'))
-      .catch(err => console.log('Directory doesnt exist'));
+  constructor(private http: HttpClient) {
   }
 
   fetchDapps(): Observable<Dapp[]> {

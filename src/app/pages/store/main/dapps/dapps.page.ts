@@ -4,6 +4,7 @@ import { ToastController } from '@ionic/angular';
 import { DappsService } from '../../../../dapps.service';
 import { Dapp } from '../../../../dapps.model';
 
+declare let appManager: any;
 
 @Component({
   selector: 'app-dapps',
