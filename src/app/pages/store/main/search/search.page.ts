@@ -27,9 +27,10 @@ export class SearchPage implements OnInit {
   ngOnInit() {
     this.appsLoaded = false;
     this.dappsService.fetchDapps().subscribe((apps: Dapp[]) => {
-      this.appsLoaded = true;
       console.log("DApps fetched", apps);
+      this.appsLoaded = true;
       this.dapps = apps;
+      this.dappsService.checkVersion();
     });
   }
 

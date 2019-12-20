@@ -34,9 +34,10 @@ export class DappsPage implements OnInit {
     this.appsLoaded = false;
     this.categories = this.dappsService.categories;
     this.dappsService.fetchDapps().subscribe((apps: Dapp[]) => {
-      this.appsLoaded = true;
       console.log("DApps fetched", apps);
+      this.appsLoaded = true;
       this.applications = apps;
+      this.dappsService.checkVersion();
     });
   }
 

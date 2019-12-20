@@ -48,6 +48,17 @@ export class DappsService {
     );
   }
 
+  checkVersion() {
+    let packages = [];
+    this._dapps.map(dapp => {
+      packages = packages.concat(dapp._id);
+      console.log(packages);
+    });
+    this.http.post('http://192.168.31.117:5200/apps/versions', packages).subscribe((res)=>{
+      console.log(res)
+    });
+  }
+
   fetchFilteredDapps(_search: string): Observable<Dapp[]> {
     this.search = _search;
     console.log('Searching from service.. ', this.search);
