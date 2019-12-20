@@ -43,32 +43,19 @@ export class DappDetailPage implements OnInit {
   }
 
   // Install app
-  async installApp(dapp) {
+  installApp(dapp) {
     dapp.installing = true;
-
-    // Download the file
-    const epkPath = await this.downloadAppEPK(dapp);
-    console.log("EPK file downloaded and saved to " + epkPath);
-
-    // Ask the app installer to install the DApp
-    appManager.sendIntent(
-      'appinstall',
-      { url: epkPath, dappStoreServerAppId: dapp._id },
-      () => {
-        console.log('App installed');
-        dapp.installing = false;
+    this.dappsService.installApp(dapp).then(res => {
+      console.log('Install state', res)
+      dapp.installing = false;
+      if(res === true) {
         dapp.installed = true;
         this.installSuccess(dapp);
-      }, (err) => {
-        console.log('App install failed', err)
-        dapp.installing = false;
+      } else {
+        dapp.installed = false;
         this.installFailed(dapp);
       }
-    );
-  }
-
-  async downloadAppEPK(dapp) {
-    return await this.dappsService.downloadDapp(dapp);
+    });
   }
 
   async installSuccess(dapp) {

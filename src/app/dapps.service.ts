@@ -2,8 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { File } from '@ionic-native/file/ngx';
 
 import { Dapp } from './dapps.model';
+import { ThrowStmt } from '@angular/compiler';
+
+declare let appManager: any;
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +35,11 @@ export class DappsService {
     'lifestyle'
   ];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private file: File) {
+    this.file.checkDir(this.file.dataDirectory, 'mydir')
+      .then(_ => console.log('Directory exists'))
+      .catch(err => console.log('Directory doesnt exist'));
+  }
 
   fetchDapps(): Observable<Dapp[]> {
     console.log("Fetching DApps");
@@ -93,6 +101,25 @@ export class DappsService {
     return this.catIndex;
   }
 
+  async installApp(dapp) {
+    // Download the file
+    const epkPath = await this.downloadDapp(dapp);
+    console.log("EPK file downloaded and saved to " + epkPath);
+
+    // Ask the app installer to install the DApp
+    return appManager.sendIntent(
+      'appinstall',
+      { url: epkPath, dappStoreServerAppId: dapp._id },
+      () => {
+        console.log('App installed');
+        return true
+      }, (err) => {
+        console.log('App install failed', err)
+        return false
+      }
+    );
+  }
+
   downloadDapp(app) {
     console.log("App download starting...");
 
@@ -114,7 +141,12 @@ export class DappsService {
 
   _savedDownloadedBlobToTempLocation(blob) {
     let fileName = "appinstall.epk"
+<<<<<<< HEAD
     
+=======
+    console.log('Cordova file directory' + cordova.file.dataDirectory);
+
+>>>>>>> Code cleanup, file plugin test
     return new Promise((resolve, reject) => {
       window.resolveLocalFileSystemURL(cordova.file.dataDirectory, (dirEntry: DirectoryEntry) => {
           dirEntry.getFile(fileName, { create: true, exclusive: false }, (fileEntry) => {
