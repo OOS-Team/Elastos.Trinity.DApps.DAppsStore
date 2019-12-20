@@ -30,7 +30,6 @@ export class SearchPage implements OnInit {
       console.log("DApps fetched", apps);
       this.appsLoaded = true;
       this.dapps = apps;
-      this.dappsService.checkVersion();
     });
   }
 

@@ -27,7 +27,7 @@ export class DappsPage implements OnInit {
 
   constructor(
     private dappsService: DappsService,
-    public toastController: ToastController
+    public toastController: ToastController,
   ) {}
 
   ngOnInit() {
@@ -37,7 +37,6 @@ export class DappsPage implements OnInit {
       console.log("DApps fetched", apps);
       this.appsLoaded = true;
       this.applications = apps;
-      this.dappsService.checkVersion();
     });
   }
 

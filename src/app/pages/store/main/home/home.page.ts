@@ -26,7 +26,6 @@ export class HomePage implements OnInit {
     this.dappsService.fetchDapps().subscribe((apps: Dapp[]) => {
       this.appsLoaded = true;
       this.applications = apps;
-      this.dappsService.checkVersion();
     });
   }
 

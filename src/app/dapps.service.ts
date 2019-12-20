@@ -43,6 +43,7 @@ export class DappsService {
       tap(response => {
         this._dapps = this._dapps.concat(response);
         console.log("DApps concat", this._dapps);
+        this.checkVersion();
         return this._dapps;
       })
     );
@@ -54,8 +55,8 @@ export class DappsService {
       packages = packages.concat(dapp._id);
       console.log(packages);
     });
-    this.http.post('http://192.168.31.117:5200/apps/versions', packages).subscribe((res)=>{
-      console.log(res)
+    this.http.post('https://dapp-store.elastos.org/apps/versions', packages).subscribe((res) => {
+      console.log(res);
     });
   }
 
@@ -118,10 +119,10 @@ export class DappsService {
       { url: epkPath, dappStoreServerAppId: dapp._id },
       () => {
         console.log('App installed');
-        return true
+        return true;
       }, (err) => {
         console.log('App install failed', err)
-        return false
+        return false;
       }
     );
   }
