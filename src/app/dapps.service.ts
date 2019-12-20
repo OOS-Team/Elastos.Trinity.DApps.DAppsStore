@@ -114,7 +114,7 @@ export class DappsService {
 
   _savedDownloadedBlobToTempLocation(blob) {
     let fileName = "appinstall.epk"
-
+    
     return new Promise((resolve, reject) => {
       window.resolveLocalFileSystemURL(cordova.file.dataDirectory, (dirEntry: DirectoryEntry) => {
           dirEntry.getFile(fileName, { create: true, exclusive: false }, (fileEntry) => {
