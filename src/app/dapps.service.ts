@@ -141,12 +141,8 @@ export class DappsService {
 
   _savedDownloadedBlobToTempLocation(blob) {
     let fileName = "appinstall.epk"
-<<<<<<< HEAD
-    
-=======
     console.log('Cordova file directory' + cordova.file.dataDirectory);
 
->>>>>>> Code cleanup, file plugin test
     return new Promise((resolve, reject) => {
       window.resolveLocalFileSystemURL(cordova.file.dataDirectory, (dirEntry: DirectoryEntry) => {
           dirEntry.getFile(fileName, { create: true, exclusive: false }, (fileEntry) => {
