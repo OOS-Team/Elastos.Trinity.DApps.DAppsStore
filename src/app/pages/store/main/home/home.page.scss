@@ -50,6 +50,8 @@ ion-grid {
       p {
         margin: 0;
         font-size: 9px;
+        font-weight: 500;
+        color: #959595;
       }
     }
   }
@@ -64,7 +66,7 @@ ion-grid {
       margin: 6px 0;
       padding: 0;
       font-size: 18px !important;
-      font-weight: bold;
+      font-weight: 700;
       color: black;
 
       p {
@@ -77,7 +79,7 @@ ion-grid {
       padding: 0;
       font-size: 13px !important;
       color: #007AFF !important;
-      font-weight: bold;
+      font-weight: 700;
       display: flex;
       justify-content: center;
 
@@ -114,13 +116,13 @@ ion-grid {
 
           h2 {
             font-size: 16px;
-            font-family: 'Raleway:500', sans-serif;
-            font-weight: normal;
+            font-weight: 600;
             margin: 0;
           }
 
           p {
-            font-size: 10px !important;
+            font-size: 9px !important;
+            font-weight: 500;
             color: #959595;
             margin: 0;
           }
@@ -137,7 +139,8 @@ ion-grid {
 
           ion-label {
             font-size: 9px;
-            padding: 0 5px;
+            font-weight: 700;
+            padding: 0;
           }
         }
       }

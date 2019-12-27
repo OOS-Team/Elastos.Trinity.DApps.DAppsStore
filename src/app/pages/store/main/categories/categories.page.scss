@@ -5,6 +5,8 @@ ion-grid {
   .box-container {
     display: flex;
     justify-content: flex-end;
+    font-size: 25px;
+    padding: 20px 10px 0 0;
 
     .box {
       min-width: 10px;
@@ -14,10 +16,12 @@ ion-grid {
   }
 
   .category {
-    padding-left: 0;
+    display: flex;
+    align-items: center;
+    padding: 20px 0 0 0;
 
     ion-label {
-      font-weight: 500;
+      font-weight: 600;
     }
   }
 }
