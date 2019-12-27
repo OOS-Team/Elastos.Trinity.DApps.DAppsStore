@@ -99,7 +99,7 @@ export class DappsPage implements OnInit {
     const toast = await this.toastController.create({
       message: 'Installed ' + dapp.appName,
       color: "primary",
-      duration: 2000,
+      duration: 4000,
     });
     toast.present();
   }
@@ -108,7 +108,7 @@ export class DappsPage implements OnInit {
     const toast = await this.toastController.create({
       message: 'Failed to install ' + dapp.appName,
       color: "primary",
-      duration: 2000
+      duration: 4000
     });
     toast.present();
   }

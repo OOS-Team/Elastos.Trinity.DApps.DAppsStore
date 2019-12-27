@@ -19,7 +19,8 @@ export class HomePage implements OnInit {
   constructor(
     private dappsService: DappsService,
     public toastController: ToastController
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.appsLoaded = false;

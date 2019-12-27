@@ -6,6 +6,7 @@ import { tap } from 'rxjs/operators';
 import { Dapp } from './dapps.model';
 
 declare let appManager: any;
+// declare let appManager: AppManagerPlugin.AppManager;
 
 @Injectable({
   providedIn: 'root'
@@ -43,18 +44,19 @@ export class DappsService {
       tap(response => {
         this._dapps = this._dapps.concat(response);
         console.log("DApps concat", this._dapps);
-        this.checkVersion();
+        this.getAppInfo();
         return this._dapps;
       })
     );
   }
 
-  checkVersion() {
+  getAppInfo() {
     let packages = [];
     this._dapps.map(dapp => {
       packages = packages.concat(dapp._id);
       console.log(packages);
     });
+    appManager.getAppInfos();
     this.http.post('https://dapp-store.elastos.org/apps/versions', packages).subscribe((res) => {
       console.log(res);
     });
@@ -118,7 +120,7 @@ export class DappsService {
       'appinstall',
       { url: epkPath, dappStoreServerAppId: dapp._id },
       () => {
-        console.log('App installed');
+        console.log('App installed')
         return true;
       }, (err) => {
         console.log('App install failed', err)
@@ -148,7 +150,7 @@ export class DappsService {
 
   _savedDownloadedBlobToTempLocation(blob) {
     let fileName = "appinstall.epk"
-    
+
     return new Promise((resolve, reject) => {
       window.resolveLocalFileSystemURL(cordova.file.dataDirectory, (dirEntry: DirectoryEntry) => {
           dirEntry.getFile(fileName, { create: true, exclusive: false }, (fileEntry) => {
