@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ToastController, IonInput } from '@ionic/angular';
 
 import { DappsService } from '../../../../dapps.service';
 import { Dapp } from '../../../../dapps.model';
@@ -12,6 +12,8 @@ declare let appManager: any;
   styleUrls: ['./search.page.scss'],
 })
 export class SearchPage implements OnInit {
+
+  @ViewChild('search', {static: false}) search: IonInput;
 
   // General
   dapps: Dapp[] = [];
@@ -35,6 +37,12 @@ export class SearchPage implements OnInit {
 
   ionViewWillEnter() {
     this.dapps = this.dappsService.dapps;
+  }
+
+  ionViewDidEnter() {
+    setTimeout(() => {
+      this.search.setFocus();
+    }, 200);
   }
 
   getAppIcon(app) {
