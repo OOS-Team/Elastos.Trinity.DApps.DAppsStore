@@ -95,8 +95,11 @@
                 <ion-spinner name="dots"></ion-spinner>
               </ion-label>
             </ion-button>
-            <ion-button  color="tertiary" *ngIf="!app.installing && app.installed" disabled>
+            <ion-button color="tertiary" *ngIf="!app.installing && app.installed && !app.updateAvailable" disabled>
               <ion-label>Installed</ion-label>
+            </ion-button>
+            <ion-button color="tertiary" (click)="installApp(app)" *ngIf="!app.installing && app.installed && app.updateAvailable">
+              <ion-label>Update</ion-label>
             </ion-button>
           </ion-col>
         </ion-row>

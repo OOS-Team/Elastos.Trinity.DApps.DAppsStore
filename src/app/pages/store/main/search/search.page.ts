@@ -57,8 +57,15 @@ export class SearchPage implements OnInit {
       this.filteredApps = [];
     } else {
       this.dappsService.fetchFilteredDapps(search).subscribe((apps: Dapp[]) => {
+        console.log('Searched apps', apps);
         this.appsLoaded = true;
-        this.filteredApps = apps;
+        this.dapps.map(dapp => {
+          apps.map(app => {
+            if(dapp.packageName === app.packageName) {
+              this.filteredApps = this.filteredApps.concat(dapp);
+            }
+          })
+        })
       });
     }
   }
@@ -81,6 +88,7 @@ export class SearchPage implements OnInit {
 
   async installSuccess(dapp) {
     const toast = await this.toastController.create({
+      mode: 'ios',
       message: 'Installed ' + dapp.appName,
       color: "primary",
       duration: 2000
@@ -90,6 +98,7 @@ export class SearchPage implements OnInit {
 
   async installFailed(dapp) {
     const toast = await this.toastController.create({
+      mode: 'ios',
       message: 'Failed to install ' + dapp.appName,
       color: "primary",
       duration: 2000

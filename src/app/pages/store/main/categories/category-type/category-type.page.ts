@@ -95,6 +95,7 @@ export class CategoryTypePage implements OnInit {
 
   async installSuccess(dapp) {
     const toast = await this.toastController.create({
+      mode: 'ios',
       message: 'Installed ' + dapp.appName,
       color: "primary",
       duration: 2000
@@ -104,6 +105,7 @@ export class CategoryTypePage implements OnInit {
 
   async installFailed(dapp) {
     const toast = await this.toastController.create({
+      mode: 'ios',
       message: 'Failed to install ' + dapp.appName,
       color: "primary",
       duration: 2000

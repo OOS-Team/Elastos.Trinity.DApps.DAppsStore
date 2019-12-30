@@ -97,18 +97,20 @@ export class DappsPage implements OnInit {
 
   async installSuccess(dapp) {
     const toast = await this.toastController.create({
+      mode: 'ios',
       message: 'Installed ' + dapp.appName,
       color: "primary",
-      duration: 10000,
+      duration: 2000,
     });
     toast.present();
   }
 
   async installFailed(dapp) {
     const toast = await this.toastController.create({
+      mode: 'ios',
       message: 'Failed to install ' + dapp.appName,
       color: "primary",
-      duration: 10000
+      duration: 2000
     });
     toast.present();
   }

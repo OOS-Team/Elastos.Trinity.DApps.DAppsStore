@@ -1,16 +1,89 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button menu="m1"></ion-menu-button>
+<ion-header no-border>
+  <ion-toolbar mode="ios">
+    <ion-buttons
+      slot="start"
+      padding
+      class="header-btns"
+      [routerLink]="[
+        '/',
+        'store',
+        'tabs',
+        'dapps'
+      ]">
+      <ion-icon name="arrow-back" mode="ios"></ion-icon>
     </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-button (click)="closeApp()">
-        <ion-icon name="close"></ion-icon>
-      </ion-button>
+    <ion-buttons slot="end" class="header-btns">
+      <ion-menu-toggle>
+        <ion-icon src="../assets/icon/menu.svg"></ion-icon>
+      </ion-menu-toggle>
     </ion-buttons>
     <ion-title>My DApps</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <div class="search-container">
+    <ion-searchbar
+      #search
+      mode="ios"
+      color="medium"
+      placeholder=" Search for Application"
+      [(ngModel)]="dapp"
+      (ngModelChange)="filterDapps($event)"
+    >
+    </ion-searchbar>
+  </div>
+
+  <ion-list no-padding>
+    <ion-item *ngFor="let app of filteredApps" lines="none">
+      <ion-grid no-padding>
+        <ion-row>
+          <ion-col
+            size="2.25"
+            size-lg="2.25"
+            class="img-container"
+            [routerLink]="[
+              '/',
+              'store',
+              'tabs',
+              'dapps',
+              app._id
+            ]">
+            <img-loader [src]="getAppIcon(app)" useImg></img-loader>
+          </ion-col>
+          <ion-col
+            size="6.25"
+            size-xs="6.25"
+            class="node-content"
+            [routerLink]="[
+              '/',
+              'store',
+              'tabs',
+              'dapps',
+              app._id
+            ]">
+            <ion-label>
+              <h2>{{ app.appName }}</h2>
+              <p>{{ app.appShortDescription }}</p>
+            </ion-label>
+          </ion-col>
+          <ion-col size="3.5" size-xs="3.5" class="btn-container">
+            <ion-button  color="tertiary" *ngIf="!app.installing && app.installed && !app.updateAvailable" disabled>
+              <ion-label>Installed</ion-label>
+            </ion-button>
+            <ion-button color="tertiary" *ngIf="app.installing">
+              <ion-label>
+                <ion-spinner name="dots"></ion-spinner>
+              </ion-label>
+            </ion-button>
+            <ion-button color="tertiary" (click)="installApp(app)" *ngIf="!app.installing && app.installed && app.updateAvailable">
+              <ion-label>Update</ion-label>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+
 </ion-content>

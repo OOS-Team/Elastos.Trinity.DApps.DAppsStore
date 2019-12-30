@@ -13,7 +13,7 @@ declare let appManager: AppManagerPlugin.AppManager;
 })
 export class DappsService {
 
-  private _dapps: Dapp[] = [];
+  public _dapps: Dapp[] = [];
   private searchUrl: string = 'https://dapp-store.elastos.org/apps/list?s=';
   private search: string = '';
   private catIndex: number;
@@ -50,21 +50,13 @@ export class DappsService {
     );
   }
 
-  getAppInfo() {
-
-    /* let packages = [];
-    this._dapps.map(dapp => {
-      packages = packages.concat(dapp._id);
-      console.log(packages);
-    });
-    this.http.post('https://dapp-store.elastos.org/apps/versions', packages).subscribe((res) => {
-      console.log(res);
-    }); */
+  /* getAppInfo() {
 
     console.log('Calling getAppInfos()');
     appManager.getAppInfos((info) => {
       console.log("App infos", info)
       let installedApps = Object.keys(info);
+      console.log('installed apps', installedApps);
       installedApps.map(app => {
         this._dapps.map(dapp => {
           if (app === dapp.packageName) {
@@ -75,6 +67,30 @@ export class DappsService {
       })
     });
 
+  } */
+
+  getAppInfo() {
+    appManager.getAppInfos((info) => {
+      console.log("App infos", info)
+
+      let installedApps = Object.values(info);
+      console.log('Installed apps', installedApps);
+
+      installedApps.map(app => {
+        this._dapps.map(dapp => {
+          if (app.id === dapp.packageName) {
+            dapp.installed = true;
+          } else {
+            dapp.installed = false;
+          }
+          if (app.version !== dapp.versionName) {
+            dapp.updateAvailable = true;
+          } else {
+            dapp.updateAvailable = false;
+          }
+        })
+      })
+    });
   }
 
   fetchFilteredDapps(_search: string): Observable<Dapp[]> {
@@ -130,17 +146,24 @@ export class DappsService {
     const epkPath = await this.downloadDapp(dapp);
     console.log("EPK file downloaded and saved to " + epkPath);
 
-    return appManager.sendIntent(
-      'appinstall',
-      { url: epkPath, dappStoreServerAppId: dapp._id },
-      (res) => {
-        console.log('App installed', res)
-        return true;
-      }, (err) => {
-        console.log('App install failed', err)
-        return false;
-      }
-    );
+    return new Promise((resolve,reject) => {
+      appManager.sendIntent(
+        'appinstall',
+        { url: epkPath, dappStoreServerAppId: dapp._id },
+        (res) => {
+          console.log('App installed', res)
+          this._dapps.map(app => {
+            if(app === dapp) {
+              app.installed = true;
+            }
+          });
+          resolve(true);
+        }, (err) => {
+          console.log('App install failed', err)
+          reject(false);
+        }
+      );
+    })
   }
 
   downloadDapp(app) {
