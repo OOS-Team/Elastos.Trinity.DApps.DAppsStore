@@ -78,6 +78,7 @@ export class SearchPage implements OnInit {
       dapp.installing = false;
       if(res === true) {
         dapp.installed = true;
+        dapp.updateAvailable = false;
         this.installSuccess(dapp);
       } else {
         dapp.installed = false;
@@ -104,5 +105,9 @@ export class SearchPage implements OnInit {
       duration: 2000
     });
     toast.present();
+  }
+
+  startApp(id) {
+    this.dappsService.startApp(id);
   }
 }

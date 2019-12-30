@@ -46,6 +46,7 @@ export class MyAppsPage implements OnInit {
       dapp.installing = false;
       if(res === true) {
         dapp.installed = true;
+        dapp.updateAvailable = false;
         this.updateSuccess(dapp);
       } else {
         dapp.installed = false;
@@ -72,5 +73,9 @@ export class MyAppsPage implements OnInit {
       duration: 2000
     });
     toast.present();
+  }
+
+  startApp(id) {
+    this.dappsService.startApp(id);
   }
 }

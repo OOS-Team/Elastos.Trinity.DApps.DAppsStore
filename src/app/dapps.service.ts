@@ -152,12 +152,17 @@ export class DappsService {
         { url: epkPath, dappStoreServerAppId: dapp._id },
         (res) => {
           console.log('App installed', res)
-          this._dapps.map(app => {
-            if(app === dapp) {
-              app.installed = true;
-            }
-          });
-          resolve(true);
+          if(res.result.result === 'installed') {
+            this._dapps.map(app => {
+              if(app === dapp) {
+                app.installed = true;
+                app.updateAvailable = false;
+              }
+            });
+            resolve(true);
+          } else {
+            resolve(false);
+          }
         }, (err) => {
           console.log('App install failed', err)
           reject(false);
@@ -208,5 +213,9 @@ export class DappsService {
         reject(err);
       });
     });
+  }
+
+  startApp(id) {
+    appManager.start(id);
   }
 }
