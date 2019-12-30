@@ -14,11 +14,11 @@ declare let appManager: AppManagerPlugin.AppManager;
 export class DappsService {
 
   private _dapps: Dapp[] = [];
-  searchUrl: string = 'https://dapp-store.elastos.org/apps/list?s=';
-  search: string = '';
-  catIndex: number;
+  private searchUrl: string = 'https://dapp-store.elastos.org/apps/list?s=';
+  private search: string = '';
+  private catIndex: number;
 
-  _categories = [
+  private _categories = [
     'new',
     'popular',
     'finance',
@@ -51,18 +51,30 @@ export class DappsService {
   }
 
   getAppInfo() {
-    let packages = [];
+
+    /* let packages = [];
     this._dapps.map(dapp => {
       packages = packages.concat(dapp._id);
       console.log(packages);
     });
-    console.log("Calling getAppInfos()");
-    appManager.getAppInfos((info)=>{
-      console.log("App infos:", info)
-    });
     this.http.post('https://dapp-store.elastos.org/apps/versions', packages).subscribe((res) => {
       console.log(res);
+    }); */
+
+    console.log('Calling getAppInfos()');
+    appManager.getAppInfos((info) => {
+      console.log("App infos", info)
+      let installedApps = Object.keys(info);
+      installedApps.map(app => {
+        this._dapps.map(dapp => {
+          if (app === dapp.packageName) {
+            console.log(dapp + ' is already installed');
+            dapp.installed = true;
+          }
+        })
+      })
     });
+
   }
 
   fetchFilteredDapps(_search: string): Observable<Dapp[]> {
@@ -118,12 +130,11 @@ export class DappsService {
     const epkPath = await this.downloadDapp(dapp);
     console.log("EPK file downloaded and saved to " + epkPath);
 
-    // Ask the app installer to install the DApp
     return appManager.sendIntent(
       'appinstall',
       { url: epkPath, dappStoreServerAppId: dapp._id },
-      () => {
-        console.log('App installed')
+      (res) => {
+        console.log('App installed', res)
         return true;
       }, (err) => {
         console.log('App install failed', err)
