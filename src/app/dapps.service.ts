@@ -5,8 +5,8 @@ import { tap } from 'rxjs/operators';
 
 import { Dapp } from './dapps.model';
 
-declare let appManager: any;
-// declare let appManager: AppManagerPlugin.AppManager;
+//declare let appManager: any;
+declare let appManager: AppManagerPlugin.AppManager;
 
 @Injectable({
   providedIn: 'root'
@@ -56,7 +56,10 @@ export class DappsService {
       packages = packages.concat(dapp._id);
       console.log(packages);
     });
-    appManager.getAppInfos();
+    console.log("Calling getAppInfos()");
+    appManager.getAppInfos((info)=>{
+      console.log("App infos:", info)
+    });
     this.http.post('https://dapp-store.elastos.org/apps/versions', packages).subscribe((res) => {
       console.log(res);
     });
