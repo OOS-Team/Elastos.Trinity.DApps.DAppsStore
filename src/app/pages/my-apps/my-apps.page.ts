@@ -58,7 +58,7 @@ export class MyAppsPage implements OnInit {
   async updateSuccess(dapp) {
     const toast = await this.toastController.create({
       mode: 'ios',
-      message: dapp.appName + 'updated',
+      message: dapp.appName + ' updated to ' + dapp.versionName,
       color: "primary",
       duration: 2000
     });
@@ -68,7 +68,7 @@ export class MyAppsPage implements OnInit {
   async updateFailed(dapp) {
     const toast = await this.toastController.create({
       mode: 'ios',
-      message: dapp.appName + 'update failed',
+      message: dapp.appName + ' update failed',
       color: "primary",
       duration: 2000
     });

@@ -50,8 +50,8 @@ export class DappsService {
     );
   }
 
+  // Compare fetched apps with getAppInfos() object keys
   /* getAppInfo() {
-
     console.log('Calling getAppInfos()');
     appManager.getAppInfos((info) => {
       console.log("App infos", info)
@@ -66,9 +66,9 @@ export class DappsService {
         })
       })
     });
-
   } */
 
+  // Compare fetched apps with getAppInfos() object values
   getAppInfo() {
     appManager.getAppInfos((info) => {
       console.log("App infos", info)
@@ -76,20 +76,19 @@ export class DappsService {
       let installedApps = Object.values(info);
       console.log('Installed apps', installedApps);
 
-      installedApps.map(app => {
-        this._dapps.map(dapp => {
-          if (app.id === dapp.packageName) {
+      this._dapps.map(dapp => {
+        installedApps.map(app => {
+          if (dapp.packageName === app.id) {
             dapp.installed = true;
-          } else {
-            dapp.installed = false;
+            console.log('Dapp is already installed', dapp.packageName);
           }
-          if (app.version !== dapp.versionName) {
+          if (dapp.packageName === app.id && dapp.versionName !== app.version) {
+            dapp.installed = true;
             dapp.updateAvailable = true;
-          } else {
-            dapp.updateAvailable = false;
+            console.log('Update available', dapp.packageName, ' New version =', dapp.versionName, ' Current version =', app.version);
           }
-        })
-      })
+        });
+      });
     });
   }
 

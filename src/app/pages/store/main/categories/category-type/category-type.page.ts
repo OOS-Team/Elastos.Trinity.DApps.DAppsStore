@@ -57,15 +57,43 @@ export class CategoryTypePage implements OnInit {
     return this.dappsService.getAppIcon(app);
   }
 
-  // Search
   filterDapps(search: string) {
+    this.appsLoaded = false;
+    if (!search) {
+      this.appsLoaded = true;
+      this.dapps = this.dappsService.getCategory(this.categoryType);
+    } else {
+      this.dapps = [];
+      this.dappsService.fetchFilteredDapps(search).subscribe((apps: Dapp[]) => {
+        this.appsLoaded = true;
+        let searchedApps = [];
+        this.dappsService.dapps.map(dapp => {
+          apps.map(app => {
+            if(dapp.packageName === app.packageName) {
+              searchedApps = searchedApps.concat(dapp);
+              this.dapps = searchedApps.filter(app => app.category === this.categoryType);
+              if (this.categoryType === 'new') {
+                this.dapps = searchedApps;
+              }
+              if (this.categoryType === 'popular') {
+                this.dapps = searchedApps;
+              }
+            }
+          });
+        });
+      });
+    }
+  }
+
+  // This search api isn't aware of installed apps
+  /* filterDapps(search: string) {
     this.appsLoaded = false;
     this.dappsService.fetchFilteredDapps(search).subscribe((apps: Dapp[]) => {
       this.appsLoaded = true;
       this.dapps = apps.filter(app => app.category === this.categoryType);
       console.log('Search reults', this.dapps);
       if (search.length === 0) {
-        this.dapps = this.dapps
+        this.dapps = this.dapps;
         console.log('Search is empty', this.dapps);
       }
       if (this.categoryType === 'new') {
@@ -75,7 +103,7 @@ export class CategoryTypePage implements OnInit {
         this.dapps = apps;
       }
     });
-  }
+  } */
 
   // Install app
   installApp(dapp) {
@@ -88,7 +116,6 @@ export class CategoryTypePage implements OnInit {
         dapp.updateAvailable = false;
         this.installSuccess(dapp);
       } else {
-        dapp.installed = false;
         this.installFailed(dapp);
       }
     });
@@ -97,7 +124,7 @@ export class CategoryTypePage implements OnInit {
   async installSuccess(dapp) {
     const toast = await this.toastController.create({
       mode: 'ios',
-      message: 'Installed ' + dapp.appName,
+      message: 'Installed ' + dapp.appName + ' ' + dapp.versionName,
       color: "primary",
       duration: 2000
     });
@@ -107,7 +134,7 @@ export class CategoryTypePage implements OnInit {
   async installFailed(dapp) {
     const toast = await this.toastController.create({
       mode: 'ios',
-      message: 'Failed to install ' + dapp.appName,
+      message: 'Failed to install ' + dapp.appName + ' ' + dapp.versionName,
       color: "primary",
       duration: 2000
     });

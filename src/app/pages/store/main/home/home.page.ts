@@ -49,7 +49,6 @@ export class HomePage implements OnInit {
         dapp.updateAvailable = false;
         this.installSuccess(dapp);
       } else {
-        dapp.installed = false;
         this.installFailed(dapp);
       }
     });
@@ -58,7 +57,7 @@ export class HomePage implements OnInit {
   async installSuccess(dapp) {
     const toast = await this.toastController.create({
       mode: 'ios',
-      message: 'Installed ' + dapp.appName,
+      message: 'Installed ' + dapp.appName + ' ' + dapp.versionName,
       color: "primary",
       duration: 2000
     });
@@ -68,7 +67,7 @@ export class HomePage implements OnInit {
   async installFailed(dapp) {
     const toast = await this.toastController.create({
       mode: 'ios',
-      message: 'Failed to install ' + dapp.appName,
+      message: 'Failed to install ' + dapp.appName + ' ' + dapp.versionName,
       color: "primary",
       duration: 2000
     });

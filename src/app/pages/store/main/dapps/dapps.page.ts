@@ -51,14 +51,35 @@ export class DappsPage implements OnInit {
   // Search
   filterDapps(search: string) {
     this.appsLoaded = false;
+    if (!search) {
+      this.appsLoaded = true;
+      this.applications = this.dappsService.dapps;
+    } else {
+      this.applications = [];
+      this.dappsService.fetchFilteredDapps(search).subscribe((apps: Dapp[]) => {
+        this.appsLoaded = true;
+        this.dappsService.dapps.map(dapp => {
+          apps.map(app => {
+            if(dapp.packageName === app.packageName) {
+              this.applications = this.applications.concat(dapp);
+            }
+          });
+        });
+      });
+    }
+  }
+
+  // This search api isn't aware of installed apps
+  /* filterDapps(search: string) {
+    this.appsLoaded = false;
     this.dappsService.fetchFilteredDapps(search).subscribe((apps: Dapp[]) => {
       this.appsLoaded = true;
       this.applications = apps;
     });
     if (search.length === 0) {
-      this.applications = this.applications;
+      this.applications = this.dappsService.dapps;
     }
-  }
+  } */
 
   // Filter apps for each category
   getApps(cat) {
@@ -90,7 +111,6 @@ export class DappsPage implements OnInit {
         dapp.updateAvailable = false;
         this.installSuccess(dapp);
       } else {
-        dapp.installed = false;
         this.installFailed(dapp);
       }
     });
@@ -99,7 +119,7 @@ export class DappsPage implements OnInit {
   async installSuccess(dapp) {
     const toast = await this.toastController.create({
       mode: 'ios',
-      message: 'Installed ' + dapp.appName,
+      message: 'Installed ' + dapp.appName + ' ' + dapp.versionName,
       color: "primary",
       duration: 2000,
     });
@@ -109,7 +129,7 @@ export class DappsPage implements OnInit {
   async installFailed(dapp) {
     const toast = await this.toastController.create({
       mode: 'ios',
-      message: 'Failed to install ' + dapp.appName,
+      message: 'Failed to install ' + dapp.appName + ' ' + dapp.versionName,
       color: "primary",
       duration: 2000
     });
