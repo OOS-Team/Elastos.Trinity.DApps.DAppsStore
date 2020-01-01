@@ -22,7 +22,8 @@ export class DappsService {
     'new',
     'popular',
     'finance',
-    'utility',
+    'tools',
+    'communication',
     'social',
     'productivity',
     'business',
@@ -31,7 +32,8 @@ export class DappsService {
     'music',
     'casino',
     'travel',
-    'lifestyle'
+    'lifestyle',
+    'health'
   ];
 
   constructor(private http: HttpClient) {
