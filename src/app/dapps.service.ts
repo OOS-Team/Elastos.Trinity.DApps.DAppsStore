@@ -4,9 +4,11 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { Dapp } from './dapps.model';
+import { Platform } from '@ionic/angular';
+import { Router } from '@angular/router';
 
-//declare let appManager: any;
 declare let appManager: AppManagerPlugin.AppManager;
+let managerService: any;
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +38,71 @@ export class DappsService {
     'health'
   ];
 
-  constructor(private http: HttpClient) {
+  private handledIntentId: Number;
+
+  constructor(
+    private http: HttpClient,
+    private platform: Platform,
+    private router: Router
+  ) {
+  }
+
+  // Initial render //
+  init() {
+    console.log("AppmanagerService init");
+
+    // Load app manager only on real device, not in desktop browser - beware: ionic 4 bug with "desktop" or "android"/"ios"
+    if(this.platform.platforms().indexOf("cordova") >= 0) {
+      console.log("Listening to intent events")
+      appManager.setIntentListener(
+        this.onReceiveIntent
+      );
+    }
+  }
+
+  // Listen to intent //
+  onReceiveIntent = (ret) => {
+    console.log("Intent received", ret);
+
+    switch (ret.action) {
+      case "appdetails":
+        console.log('Intent recieved', ret);
+
+        this.handledIntentId = ret.intentId;
+        this.directToApp(ret.params);
+
+        // For shipping in-store apps to 3rd party apps //
+        // this.sendAppsIntent(ret.params);
+    }
+  }
+
+  // If apps are loaded, direct user to app details inquired by 3rd party app
+  async directToApp(appPackage) {
+    if(this._dapps.length > 0) {
+      this._dapps.map(dapp => {
+        if(dapp.packageName === appPackage) {
+          this.router.navigate(['/store/tabs/dapps/' + dapp._id]);
+        }
+      });
+    } else {
+      let appId = await this.waitForAppInquiry(appPackage);
+      this.router.navigate(['/store/tabs/dapps/' + appId]);
+    }
+  }
+
+  // If apps aren't loaded, wait for apps to load before directing user to app details inquired by 3rd party app
+  waitForAppInquiry(appPackage) {
+    return new Promise((resolve, reject) => {
+      this.fetchDapps().subscribe((apps: Dapp[]) => {
+        apps.map(app => {
+          if(app.packageName === appPackage) {
+            resolve(app._id);
+          };
+        });
+      }, (err) => {
+        console.log('Failed to retrieve apps', err);
+      });
+    });
   }
 
   fetchDapps(): Observable<Dapp[]> {
@@ -219,4 +285,43 @@ export class DappsService {
   startApp(id) {
     appManager.start(id);
   }
+
+   /* // Prepare to ship instore apps for 3rd party apps
+  async sendAppsIntent(appPackages) {
+    if(this._dapps.length > 0) {
+      let sendApps = [];
+      this._dapps.map(dapp => {
+        appPackages.map(packageName => {
+          if(dapp.packageName === packageName) {
+            sendApps = sendApps.concat(dapp);
+          }
+        });
+      });
+      console.log('Ready apps being shipped', sendApps);
+      appManager.sendIntentResponse("appdetails", { result: sendApps }, this.handledIntentId);
+    } else {
+      let sendApps = await this.waitForAppLoad(appPackages);
+      console.log('Waited apps being shipped', sendApps);
+      appManager.sendIntentResponse("appdetails", { result: sendApps }, this.handledIntentId);
+    }
+  }
+
+  // If instore-apps aren't available for 3rd party apps (app store not loaded), then fetch apps before sending responce
+  waitForAppLoad(appPackages) {
+    let sendApps = [];
+    return new Promise((resolve, reject) => {
+      this.fetchDapps().subscribe((apps: Dapp[]) => {
+        apps.map(app => {
+          appPackages.map(packageName => {
+            if(app.packageName === packageName) {
+              sendApps = sendApps.concat(app);
+              resolve(sendApps);
+            }
+          });
+        });
+      }, (err) => {
+        console.log('Failed to ship apps', err);
+      });
+    });
+  } */
 }
