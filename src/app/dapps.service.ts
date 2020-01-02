@@ -217,6 +217,7 @@ export class DappsService {
       appManager.sendIntent(
         'appinstall',
         { url: epkPath, dappStoreServerAppId: dapp._id },
+        {},
         (res) => {
           console.log('App installed', res)
           if(res.result.result === 'installed') {
