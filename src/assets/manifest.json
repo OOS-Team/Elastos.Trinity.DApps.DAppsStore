@@ -8,7 +8,7 @@
   "description": "elast0S official app store, your one stop shop for the latest decentralized applications. Simply find the app you wish to add and click install",
   "start_url": "index.html",
   "type": "app",
-  "category": "finance",
+  "category": "tools",
   "icons": [
     {
       "src": "assets/images/logo.png",
@@ -22,9 +22,9 @@
     }
   ],
   "author": {
-    "name": "Chad Racelis",
-    "email": "chadracelis@yahoo.com",
-    "website": "https://github.com/chadracelis"
+    "name": "Elastos Foundation",
+    "email": "contact@elastos.org",
+    "website": "https://www.elastos.org"
   },
   "default_locale": "en",
   "plugins": [
