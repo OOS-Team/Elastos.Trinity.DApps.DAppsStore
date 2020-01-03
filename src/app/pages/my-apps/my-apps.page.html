@@ -35,7 +35,7 @@
     </ion-searchbar>
   </div>
 
-  <ion-list no-padding>
+  <ion-list no-padding *ngIf="filteredApps.length > 0">
     <ion-virtual-scroll [items]="filteredApps" approxItemHeight="240px">
       <ion-item *virtualItem="let app" lines="none">
         <ion-grid no-padding>
@@ -90,6 +90,10 @@
         </ion-grid>
       </ion-item>
     </ion-virtual-scroll>
+  </ion-list>
+
+  <ion-list text-center *ngIf="filteredApps.length === 0">
+    <p>No results found</p>
   </ion-list>
 
 </ion-content>

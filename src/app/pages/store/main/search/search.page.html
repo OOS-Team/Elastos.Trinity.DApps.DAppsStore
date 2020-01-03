@@ -40,7 +40,7 @@
     <ion-spinner name="bubbles"></ion-spinner>
   </ion-list>
 
-  <ion-list *ngIf="appsLoaded" no-padding>
+  <ion-list *ngIf="appsLoaded && filteredApps.length > 0" no-padding>
     <ion-virtual-scroll [items]="filteredApps" approxItemHeight="240px">
       <ion-item *virtualItem="let app" lines="none">
         <ion-grid no-padding>
@@ -99,6 +99,10 @@
         </ion-grid>
       </ion-item>
     </ion-virtual-scroll>
+  </ion-list>
+
+  <ion-list text-center *ngIf="appsLoaded && filteredApps.length === 0">
+    <p>No results found</p>
   </ion-list>
 
 </ion-content>
