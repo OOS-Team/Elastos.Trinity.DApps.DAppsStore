@@ -21,22 +21,25 @@
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content no-padding>
   <ion-grid padding>
-    <ion-card padding-bottom>
-      <img-loader src="/../../../assets/store/appbanner.jpg" useImg></img-loader>
+
+    <!-- Card 1 -->
+    <ion-card class="welcome-card" padding-vertical>
+      <img-loader useImg class="card-img"><img src="/../../../assets/images/card2.svg"></img-loader>
       <ion-card-header>
         <ion-card-subtitle>Welcome</ion-card-subtitle>
         <ion-card-title>elastOS <br>App Store</ion-card-title>
       </ion-card-header>
     </ion-card>
 
-    <ion-card>
-      <img-loader src="/../../../assets/store/appbanner.jpg" useImg></img-loader>
+    <!-- Card 2 -->
+    <ion-card class="showcase-card">
+      <img-loader src="/../../../assets/images/card.png" useImg></img-loader>
       <ion-card-header>
         <ion-card-title>App <br>Showcase</ion-card-title>
       </ion-card-header>
-
       <ion-row *ngFor="let app of applications.slice(1, 2)" class="showcase-app">
         <ion-col size="2.5" class="img-container">
           <img-loader [src]="getAppIcon(app)" useImg></img-loader>
@@ -50,18 +53,12 @@
       </ion-row>
     </ion-card>
 
-    <ion-card>
-      <ion-row class="section" padding>
+    <!-- Card 3 -->
+    <ion-card class="apps-card">
+      <ion-row class="app-header" padding>
         <ion-col size="9" class="section-title"><p>New Releases</p></ion-col>
         <ion-col size="3" class="section-btn">
-          <p [routerLink]="[
-            '/',
-            'store',
-            'tabs',
-            'categories',
-            'new'
-          ]"> See All
-          </p>
+          <p [routerLink]="['/', 'store', 'tabs', 'categories', 'new']"> See All</p>
         </ion-col>
       </ion-row>
       <ion-card-title text-center padding *ngIf="!appsLoaded">
@@ -75,26 +72,16 @@
                 size="2.25"
                 size-lg="2.25"
                 class="img-container"
-                [routerLink]="[
-                  '/',
-                  'store',
-                  'tabs',
-                  'dapps',
-                  app._id
-                ]">
+                [routerLink]="['/', 'store', 'tabs', 'dapps', app._id]"
+              >
                   <img-loader [src]="getAppIcon(app)" useImg></img-loader>
               </ion-col>
               <ion-col
                 size="6"
                 size-xs="6"
                 class="node-content"
-                [routerLink]="[
-                  '/',
-                  'store',
-                  'tabs',
-                  'dapps',
-                  app._id
-                ]">
+                [routerLink]="['/', 'store', 'tabs', 'dapps', app._id]"
+              >
                 <ion-label>
                   <h2>{{ app.appName }}</h2>
                   <p>{{ app.appShortDescription }}</p>
@@ -124,6 +111,33 @@
             </ion-row>
           </ion-grid>
         </ion-item>
+      </div>
+    </ion-card>
+
+    <!-- Card 4 -->
+    <ion-card class="cat-card">
+      <ion-row class="cat-header" padding>
+        <ion-col size="9" class="section-title"><p>Top Categories</p></ion-col>
+        <ion-col size="3" class="section-btn">
+          <p [routerLink]="['/', 'store', 'tabs', 'categories']"> See All</p>
+        </ion-col>
+      </ion-row>
+      <ion-card-title text-center padding *ngIf="!appsLoaded">
+        <ion-spinner name="bubbles" color="primary"></ion-spinner>
+      </ion-card-title>
+      <div *ngIf="appsLoaded">
+        <ion-row
+          class="category-item"
+          *ngFor="let category of getTopCats().slice(0,3)"
+          [routerLink]="['/', 'store', 'tabs', 'categories', category.name]"
+        >
+          <ion-col size="1.75" class="box-container">
+            <ion-icon name="wallet" mode="ios"></ion-icon>
+          </ion-col>
+          <ion-col size="10.25" class="category">
+            <ion-label>{{ category.name.charAt(0).toUpperCase() + category.name.slice(1) }}</ion-label>
+          </ion-col>
+        </ion-row>
       </div>
     </ion-card>
 

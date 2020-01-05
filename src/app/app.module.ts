@@ -12,6 +12,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { SplashscreenPageModule } from './pages/splashscreen/splashscreen.module';
+import { SplashscreenPage } from './pages/splashscreen/splashscreen.page';
 
 @NgModule({
   declarations: [
@@ -22,10 +24,12 @@ import { AppRoutingModule } from './app-routing.module';
     HttpClientModule,
     IonicModule.forRoot(),
     IonicImageLoader.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    SplashscreenPageModule
  ],
   bootstrap: [AppComponent],
   entryComponents: [
+    SplashscreenPage,
     AppComponent
   ],
   providers: [

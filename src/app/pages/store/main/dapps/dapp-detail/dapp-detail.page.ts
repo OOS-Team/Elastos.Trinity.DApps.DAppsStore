@@ -4,10 +4,9 @@ import { NavController } from '@ionic/angular';
 import { ImageLoaderService } from 'ionic-image-loader';
 import { ToastController } from '@ionic/angular';
 
-import { Dapp } from '../../../../../dapps.model';
-import { DappsService } from '../../../../../dapps.service';
+import { Dapp } from '../../../../../models/dapps.model';
+import { DappsService } from '../../../../../services/dapps.service';
 
-declare let appManager: any;
 
 @Component({
   selector: 'app-dapp-detail',
@@ -42,8 +41,8 @@ export class DappDetailPage implements OnInit {
     this.imageLoader.preload('/../../../assets/store/appbanner.jpg');
   }
 
-  // Install app
-  installApp(dapp) {
+  //// Install app if app is not installed or update is available ////
+  installApp(dapp: Dapp) {
     dapp.installing = true;
     this.dappsService.installApp(dapp).then(res => {
       console.log('Install state', res)
@@ -58,7 +57,13 @@ export class DappDetailPage implements OnInit {
     });
   }
 
-  async installSuccess(dapp) {
+   //// Open app if installed ////
+   startApp(id: string) {
+    this.dappsService.startApp(id);
+  }
+
+  //// Alerts ////
+  async installSuccess(dapp: Dapp) {
     const toast = await this.toastController.create({
       mode: 'ios',
       message: 'Installed ' + dapp.appName + ' ' + dapp.versionName,
@@ -68,7 +73,7 @@ export class DappDetailPage implements OnInit {
     toast.present();
   }
 
-  async installFailed(dapp) {
+  async installFailed(dapp: Dapp) {
     const toast = await this.toastController.create({
       mode: 'ios',
       message: 'Failed to install ' + dapp.appName + ' ' + dapp.versionName,
@@ -76,9 +81,5 @@ export class DappDetailPage implements OnInit {
       duration: 2000
     });
     toast.present();
-  }
-
-  startApp(id) {
-    this.dappsService.startApp(id);
   }
 }

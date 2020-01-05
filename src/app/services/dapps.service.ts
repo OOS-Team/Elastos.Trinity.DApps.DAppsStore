@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { Dapp } from './dapps.model';
+import { Dapp } from '../models/dapps.model';
 import { Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 
@@ -47,7 +47,7 @@ export class DappsService {
   ) {
   }
 
-  // Initial render //
+  //// Initial render ////
   init() {
     console.log("AppmanagerService init");
 
@@ -60,7 +60,7 @@ export class DappsService {
     }
   }
 
-  // Listen to intent //
+  //// Listen to intent ////
   onReceiveIntent = (ret) => {
     console.log("Intent received", ret);
 
@@ -76,8 +76,8 @@ export class DappsService {
     }
   }
 
-  // If apps are loaded, direct user to app details inquired by 3rd party app
-  async directToApp(appPackage) {
+  //// If apps are loaded, direct user to app details inquired by 3rd party app ////
+  async directToApp(appPackage: string) {
     if(this._dapps.length > 0) {
       this._dapps.map(dapp => {
         if(dapp.packageName === appPackage) {
@@ -90,8 +90,8 @@ export class DappsService {
     }
   }
 
-  // If apps aren't loaded, wait for apps to load before directing user to app details inquired by 3rd party app
-  waitForAppInquiry(appPackage) {
+  //// If apps aren't loaded, wait for apps to load before directing user to app details inquired by 3rd party app ////
+  waitForAppInquiry(appPackage: string) {
     return new Promise((resolve, reject) => {
       this.fetchDapps().subscribe((apps: Dapp[]) => {
         apps.map(app => {
@@ -118,25 +118,7 @@ export class DappsService {
     );
   }
 
-  // Compare fetched apps with getAppInfos() object keys
-  /* getAppInfo() {
-    console.log('Calling getAppInfos()');
-    appManager.getAppInfos((info) => {
-      console.log("App infos", info)
-      let installedApps = Object.keys(info);
-      console.log('installed apps', installedApps);
-      installedApps.map(app => {
-        this._dapps.map(dapp => {
-          if (app === dapp.packageName) {
-            console.log(dapp + ' is already installed');
-            dapp.installed = true;
-          }
-        })
-      })
-    });
-  } */
-
-  // Compare fetched apps with getAppInfos() object values
+  //// Compare fetched apps with getAppInfos() object values ////
   getAppInfo() {
     appManager.getAppInfos((info) => {
       console.log("App infos", info)
@@ -178,11 +160,11 @@ export class DappsService {
     return {...this._dapps.find(dapp => dapp._id === id)};
   }
 
-  getAppIcon(app) {
+  getAppIcon(app: Dapp) {
     return "https://dapp-store.elastos.org/apps/"+app._id+"/icon";
   }
 
-  getAppBanner(app) {
+  getAppBanner(app: Dapp) {
     return "https://dapp-store.elastos.org/apps/"+app._id+"/banner";
   }
 
@@ -204,11 +186,11 @@ export class DappsService {
     this.catIndex = index;
   }
 
-  get index() {
+  get index(): number {
     return this.catIndex;
   }
 
-  async installApp(dapp) {
+  async installApp(dapp: Dapp) {
     // Download the file
     const epkPath = await this.downloadDapp(dapp);
     console.log("EPK file downloaded and saved to " + epkPath);
@@ -239,7 +221,7 @@ export class DappsService {
     })
   }
 
-  downloadDapp(app) {
+  downloadDapp(app: Dapp) {
     console.log("App download starting...");
 
     return new Promise((resolve, reject) => {
@@ -283,7 +265,7 @@ export class DappsService {
     });
   }
 
-  startApp(id) {
+  startApp(id: string) {
     appManager.start(id);
   }
 

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DappsService } from 'src/app/dapps.service';
+import { DappsService } from 'src/app/services/dapps.service';
 
-declare let appManager: any;
 
 @Component({
   selector: 'app-categories',
@@ -16,9 +15,5 @@ export class CategoriesPage implements OnInit {
 
   ngOnInit() {
     this.categories = this.dappsService.categories;
-  }
-
-  closeApp() {
-    appManager.close();
   }
 }

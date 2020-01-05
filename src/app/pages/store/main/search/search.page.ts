@@ -1,10 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToastController, IonInput } from '@ionic/angular';
 
-import { DappsService } from '../../../../dapps.service';
-import { Dapp } from '../../../../dapps.model';
+import { DappsService } from '../../../../services/dapps.service';
+import { Dapp } from '../../../../models/dapps.model';
 
-declare let appManager: any;
 
 @Component({
   selector: 'app-search',
@@ -27,16 +26,17 @@ export class SearchPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.appsLoaded = false;
-    this.dappsService.fetchDapps().subscribe((apps: Dapp[]) => {
-      console.log("DApps fetched", apps);
-      this.appsLoaded = true;
-      this.dapps = apps;
-    });
-  }
-
-  ionViewWillEnter() {
+    this.appsLoaded = true;
     this.dapps = this.dappsService.dapps;
+
+    if(this.dapps.length === 0) {
+      this.appsLoaded = false;
+      this.dappsService.fetchDapps().subscribe((apps: Dapp[]) => {
+        console.log("DApps fetched", apps);
+        this.appsLoaded = true;
+        this.dapps = apps;
+      });
+    }
   }
 
   ionViewDidEnter() {
@@ -45,12 +45,12 @@ export class SearchPage implements OnInit {
     }, 200);
   }
 
-  getAppIcon(app) {
+  getAppIcon(app: Dapp) {
     return this.dappsService.getAppIcon(app);
   }
 
-  // Search
-  filterDapps(search) {
+  //// Search ////
+  filterDapps(search: string) {
     this.appsLoaded = false;
     if (!search) {
       this.appsLoaded = true;
@@ -65,14 +65,14 @@ export class SearchPage implements OnInit {
             if(dapp.packageName === app.packageName) {
               this.filteredApps = this.filteredApps.concat(dapp);
             }
-          })
-        })
+          });
+        });
       });
     }
   }
 
-  // Install app
-  installApp(dapp) {
+  //// Install app if app is not installed or update is available ////
+  installApp(dapp: Dapp) {
     dapp.installing = true;
     this.dappsService.installApp(dapp).then(res => {
       console.log('Install state', res)
@@ -87,7 +87,13 @@ export class SearchPage implements OnInit {
     });
   }
 
-  async installSuccess(dapp) {
+  //// Open app if installed ////
+  startApp(id: string) {
+    this.dappsService.startApp(id);
+  }
+
+  //// Alerts ////
+  async installSuccess(dapp: Dapp) {
     const toast = await this.toastController.create({
       mode: 'ios',
       message: 'Installed ' + dapp.appName + ' ' + dapp.versionName,
@@ -97,7 +103,7 @@ export class SearchPage implements OnInit {
     toast.present();
   }
 
-  async installFailed(dapp) {
+  async installFailed(dapp: Dapp) {
     const toast = await this.toastController.create({
       mode: 'ios',
       message: 'Failed to install ' + dapp.appName + ' ' + dapp.versionName,
@@ -105,9 +111,5 @@ export class SearchPage implements OnInit {
       duration: 2000
     });
     toast.present();
-  }
-
-  startApp(id) {
-    this.dappsService.startApp(id);
   }
 }

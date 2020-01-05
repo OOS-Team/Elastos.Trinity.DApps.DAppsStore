@@ -3,10 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 
-import { DappsService } from '../../../../../dapps.service';
-import { Dapp } from '../../../../../dapps.model';
+import { DappsService } from '../../../../../services/dapps.service';
+import { Dapp } from '../../../../../models/dapps.model';
 
-declare let appManager: any;
 
 @Component({
   selector: 'app-category-type',
@@ -37,6 +36,7 @@ export class CategoryTypePage implements OnInit {
   ngOnInit() {
     this.categories = this.dappsService.categories;
     this.slideOpts.initialSlide = this.dappsService.index;
+
     this.route.paramMap.subscribe(paramMap => {
       if (!paramMap.has('categoryType')) {
         this.navCtrl.navigateBack('/store/tabs/categories');
@@ -48,15 +48,17 @@ export class CategoryTypePage implements OnInit {
     });
   }
 
-  changeCat(cat) {
+  //// Change category tab ////
+  changeCat(cat: string) {
     this.categoryType = cat;
     this.dapps = this.dappsService.getCategory(cat);
   }
 
-  getAppIcon(app) {
+  getAppIcon(app: Dapp) {
     return this.dappsService.getAppIcon(app);
   }
 
+  //// Search ////
   filterDapps(search: string) {
     this.appsLoaded = false;
     if (!search) {
@@ -85,28 +87,8 @@ export class CategoryTypePage implements OnInit {
     }
   }
 
-  // This search api isn't aware of installed apps
-  /* filterDapps(search: string) {
-    this.appsLoaded = false;
-    this.dappsService.fetchFilteredDapps(search).subscribe((apps: Dapp[]) => {
-      this.appsLoaded = true;
-      this.dapps = apps.filter(app => app.category === this.categoryType);
-      console.log('Search reults', this.dapps);
-      if (search.length === 0) {
-        this.dapps = this.dapps;
-        console.log('Search is empty', this.dapps);
-      }
-      if (this.categoryType === 'new') {
-        this.dapps = apps;
-      }
-      if (this.categoryType === 'popular') {
-        this.dapps = apps;
-      }
-    });
-  } */
-
-  // Install app
-  installApp(dapp) {
+  //// Install app if app is not installed or update is available ////
+  installApp(dapp: Dapp) {
     dapp.installing = true;
     this.dappsService.installApp(dapp).then(res => {
       console.log('Install state', res)
@@ -121,7 +103,13 @@ export class CategoryTypePage implements OnInit {
     });
   }
 
-  async installSuccess(dapp) {
+  //// Open app if installed ////
+  startApp(id: string) {
+    this.dappsService.startApp(id);
+  }
+
+  //// Alerts ////
+  async installSuccess(dapp: Dapp) {
     const toast = await this.toastController.create({
       mode: 'ios',
       message: 'Installed ' + dapp.appName + ' ' + dapp.versionName,
@@ -131,7 +119,7 @@ export class CategoryTypePage implements OnInit {
     toast.present();
   }
 
-  async installFailed(dapp) {
+  async installFailed(dapp: Dapp) {
     const toast = await this.toastController.create({
       mode: 'ios',
       message: 'Failed to install ' + dapp.appName + ' ' + dapp.versionName,
@@ -139,9 +127,5 @@ export class CategoryTypePage implements OnInit {
       duration: 2000
     });
     toast.present();
-  }
-
-  startApp(id) {
-    this.dappsService.startApp(id);
   }
 }

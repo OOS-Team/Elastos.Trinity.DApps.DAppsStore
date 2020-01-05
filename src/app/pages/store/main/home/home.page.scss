@@ -1,6 +1,7 @@
 ion-grid {
   background: #FAFAFA;
 
+  // General Cards
   ion-card {
     border-radius: 20px;
     box-shadow: 0 0 20px 20px #F2F2F2;
@@ -16,51 +17,6 @@ ion-grid {
       font-weight: 600;
       color: black;
     }
-  }
-
-  .showcase-app {
-    padding: 0 16px 20px;
-
-    .img-container {
-      padding: 0;
-      display: flex;
-      align-items: center;
-
-      img-loader {
-        border-radius: 15px !important;
-        overflow: hidden;
-        border: solid 1px black;
-        height: 48px;
-        width: 48px;
-      }
-    }
-
-    .dapp-content {
-      padding: 0;
-      display: flex;
-      align-items: center;
-
-      h2 {
-        margin: 0;
-        font-size: 16px;
-        font-weight: 600;
-        color: black;
-      }
-
-      p {
-        margin: 0;
-        font-size: 9px;
-        font-weight: 500;
-        color: #959595;
-      }
-    }
-  }
-
-  .section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgb(216, 216, 216);
 
     .section-title {
       margin: 6px 0;
@@ -89,17 +45,29 @@ ion-grid {
     }
   }
 
-  ion-item {
-    --inner-padding-end: 0px;
-    --padding-start: 0px;
-    border-bottom: 1px solid rgb(230, 230, 230);
+  // Card 1
+  .welcome-card {
+    .card-img {
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-    ion-row {
-      padding: 5px 0;
+      img {
+        height: 200px;
+        width: 200px;
+      }
+    }
+  }
+
+  // Card 2
+  .showcase-card {
+    .showcase-app {
+      padding: 0 16px 20px;
 
       .img-container {
+        padding: 0;
         display: flex;
-        justify-content: flex-end;
+        align-items: center;
 
         img-loader {
           border-radius: 15px !important;
@@ -110,39 +78,125 @@ ion-grid {
         }
       }
 
-      .node-content {
+      .dapp-content {
+        padding: 0;
         display: flex;
         align-items: center;
 
-          h2 {
-            font-size: 16px;
-            font-weight: 600;
-            margin: 0;
-          }
+        h2 {
+          margin: 0;
+          font-size: 16px;
+          font-weight: 600;
+          color: black;
+        }
 
-          p {
-            font-size: 9px !important;
-            font-weight: 500;
-            color: #959595;
-            margin: 0;
+        p {
+          margin: 0;
+          font-size: 9px;
+          font-weight: 500;
+          color: #959595;
+        }
+      }
+    }
+  }
+
+  // Card 3
+  .apps-card {
+    .app-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgb(216, 216, 216);
+    }
+
+    ion-item {
+      --inner-padding-end: 0px;
+      --padding-start: 0px;
+      border-bottom: 1px solid rgb(230, 230, 230);
+
+      ion-row {
+        padding: 5px 0;
+
+        .img-container {
+          display: flex;
+          justify-content: flex-end;
+
+          img-loader {
+            border-radius: 15px !important;
+            overflow: hidden;
+            border: solid 1px black;
+            height: 48px;
+            width: 48px;
           }
+        }
+
+        .node-content {
+          display: flex;
+          align-items: center;
+
+            h2 {
+              font-size: 16px;
+              font-weight: 600;
+              margin: 0;
+            }
+
+            p {
+              font-size: 9px !important;
+              font-weight: 500;
+              color: #959595;
+              margin: 0;
+            }
+        }
+
+        .btn-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          ion-button {
+            --border-radius: 30px;
+            --box-shadow: none;
+            width: 80px;
+
+            ion-label {
+              font-size: 9px;
+              font-weight: 700;
+              padding: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Card 4
+  .cat-card {
+    .cat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .category-item {
+      .box-container {
+        display: flex;
+        justify-content: flex-end;
+        font-size: 25px;
+        padding: 0px 10px 20px 0;
+
+        ion-icon {
+          color: black;
+        }
       }
 
-      .btn-container {
+      .category {
         display: flex;
-        justify-content: center;
         align-items: center;
+        padding: 0px 0 20px 0;
 
-        ion-button {
-          --border-radius: 30px;
-          --box-shadow: none;
-          width: 80px;
-
-          ion-label {
-            font-size: 9px;
-            font-weight: 700;
-            padding: 0;
-          }
+        ion-label {
+          color: black;
+          font-weight: 600;
         }
       }
     }

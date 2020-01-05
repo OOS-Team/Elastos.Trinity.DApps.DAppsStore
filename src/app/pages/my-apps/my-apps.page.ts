@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
-import { DappsService } from 'src/app/dapps.service';
-import { Dapp } from 'src/app/dapps.model';
+import { DappsService } from 'src/app/services/dapps.service';
+import { Dapp } from 'src/app/models/dapps.model';
 
 declare let appManager: any;
 
@@ -12,7 +12,6 @@ declare let appManager: any;
 })
 export class MyAppsPage implements OnInit {
 
-  // General
   dapps: Dapp[] = [];
   filteredApps: Dapp[] = [];
   dapp: string = '';
@@ -27,19 +26,19 @@ export class MyAppsPage implements OnInit {
     this.filteredApps = this.dapps;
   }
 
-  getAppIcon(app) {
+  getAppIcon(app: Dapp) {
     return this.dappsService.getAppIcon(app);
   }
 
-  // Search
-  filterDapps(search): any {
+  //// Search ////
+  filterDapps(search: string) {
     this.filteredApps = this.dapps.filter((dapp) => {
       return dapp.appName.toLowerCase().indexOf(search.toLowerCase()) !== -1;
     });
   }
 
-   // Install app
-   installApp(dapp) {
+   //// Install app if update is available  ////
+   installApp(dapp: Dapp) {
     dapp.installing = true;
     this.dappsService.installApp(dapp).then(res => {
       console.log('Install state', res)
@@ -55,7 +54,13 @@ export class MyAppsPage implements OnInit {
     });
   }
 
-  async updateSuccess(dapp) {
+  //// Open app if installed ////
+  startApp(id: string) {
+    this.dappsService.startApp(id);
+  }
+
+  //// Alerts ////
+  async updateSuccess(dapp: Dapp) {
     const toast = await this.toastController.create({
       mode: 'ios',
       message: dapp.appName + ' updated to ' + dapp.versionName,
@@ -65,7 +70,7 @@ export class MyAppsPage implements OnInit {
     toast.present();
   }
 
-  async updateFailed(dapp) {
+  async updateFailed(dapp: Dapp) {
     const toast = await this.toastController.create({
       mode: 'ios',
       message: dapp.appName + ' update failed',
@@ -73,9 +78,5 @@ export class MyAppsPage implements OnInit {
       duration: 2000
     });
     toast.present();
-  }
-
-  startApp(id) {
-    this.dappsService.startApp(id);
   }
 }

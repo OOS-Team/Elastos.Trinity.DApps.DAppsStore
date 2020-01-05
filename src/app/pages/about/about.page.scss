@@ -1,8 +1,8 @@
-ion-list {
+div {
   min-height: 100%;
-  background-image: linear-gradient(to right, rgb(20, 20, 20) 0%, #325169 100%);
-}
+  background: #FAFAFA;
 
-ion-card {
-  background-color: white;
+  strong {
+    font-size: 24px;
+  }
 }
