@@ -12,6 +12,7 @@ export class Dapp {
     public appDescription: string,
     public packageName: string,
     public category: string,
+    public whatsNew: string,
     public downloadsCount: number,
     public imageUrl: string,
     public installing: boolean,

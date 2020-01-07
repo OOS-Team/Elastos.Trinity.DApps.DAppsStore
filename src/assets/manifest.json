@@ -1,7 +1,7 @@
 {
   "id": "org.elastos.trinity.dapp.dappstore",
-  "version": "1.0.2",
-  "version_code": 3,
+  "version": "1.0.3",
+  "version_code": 4,
   "name": "DApp Store",
   "short_name": "DApp Store",
   "short_description": "elast0S DApp Store",

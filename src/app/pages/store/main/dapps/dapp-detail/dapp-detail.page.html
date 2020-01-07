@@ -28,7 +28,7 @@
     <ion-row>
       <ion-col size="2.5" class="img-container">
         <img-loader *ngIf="dappIcon" useImg><img [src]="dappIcon"></img-loader>
-        <img-loader *ngIf="!dappIcon" useImg><img src="/../../../assets/images/logo.png"></img-loader>
+        <img-loader *ngIf="!dappIcon" useImg><img src="../assets/images/logo.png"></img-loader>
       </ion-col>
       <ion-col size="9.5" class="dapp-content" align-items-center>
         <ion-label>
@@ -68,7 +68,7 @@
       </ion-col>
     </ion-row>
 
-    <ion-row>
+    <ion-row padding-bottom>
       <ion-col size="12" class="app-description">
         <p>{{ dapp.appDescription }}</p>
       </ion-col>
@@ -76,8 +76,21 @@
 
     <ion-row>
       <ion-col size="12" class="app-banner">
-        <img-loader *ngIf="dappBanner" useImg><img [src]="dappBanner"></img-loader>
-        <img-loader *ngIf="!dappBanner" useImg><img src="/../../../assets/images/card.png"></img-loader>
+        <!-- <img-loader *ngIf="dappBanner" useImg><img [src]="dappBanner"></img-loader> -->
+        <!-- <img-loader *ngIf="!dappBanner" useImg><img src="../assets/images/card.png"></img-loader> -->
+        <img-loader useImg><img src="../assets/images/card.png"></img-loader>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="dapp.whatsNew" padding-top>
+      <ion-col size="12" class="section">
+        <h2>What's New</h2>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12" class="app-description">
+        <p>{{ dapp.whatsNew }}</p>
       </ion-col>
     </ion-row>
 
