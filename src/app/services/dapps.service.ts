@@ -244,7 +244,7 @@ export class DappsService {
     let fileName = "appinstall.epk"
 
     return new Promise((resolve, reject) => {
-      window.resolveLocalFileSystemURL(cordova.file.dataDirectory, (dirEntry: DirectoryEntry) => {
+      window.resolveLocalFileSystemURL(cordova.file.dataDirectory, (dirEntry: CordovaFilePlugin.DirectoryEntry) => {
           dirEntry.getFile(fileName, { create: true, exclusive: false }, (fileEntry) => {
             console.log("Downloaded file entry", fileEntry);
             fileEntry.createWriter((fileWriter) => {
