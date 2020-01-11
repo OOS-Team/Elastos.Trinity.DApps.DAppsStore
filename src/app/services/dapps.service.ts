@@ -223,7 +223,7 @@ export class DappsService {
   }
 
   downloadDapp(app: Dapp) {
-    console.log("App download starting...");
+    console.log("App download starting..." + app);
 
     return new Promise((resolve, reject) => {
       // Download EPK file as blob
