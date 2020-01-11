@@ -5,7 +5,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { DappsService } from './services/dapps.service';
 import { SplashscreenPage } from './pages/splashscreen/splashscreen.page';
 
-declare let appManager: any;
+declare let appManager: AppManagerPlugin.AppManager;
 
 @Component({
   selector: 'app-root',
@@ -34,6 +34,10 @@ export class AppComponent {
   async splash() {
     const splash = await this.modalCtrl.create({component: SplashscreenPage});
     return await splash.present();
+  }
+
+  minimizeApp() {
+    appManager.launcher();
   }
 
   closeApp() {

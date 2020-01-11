@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -43,7 +43,8 @@ export class DappsService {
   constructor(
     private http: HttpClient,
     private platform: Platform,
-    private router: Router
+    private router: Router,
+    private zone: NgZone,
   ) {
   }
 
@@ -204,7 +205,7 @@ export class DappsService {
           console.log('App installed', res)
           if(res.result.result === 'installed') {
             this._dapps.map(app => {
-              if(app === dapp) {
+              if(app._id === dapp._id) {
                 app.installed = true;
                 app.updateAvailable = false;
               }
@@ -218,7 +219,7 @@ export class DappsService {
           reject(false);
         }
       );
-    })
+    });
   }
 
   downloadDapp(app: Dapp) {
@@ -267,6 +268,11 @@ export class DappsService {
 
   startApp(id: string) {
     appManager.start(id);
+  }
+
+  goToLink(site: string) {
+    console.log(site);
+    appManager.sendUrlIntent(site, () => {}, ()=> {});
   }
 
    /* // Prepare to ship instore apps for 3rd party apps

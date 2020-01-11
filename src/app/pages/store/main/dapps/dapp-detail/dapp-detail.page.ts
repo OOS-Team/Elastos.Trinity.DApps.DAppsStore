@@ -57,6 +57,11 @@ export class DappDetailPage implements OnInit {
     });
   }
 
+  //// Website clicked ////
+  goToLink(site: string) {
+    this.dappsService.goToLink(site);
+  }
+
    //// Open app if installed ////
    startApp(id: string) {
     this.dappsService.startApp(id);

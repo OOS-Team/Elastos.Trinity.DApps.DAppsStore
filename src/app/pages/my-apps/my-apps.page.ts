@@ -26,6 +26,10 @@ export class MyAppsPage implements OnInit {
     this.filteredApps = this.dapps;
   }
 
+  ionViewWillEnter() {
+    this.dapps = this.dappsService.dapps.filter(dapp => dapp.installed === true)
+  }
+
   getAppIcon(app: Dapp) {
     return this.dappsService.getAppIcon(app);
   }

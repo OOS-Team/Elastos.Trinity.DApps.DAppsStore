@@ -76,9 +76,9 @@
 
     <ion-row>
       <ion-col size="12" class="app-banner">
-        <!-- <img-loader *ngIf="dappBanner" useImg><img [src]="dappBanner"></img-loader> -->
-        <!-- <img-loader *ngIf="!dappBanner" useImg><img src="../assets/images/card.png"></img-loader> -->
-        <img-loader useImg><img src="../assets/images/card.png"></img-loader>
+        <img-loader *ngIf="dappBanner" useImg><img [src]="dappBanner"></img-loader>
+        <img-loader *ngIf="!dappBanner" useImg><img src="../assets/images/card.png"></img-loader>
+        <!-- <img-loader useImg><img src="../assets/images/card.png"></img-loader> -->
       </ion-col>
     </ion-row>
 
@@ -136,9 +136,9 @@
       <p>{{ dapp.authorEmail }}</p>
     </ion-row>
 
-    <ion-row class="details">
+    <ion-row (click)="goToLink(dapp.authorWebsite)" class="details">
       <h4>Website</h4>
-      <p><a href="{{ dapp.authorWebsite }}"> {{ dapp.authorWebsite }}</a></p>
+      <p><a href="{{ dapp.authorWebsite }}">{{ dapp.authorWebsite }}</a></p>
     </ion-row>
 
   </ion-grid>
