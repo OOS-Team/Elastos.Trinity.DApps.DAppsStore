@@ -83,6 +83,10 @@ export class HomePage implements OnInit {
     this.dappsService.startApp(id);
   }
 
+  appIntentTest(dapp: Dapp) {
+    this.dappsService.appIntent(dapp);
+  }
+
   //// Alerts ////
   async installSuccess(dapp: Dapp) {
     const toast = await this.toastController.create({

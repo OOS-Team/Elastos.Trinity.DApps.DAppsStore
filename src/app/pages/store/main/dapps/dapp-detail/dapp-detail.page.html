@@ -40,7 +40,7 @@
 
     <ion-row padding-top>
       <ion-col size="12" class="btn-container">
-
+<!--
         <ion-button  color="tertiary" (click)="installApp(dapp)" *ngIf="!dapp.installing && !dapp.installed">
           <ion-label>Install</ion-label>
         </ion-button>
@@ -51,6 +51,10 @@
 
         <ion-button color="tertiary" (click)="installApp(dapp)" *ngIf="!dapp.installing && dapp.installed && dapp.updateAvailable">
           <ion-label>Update</ion-label>
+        </ion-button> -->
+
+        <ion-button  color="tertiary" (click)="appIntentTest(dapp)" *ngIf="!dapp.installing && !dapp.installed">
+          <ion-label>Discover</ion-label>
         </ion-button>
 
         <ion-button color="tertiary" *ngIf="dapp.installing">

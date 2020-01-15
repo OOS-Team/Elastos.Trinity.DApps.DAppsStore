@@ -21,9 +21,11 @@ export class MyAppsPage implements OnInit {
     public toastController: ToastController
   ) {}
 
+  /* This page is currently not working due to the modified package name, hence appInfos is not permitted */
   ngOnInit() {
     this.dapps = this.dappsService.dapps.filter(dapp => dapp.installed === true)
     this.filteredApps = this.dapps;
+    console.log('My DApps' + this.dapps);
   }
 
   ionViewWillEnter() {

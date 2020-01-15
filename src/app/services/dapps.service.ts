@@ -270,6 +270,17 @@ export class DappsService {
     appManager.start(id);
   }
 
+  appIntent(dapp: Dapp) {
+    console.log('Testing app intent');
+    appManager.sendIntent(
+      'app',
+      { app: dapp },
+      {},
+      (res) => {},
+      (err) => { 'TEST INTENT FAILED' + err }
+    )
+  }
+
   goToLink(site: string) {
     console.log(site);
     appManager.sendUrlIntent(site, () => {}, ()=> {});
