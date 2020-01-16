@@ -274,7 +274,7 @@ export class DappsService {
     console.log('Testing app intent');
     appManager.sendIntent(
       'app',
-      { app: dapp },
+      { id: dapp.packageName },
       {},
       (res) => {},
       (err) => { 'TEST INTENT FAILED' + err }
