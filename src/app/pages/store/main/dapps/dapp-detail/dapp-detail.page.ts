@@ -7,6 +7,7 @@ import { ToastController } from '@ionic/angular';
 import { Dapp } from '../../../../../models/dapps.model';
 import { DappsService } from '../../../../../services/dapps.service';
 
+declare let appManager: AppManagerPlugin.AppManager;
 
 @Component({
   selector: 'app-dapp-detail',
@@ -39,6 +40,10 @@ export class DappDetailPage implements OnInit {
       console.log('Dapp', this.dapp);
     });
     this.imageLoader.preload('/../../../assets/store/appbanner.jpg');
+  }
+
+  ionViewDidEnter() {
+    appManager.setVisible("show", ()=>{}, (err)=>{});
   }
 
   //// Install app if app is not installed or update is available ////

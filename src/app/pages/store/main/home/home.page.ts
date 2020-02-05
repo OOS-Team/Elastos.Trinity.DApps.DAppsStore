@@ -5,6 +5,7 @@ import { DappsService } from 'src/app/services/dapps.service';
 import { Dapp } from 'src/app/models/dapps.model';
 import { Category } from 'src/app/models/categories.model';
 
+declare let appManager: AppManagerPlugin.AppManager;
 
 @Component({
   selector: 'app-home',
@@ -42,6 +43,10 @@ export class HomePage implements OnInit {
         this.applications = apps;
       });
     }
+  }
+
+  ionViewDidEnter() {
+    appManager.setVisible("show", ()=>{}, (err)=>{});
   }
 
   getAppIcon(app: Dapp) {
