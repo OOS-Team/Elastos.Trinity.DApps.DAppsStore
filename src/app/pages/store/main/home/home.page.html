@@ -40,14 +40,14 @@
       <ion-card-header>
         <ion-card-title>App <br>Showcase</ion-card-title>
       </ion-card-header>
-      <ion-row *ngFor="let app of applications.slice(1, 2)" class="showcase-app">
+      <ion-row class="showcase-app" *ngIf="randomDapp">
         <ion-col size="2.5" class="img-container">
-          <img-loader [src]="getAppIcon(app)" useImg></img-loader>
+          <img-loader [src]="dappsService.getAppIcon(randomDapp)" useImg></img-loader>
         </ion-col>
         <ion-col size="9.5" class="dapp-content" align-items-center>
           <ion-label>
-            <h2>{{ app.appName }}</h2>
-            <p>{{ app.appShortDescription }}</p>
+            <h2>{{ randomDapp.appName }}</h2>
+            <p>{{ randomDapp.appShortDescription }}</p>
           </ion-label>
         </ion-col>
       </ion-row>

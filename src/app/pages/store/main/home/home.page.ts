@@ -16,10 +16,11 @@ export class HomePage implements OnInit {
 
   applications: Dapp[] = [];
   categories: Category[] = [];
+  randomDapp: Dapp;
   appsLoaded: boolean = false;
 
   constructor(
-    private dappsService: DappsService,
+    public dappsService: DappsService,
     public toastController: ToastController
   ) {
   }
@@ -27,6 +28,7 @@ export class HomePage implements OnInit {
   ngOnInit() {
     this.appsLoaded = true;
     this.applications = this.dappsService.dapps;
+    this.getRandomApp();
 
     this.dappsService.categories.map(cat => {
       this.categories.push({
@@ -41,6 +43,7 @@ export class HomePage implements OnInit {
         console.log("DApps fetched", apps);
         this.appsLoaded = true;
         this.applications = apps;
+        this.getRandomApp();
       });
     }
   }
@@ -51,6 +54,11 @@ export class HomePage implements OnInit {
 
   getAppIcon(app: Dapp) {
     return this.dappsService.getAppIcon(app);
+  }
+
+  getRandomApp() {
+    this.randomDapp = this.applications[Math.floor(Math.random() * this.applications.length)];
+    console.log('App showcase', this.randomDapp);
   }
 
   //// Organize categories by the most apps ////
