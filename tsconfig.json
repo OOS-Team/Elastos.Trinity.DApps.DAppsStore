@@ -19,7 +19,8 @@
     ],
     "types": [
       "node",
-      "trinity-types"
+      "trinity-types",
+      "cordova"
     ]
   },
   "include": [
