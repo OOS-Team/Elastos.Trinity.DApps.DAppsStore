@@ -130,7 +130,7 @@ export class DappsService {
           if (dapp.packageName === app.id) {
             dapp.installed = true;
 
-            if (app.id && dapp.versionName !== app.version) {
+            if (dapp.versionName !== app.version) {
               console.log(
                 'Versions are different', dapp.packageName,
                 ' Store version =', dapp.versionName,
