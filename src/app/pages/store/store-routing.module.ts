@@ -14,7 +14,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: './main/home/home.module#HomePageModule'
+            loadChildren: './home/home.module#HomePageModule'
           }
         ]
       },
@@ -24,11 +24,11 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: './main/dapps/dapps.module#DappsPageModule'
+            loadChildren: './dapps/dapps.module#DappsPageModule'
           },
           {
             path: ':dappId',
-            loadChildren: './main/dapps/dapp-detail/dapp-detail.module#DappDetailPageModule'
+            loadChildren: './dapps/dapp-detail/dapp-detail.module#DappDetailPageModule'
           }
         ]
       },
@@ -38,11 +38,11 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: './main/categories/categories.module#CategoriesPageModule'
+            loadChildren: './categories/categories.module#CategoriesPageModule'
           },
           {
             path: ':categoryType',
-            loadChildren: './main/categories/category-type/category-type.module#CategoryTypePageModule'
+            loadChildren: './categories/category-type/category-type.module#CategoryTypePageModule'
           }
         ]
       },
@@ -52,7 +52,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: './main/search/search.module#SearchPageModule'
+            loadChildren: './search/search.module#SearchPageModule'
           },
         ]
       },

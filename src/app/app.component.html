@@ -10,35 +10,23 @@
     </ion-header>
 
     <ion-content>
-      <ion-list padding-start>
+      <ion-list class="ion-padding-start">
         <ion-menu-toggle>
           <ion-item routerLink="/store/tabs/dapps" lines="none">
             <ion-icon name="apps"></ion-icon>
-            <ion-label padding>Discover</ion-label>
+            <ion-label class="ion-padding">Discover</ion-label>
           </ion-item>
-        </ion-menu-toggle>
-        <ion-menu-toggle>
-          <ion-item routerLink="/my-apps" lines="none">
-            <ion-icon mode="ios" name="download"></ion-icon>
-            <ion-label padding>My DApps</ion-label>
-          </ion-item>
-        </ion-menu-toggle>
-        <ion-menu-toggle>
-  <!--         <ion-item routerLink="/about" lines="none">
-            <ion-icon name="contacts"></ion-icon>
-            <ion-label padding>About</ion-label>
-          </ion-item> -->
         </ion-menu-toggle>
         <ion-menu-toggle>
           <ion-item (click)="minimizeApp()" lines="none">
             <ion-icon mode="ios" name="remove-circle"></ion-icon>
-            <ion-label padding>Minimize App</ion-label>
+            <ion-label class="ion-padding">Minimize App</ion-label>
           </ion-item>
         </ion-menu-toggle>
         <ion-menu-toggle>
           <ion-item (click)="closeApp()" lines="none">
-            <ion-icon mode="ios" name="exit"></ion-icon>
-            <ion-label padding>Close App</ion-label>
+            <ion-icon name="exit"></ion-icon>
+            <ion-label class="ion-padding">Close App</ion-label>
           </ion-item>
         </ion-menu-toggle>
       </ion-list>

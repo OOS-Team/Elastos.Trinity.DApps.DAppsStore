@@ -123,24 +123,37 @@ export class DappsService {
   getAppInfo() {
     appManager.getAppInfos((info) => {
       console.log("App infos", info)
-
       let installedApps = Object.values(info);
-      console.log('Installed apps', installedApps);
 
       this._dapps.map(dapp => {
         installedApps.map(app => {
           if (dapp.packageName === app.id) {
             dapp.installed = true;
-            console.log('Dapp is already installed', dapp.packageName);
-          }
-          if (dapp.packageName === app.id && dapp.versionName !== app.version) {
-            dapp.installed = true;
-            dapp.updateAvailable = true;
-            console.log('Update available', dapp.packageName, ' New version =', dapp.versionName, ' Current version =', app.version);
+
+            if (dapp.versionName !== app.version) {
+              console.log(
+                'Versions are different', dapp.packageName,
+                ' Store version =', dapp.versionName,
+                ' Current version =', app.version
+              );
+              dapp.updateAvailable = this.checkVersion(app.version, dapp.versionName);
+            }
           }
         });
       });
     });
+  }
+
+  // Since versions aren't numbers nor can they be converted, we need to loop through each number of each version and compare them
+  checkVersion(installedVer, storeVer): boolean {
+    const oldVer = installedVer.split('.')
+    const newVer = storeVer.split('.')
+    for (var i = 0; i < storeVer.length; i++) {
+      const a = parseInt(newVer[i]) || 0
+      const b = parseInt(oldVer[i]) || 0
+      if (a > b) return true // If new version is bigger than old version
+      if (a < b) return false // If new version is smaller than old version
+    }
   }
 
   fetchFilteredDapps(_search: string): Observable<Dapp[]> {
@@ -270,6 +283,7 @@ export class DappsService {
     appManager.start(id);
   }
 
+  // Handle app via browser
   appIntent(dapp: Dapp) {
     console.log('Testing app intent');
     appManager.sendIntent(
@@ -285,43 +299,4 @@ export class DappsService {
     console.log(site);
     appManager.sendUrlIntent(site, () => {}, ()=> {});
   }
-
-   /* // Prepare to ship instore apps for 3rd party apps
-  async sendAppsIntent(appPackages) {
-    if(this._dapps.length > 0) {
-      let sendApps = [];
-      this._dapps.map(dapp => {
-        appPackages.map(packageName => {
-          if(dapp.packageName === packageName) {
-            sendApps = sendApps.concat(dapp);
-          }
-        });
-      });
-      console.log('Ready apps being shipped', sendApps);
-      appManager.sendIntentResponse("appdetails", { result: sendApps }, this.handledIntentId);
-    } else {
-      let sendApps = await this.waitForAppLoad(appPackages);
-      console.log('Waited apps being shipped', sendApps);
-      appManager.sendIntentResponse("appdetails", { result: sendApps }, this.handledIntentId);
-    }
-  }
-
-  // If instore-apps aren't available for 3rd party apps (app store not loaded), then fetch apps before sending responce
-  waitForAppLoad(appPackages) {
-    let sendApps = [];
-    return new Promise((resolve, reject) => {
-      this.fetchDapps().subscribe((apps: Dapp[]) => {
-        apps.map(app => {
-          appPackages.map(packageName => {
-            if(app.packageName === packageName) {
-              sendApps = sendApps.concat(app);
-              resolve(sendApps);
-            }
-          });
-        });
-      }, (err) => {
-        console.log('Failed to ship apps', err);
-      });
-    });
-  } */
 }

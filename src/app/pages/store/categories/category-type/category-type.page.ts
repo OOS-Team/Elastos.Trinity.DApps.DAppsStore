@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 
-import { DappsService } from '../../../../../services/dapps.service';
-import { Dapp } from '../../../../../models/dapps.model';
+import { DappsService } from '../../../../services/dapps.service';
+import { Dapp } from '../../../../models/dapps.model';
 
 
 @Component({
@@ -27,7 +27,7 @@ export class CategoryTypePage implements OnInit {
   };
 
   constructor(
-    private dappsService: DappsService,
+    public dappsService: DappsService,
     private route: ActivatedRoute,
     private navCtrl: NavController,
     public toastController: ToastController
@@ -106,10 +106,6 @@ export class CategoryTypePage implements OnInit {
   //// Open app if installed ////
   startApp(id: string) {
     this.dappsService.startApp(id);
-  }
-
-  appIntentTest(dapp: Dapp) {
-    this.dappsService.appIntent(dapp);
   }
 
   //// Alerts ////

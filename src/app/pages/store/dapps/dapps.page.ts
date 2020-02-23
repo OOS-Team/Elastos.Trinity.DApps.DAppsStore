@@ -1,48 +1,47 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ToastController, IonInput } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { ToastController } from '@ionic/angular';
 
-import { DappsService } from '../../../../services/dapps.service';
-import { Dapp } from '../../../../models/dapps.model';
+import { DappsService } from '../../../services/dapps.service';
+import { Dapp } from '../../../models/dapps.model';
 
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.page.html',
-  styleUrls: ['./search.page.scss'],
+  selector: 'app-dapps',
+  templateUrl: './dapps.page.html',
+  styleUrls: ['dapps.page.scss'],
 })
-export class SearchPage implements OnInit {
-
-  @ViewChild('search', {static: false}) search: IonInput;
+export class DappsPage implements OnInit {
 
   // General
-  dapps: Dapp[] = [];
-  filteredApps: Dapp[] = [];
+  applications: Dapp[] = [];
+  categories: any[];
   dapp: string = '';
   appsLoaded: boolean = false;
 
+  slideOpts = {
+    initialSlide: 0,
+    speed: 100,
+    slidesPerView: 4,
+  };
+
   constructor(
-    private dappsService: DappsService,
-    public toastController: ToastController
+    public dappsService: DappsService,
+    public toastController: ToastController,
   ) {}
 
   ngOnInit() {
     this.appsLoaded = true;
-    this.dapps = this.dappsService.dapps;
+    this.applications = this.dappsService.dapps;
+    this.categories = this.dappsService.categories;
 
-    if(this.dapps.length === 0) {
+    if(this.applications.length === 0) {
       this.appsLoaded = false;
       this.dappsService.fetchDapps().subscribe((apps: Dapp[]) => {
         console.log("DApps fetched", apps);
         this.appsLoaded = true;
-        this.dapps = apps;
+        this.applications = apps;
       });
     }
-  }
-
-  ionViewDidEnter() {
-    setTimeout(() => {
-      this.search.setFocus();
-    }, 200);
   }
 
   getAppIcon(app: Dapp) {
@@ -54,21 +53,39 @@ export class SearchPage implements OnInit {
     this.appsLoaded = false;
     if (!search) {
       this.appsLoaded = true;
-      this.filteredApps = [];
+      this.applications = this.dappsService.dapps;
     } else {
-      this.filteredApps = [];
+      this.applications = [];
       this.dappsService.fetchFilteredDapps(search).subscribe((apps: Dapp[]) => {
-        console.log('Searched apps', apps);
         this.appsLoaded = true;
-        this.dapps.map(dapp => {
+        this.dappsService.dapps.map(dapp => {
           apps.map(app => {
             if(dapp.packageName === app.packageName) {
-              this.filteredApps = this.filteredApps.concat(dapp);
+              this.applications = this.applications.concat(dapp);
             }
           });
         });
       });
     }
+  }
+
+  //// Filter apps for each category ////
+  getApps(cat: string) {
+    if (cat === 'new') {
+      return this.dappsService.dapps;
+    }
+    if (cat === 'popular') {
+      return this.applications.sort((a, b) => {
+        return b.downloadsCount - a.downloadsCount;
+      });
+    } else {
+      return this.applications.filter(app => app.category === cat);
+    }
+  }
+
+  //// Set initial category button in category-type page ////
+  showCategory(index: number) {
+    this.dappsService.setCatIndex(index);
   }
 
   //// Install app if app is not installed or update is available ////
@@ -92,17 +109,13 @@ export class SearchPage implements OnInit {
     this.dappsService.startApp(id);
   }
 
-  appIntentTest(dapp: Dapp) {
-    this.dappsService.appIntent(dapp);
-  }
-
   //// Alerts ////
   async installSuccess(dapp: Dapp) {
     const toast = await this.toastController.create({
       mode: 'ios',
       message: 'Installed ' + dapp.appName + ' ' + dapp.versionName,
       color: "primary",
-      duration: 2000
+      duration: 2000,
     });
     toast.present();
   }

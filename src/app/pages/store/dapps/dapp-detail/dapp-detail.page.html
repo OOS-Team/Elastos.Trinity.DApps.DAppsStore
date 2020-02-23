@@ -2,8 +2,7 @@
   <ion-toolbar mode="ios">
     <ion-buttons
       slot="start"
-      padding
-      class="header-btns"
+      class="header-btns ion-padding"
       [routerLink]="[
       '/',
       'store',
@@ -23,14 +22,14 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid padding>
+  <ion-grid class="ion-padding">
 
     <ion-row>
       <ion-col size="2.5" class="img-container">
         <img-loader *ngIf="dappIcon" useImg><img [src]="dappIcon"></img-loader>
         <img-loader *ngIf="!dappIcon" useImg><img src="../assets/images/logo.png"></img-loader>
       </ion-col>
-      <ion-col size="9.5" class="dapp-content" align-items-center>
+      <ion-col size="9.5" class="dapp-content ion-align-items-center">
         <ion-label>
           <h2>{{ dapp.appName }}</h2>
           <p>{{ dapp.appShortDescription }}</p>
@@ -38,41 +37,21 @@
       </ion-col>
     </ion-row>
 
-    <ion-row padding-top>
+    <ion-row class="ion-padding-top">
       <ion-col size="12" class="btn-container">
-<!--
-        <ion-button  color="tertiary" (click)="installApp(dapp)" *ngIf="!dapp.installing && !dapp.installed">
-          <ion-label>Install</ion-label>
-        </ion-button>
-
-        <ion-button color="tertiary" (click)="startApp(dapp.packageName)" *ngIf="!dapp.installing && dapp.installed && !dapp.updateAvailable">
-          <ion-label>Open</ion-label>
-        </ion-button>
-
-        <ion-button color="tertiary" (click)="installApp(dapp)" *ngIf="!dapp.installing && dapp.installed && dapp.updateAvailable">
-          <ion-label>Update</ion-label>
-        </ion-button> -->
-
-        <ion-button  color="tertiary" (click)="appIntentTest(dapp)" *ngIf="!dapp.installing && !dapp.installed">
+        <ion-button  color="tertiary" (click)="dappsService.appIntent(dapp)" *ngIf="!dapp.installing && !dapp.installed">
           <ion-label>Browse</ion-label>
         </ion-button>
-
-        <ion-button color="tertiary" *ngIf="dapp.installing">
-          <ion-label>
-            <ion-spinner name="dots"></ion-spinner>
-          </ion-label>
-        </ion-button>
-
       </ion-col>
     </ion-row>
 
-    <ion-row padding-top>
+    <ion-row class="ion-padding-top">
       <ion-col size="12" class="section">
         <h2>Description</h2>
       </ion-col>
     </ion-row>
 
-    <ion-row padding-bottom>
+    <ion-row class="ion-padding-bottom">
       <ion-col size="12" class="app-description">
         <p>{{ dapp.appDescription }}</p>
       </ion-col>
@@ -86,7 +65,7 @@
       </ion-col>
     </ion-row>
 
-    <ion-row *ngIf="dapp.whatsNew" padding-top>
+    <ion-row *ngIf="dapp.whatsNew" class="ion-padding-top">
       <ion-col size="12" class="section">
         <h2>What's New</h2>
       </ion-col>
@@ -98,7 +77,7 @@
       </ion-col>
     </ion-row>
 
-    <ion-row padding-top>
+    <ion-row class="ion-padding-top">
       <ion-col size="12" class="section">
         <h2>App Details</h2>
       </ion-col>
@@ -124,7 +103,7 @@
       <p>{{ dapp.downloadsCount }}</p>
     </ion-row>
 
-    <ion-row padding-top>
+    <ion-row class="ion-padding-top">
       <ion-col size="12" class="section">
         <h2>Developer Details</h2>
       </ion-col>

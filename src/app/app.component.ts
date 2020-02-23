@@ -26,7 +26,8 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
-      this.splash();
+      this.splashScreen.hide();
+      // this.splash();
       this.dappsService.init();
     });
   }
