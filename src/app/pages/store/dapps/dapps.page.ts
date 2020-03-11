@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 
-import { DappsService } from '../../../../services/dapps.service';
-import { Dapp } from '../../../../models/dapps.model';
+import { DappsService } from '../../../services/dapps.service';
+import { Dapp } from '../../../models/dapps.model';
 
 
 @Component({
@@ -25,7 +25,7 @@ export class DappsPage implements OnInit {
   };
 
   constructor(
-    private dappsService: DappsService,
+    public dappsService: DappsService,
     public toastController: ToastController,
   ) {}
 
@@ -86,47 +86,5 @@ export class DappsPage implements OnInit {
   //// Set initial category button in category-type page ////
   showCategory(index: number) {
     this.dappsService.setCatIndex(index);
-  }
-
-  //// Install app if app is not installed or update is available ////
-  installApp(dapp: Dapp) {
-    dapp.installing = true;
-    this.dappsService.installApp(dapp).then(res => {
-      console.log('Install state', res)
-      dapp.installing = false;
-      if(res === true) {
-        dapp.installed = true;
-        dapp.updateAvailable = false;
-        this.installSuccess(dapp);
-      } else {
-        this.installFailed(dapp);
-      }
-    });
-  }
-
-  //// Open app if installed ////
-  startApp(id: string) {
-    this.dappsService.startApp(id);
-  }
-
-  //// Alerts ////
-  async installSuccess(dapp: Dapp) {
-    const toast = await this.toastController.create({
-      mode: 'ios',
-      message: 'Installed ' + dapp.appName + ' ' + dapp.versionName,
-      color: "primary",
-      duration: 2000,
-    });
-    toast.present();
-  }
-
-  async installFailed(dapp: Dapp) {
-    const toast = await this.toastController.create({
-      mode: 'ios',
-      message: 'Failed to install ' + dapp.appName + ' ' + dapp.versionName,
-      color: "primary",
-      duration: 2000
-    });
-    toast.present();
   }
 }
