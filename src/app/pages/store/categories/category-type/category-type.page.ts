@@ -6,6 +6,7 @@ import { ToastController } from '@ionic/angular';
 import { DappsService } from '../../../../services/dapps.service';
 import { Dapp } from '../../../../models/dapps.model';
 
+declare let titleBarManager: TitleBarPlugin.TitleBarManager;
 
 @Component({
   selector: 'app-category-type',
@@ -45,7 +46,13 @@ export class CategoryTypePage implements OnInit {
       this.dapps = this.dappsService.getCategory(paramMap.get('categoryType'));
       this.categoryType = paramMap.get('categoryType');
       console.log('category', this.categoryType);
+
+      titleBarManager.setTitle(this.categoryType.charAt(0).toUpperCase() + this.categoryType.slice(1));
     });
+  }
+
+  ionViewDidEnter() {
+    titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.BACK);
   }
 
   //// Change category tab ////

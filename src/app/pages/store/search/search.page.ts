@@ -4,6 +4,7 @@ import { ToastController, IonInput } from '@ionic/angular';
 import { DappsService } from '../../../services/dapps.service';
 import { Dapp } from '../../../models/dapps.model';
 
+declare let titleBarManager: TitleBarPlugin.TitleBarManager;
 
 @Component({
   selector: 'app-search',
@@ -43,6 +44,9 @@ export class SearchPage implements OnInit {
     setTimeout(() => {
       this.search.setFocus();
     }, 200);
+
+    titleBarManager.setTitle("Search");
+    titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.BACK);
   }
 
   getAppIcon(app: Dapp) {

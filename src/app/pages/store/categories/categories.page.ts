@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DappsService } from 'src/app/services/dapps.service';
 
+declare let titleBarManager: TitleBarPlugin.TitleBarManager;
 
 @Component({
   selector: 'app-categories',
@@ -15,5 +16,10 @@ export class CategoriesPage implements OnInit {
 
   ngOnInit() {
     this.categories = this.dappsService.categories;
+  }
+
+  ionViewDidEnter() {
+    titleBarManager.setTitle("Categories");
+    titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.BACK);
   }
 }

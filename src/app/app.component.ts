@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform, ModalController } from '@ionic/angular';
+import { Platform, ModalController, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { DappsService } from './services/dapps.service';
@@ -18,7 +18,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private dappsService: DappsService,
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    private navController: NavController
   ) {
     this.initializeApp();
   }
@@ -29,19 +30,13 @@ export class AppComponent {
       this.splashScreen.hide();
       // this.splash();
       this.dappsService.init();
+
+      this.navController.navigateRoot("/store");
     });
   }
 
   async splash() {
     const splash = await this.modalCtrl.create({component: SplashscreenPage});
     return await splash.present();
-  }
-
-  minimizeApp() {
-    appManager.launcher();
-  }
-
-  closeApp() {
-    appManager.close();
   }
 }

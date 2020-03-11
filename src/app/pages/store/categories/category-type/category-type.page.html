@@ -1,25 +1,4 @@
-<ion-header no-border>
-  <ion-toolbar mode="ios">
-    <ion-buttons
-      slot="start"
-      class="header-btns ion-padding"
-      [routerLink]="[
-      '/',
-      'store',
-      'tabs',
-      'dapps'
-      ]"
-    >
-      <ion-icon name="arrow-back" mode="ios"></ion-icon>
-    </ion-buttons>
-    <ion-buttons slot="end" class="header-btns">
-      <ion-menu-toggle>
-        <ion-icon src="../assets/icon/menu.svg"></ion-icon>
-      </ion-menu-toggle>
-    </ion-buttons>
-    <ion-title>{{ categoryType.charAt(0).toUpperCase() + categoryType.slice(1) }}</ion-title>
-  </ion-toolbar>
-
+<ion-header>
   <ion-slides [options]="slideOpts">
     <ion-slide
       *ngFor="let category of categories"
@@ -32,7 +11,6 @@
       </div>
     </ion-slide>
   </ion-slides>
-
 </ion-header>
 
 <ion-content>

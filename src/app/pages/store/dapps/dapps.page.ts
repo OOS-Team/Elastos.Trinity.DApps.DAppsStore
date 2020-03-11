@@ -4,6 +4,7 @@ import { ToastController } from '@ionic/angular';
 import { DappsService } from '../../../services/dapps.service';
 import { Dapp } from '../../../models/dapps.model';
 
+declare let titleBarManager: TitleBarPlugin.TitleBarManager;
 
 @Component({
   selector: 'app-dapps',
@@ -42,6 +43,11 @@ export class DappsPage implements OnInit {
         this.applications = apps;
       });
     }
+  }
+
+  ionViewDidEnter() {
+    titleBarManager.setTitle("Apps");
+    titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.BACK);
   }
 
   getAppIcon(app: Dapp) {

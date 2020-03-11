@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { Dapp } from '../models/dapps.model';
-import { Platform } from '@ionic/angular';
+import { Platform, NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 declare let appManager: AppManagerPlugin.AppManager;
@@ -46,6 +46,7 @@ export class DappsService {
     private platform: Platform,
     private router: Router,
     private zone: NgZone,
+    private navController: NavController
   ) {
   }
 
@@ -56,9 +57,18 @@ export class DappsService {
     // Load app manager only on real device, not in desktop browser - beware: ionic 4 bug with "desktop" or "android"/"ios"
     if(this.platform.platforms().indexOf("cordova") >= 0) {
       console.log("Listening to intent events")
+      appManager.setListener((msg)=>{
+        this.onMessageReceived(msg);
+      });
       appManager.setIntentListener(
         this.onReceiveIntent
       );
+    }
+  }
+
+  onMessageReceived(msg: AppManagerPlugin.ReceivedMessage) {
+    if (msg.message =="navback") {
+      this.navController.back();
     }
   }
 

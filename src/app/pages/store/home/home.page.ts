@@ -6,6 +6,7 @@ import { Dapp } from 'src/app/models/dapps.model';
 import { Category } from 'src/app/models/categories.model';
 
 declare let appManager: AppManagerPlugin.AppManager;
+declare let titleBarManager: TitleBarPlugin.TitleBarManager;
 
 @Component({
   selector: 'app-home',
@@ -49,7 +50,12 @@ export class HomePage implements OnInit {
   }
 
   ionViewDidEnter() {
-    appManager.setVisible("show", ()=>{}, (err)=>{});
+    appManager.setVisible("show");
+
+    titleBarManager.setTitle();
+    titleBarManager.setBackgroundColor("#FFFFFF");
+    titleBarManager.setForegroundMode(TitleBarPlugin.TitleBarForegroundMode.DARK);
+    titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.HOME);
   }
 
   getAppIcon(app: Dapp) {

@@ -8,6 +8,7 @@ import { Dapp } from '../../../../models/dapps.model';
 import { DappsService } from '../../../../services/dapps.service';
 
 declare let appManager: AppManagerPlugin.AppManager;
+declare let titleBarManager: TitleBarPlugin.TitleBarManager;
 
 @Component({
   selector: 'app-dapp-detail',
@@ -43,7 +44,9 @@ export class DappDetailPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    appManager.setVisible("show", ()=>{}, (err)=>{});
+    appManager.setVisible("show");
+    titleBarManager.setTitle("App info");
+    titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.BACK);
   }
 
   //// Website clicked ////
