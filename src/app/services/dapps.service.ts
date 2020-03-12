@@ -124,26 +124,9 @@ export class DappsService {
       tap(response => {
         this._dapps = this._dapps.concat(response);
         console.log("DApps concat", this._dapps);
-        this.getAppInfo();
         return this._dapps;
       })
     );
-  }
-
-  //// Compare fetched apps with getAppInfos() object values ////
-  getAppInfo() {
-    appManager.getAppInfos((info) => {
-      console.log("App infos", info)
-      let installedApps = Object.values(info);
-
-      this._dapps.map(dapp => {
-        installedApps.map(app => {
-          if (dapp.packageName === app.id) {
-            dapp.installed = true;
-          }
-        });
-      });
-    });
   }
 
   fetchFilteredDapps(_search: string): Observable<Dapp[]> {
