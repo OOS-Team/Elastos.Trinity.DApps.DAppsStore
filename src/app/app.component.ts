@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Platform, ModalController, NavController } from '@ionic/angular';
+import { Component, ViewChild } from '@angular/core';
+import { Platform, ModalController, NavController, IonRouterOutlet } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { DappsService } from './services/dapps.service';
@@ -13,6 +13,8 @@ declare let appManager: AppManagerPlugin.AppManager;
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  @ViewChild(IonRouterOutlet, {static: true}) routerOutlet: IonRouterOutlet;
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -31,7 +33,23 @@ export class AppComponent {
       // this.splash();
       this.dappsService.init();
 
+      this.setupBackKeyNavigation();
+
       this.navController.navigateRoot("/store");
+    });
+  }
+
+  /**
+   * Listen to back key events. If the default router can go back, just go back.
+   * Otherwise, exit the application.
+   */
+  setupBackKeyNavigation() {
+    this.platform.backButton.subscribeWithPriority(0, () => {
+      if (this.routerOutlet && this.routerOutlet.canGoBack()) {
+        this.routerOutlet.pop();
+      } else {
+        navigator['app'].exitApp();
+      }
     });
   }
 
