@@ -45,9 +45,8 @@ export class CategoryTypePage implements OnInit {
       }
       this.dapps = this.dappsService.getCategory(paramMap.get('categoryType'));
       this.categoryType = paramMap.get('categoryType');
-      console.log('category', this.categoryType);
-
       titleBarManager.setTitle(this.categoryType.charAt(0).toUpperCase() + this.categoryType.slice(1));
+      console.log('category', this.categoryType);
     });
   }
 
@@ -59,6 +58,7 @@ export class CategoryTypePage implements OnInit {
   changeCat(cat: string) {
     this.categoryType = cat;
     this.dapps = this.dappsService.getCategory(cat);
+    titleBarManager.setTitle(this.categoryType.charAt(0).toUpperCase() + this.categoryType.slice(1));
   }
 
   getAppIcon(app: Dapp) {

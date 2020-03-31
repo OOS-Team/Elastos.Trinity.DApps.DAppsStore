@@ -46,7 +46,7 @@ export class DappsPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    titleBarManager.setTitle("Apps");
+    titleBarManager.setTitle("Capsules");
     titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.BACK);
   }
 

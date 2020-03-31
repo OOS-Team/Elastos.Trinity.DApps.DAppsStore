@@ -52,7 +52,7 @@ export class HomePage implements OnInit {
   ionViewDidEnter() {
     appManager.setVisible("show");
 
-    titleBarManager.setTitle();
+    titleBarManager.setTitle("Capsule Marketplace");
     titleBarManager.setBackgroundColor("#FFFFFF");
     titleBarManager.setForegroundMode(TitleBarPlugin.TitleBarForegroundMode.DARK);
     titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.HOME);

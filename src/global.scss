@@ -90,9 +90,9 @@ ion-header {
 
 // ** Search Container ** //
 .search-container {
-  position: sticky;
+/*   position: sticky;
   top: 0px;
-  z-index: 1;
+  z-index: 1; */
   display: flex;
   justify-content: center;
   background: #FAFAFA;
@@ -133,7 +133,6 @@ ion-list {
         img-loader {
           border-radius: 15px !important;
           overflow: hidden;
-          border: solid 1px black;
           height: 48px;
           width: 48px;
         }

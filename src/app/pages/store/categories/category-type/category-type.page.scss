@@ -1,19 +1,23 @@
-ion-slides {
-  padding-top:10px;
+ion-header {
+  box-shadow: 0px 0px 2px 0px rgb(199, 199, 199);
 
-  ion-label {
-    margin: 16px 0 12px;
-    font-size: 13px;
-    font-weight: 500;
-    color: #959595;
-  }
-
-  .highlight {
-    padding-bottom: 10px;
-    border-bottom: 1px solid #007AFF;
+  ion-slides {
+    padding-top:10px;
 
     ion-label {
-      color: #007AFF !important;
+      margin: 16px 0 12px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #959595;
+    }
+
+    .highlight {
+      padding-bottom: 10px;
+      border-bottom: 1px solid #007AFF;
+
+      ion-label {
+        color: #007AFF !important;
+      }
     }
   }
 }

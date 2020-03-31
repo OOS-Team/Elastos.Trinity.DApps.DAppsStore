@@ -45,7 +45,7 @@ export class DappDetailPage implements OnInit {
 
   ionViewDidEnter() {
     appManager.setVisible("show");
-    titleBarManager.setTitle("App info");
+    titleBarManager.setTitle("Capsule Info");
     titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.BACK);
   }
 
