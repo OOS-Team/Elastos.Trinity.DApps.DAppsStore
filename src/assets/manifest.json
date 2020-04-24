@@ -1,7 +1,7 @@
 {
     "id": "org.elastos.trinity.dapp.dappstore",
-    "version": "1.1.1",
-    "version_code": 10,
+    "version": "1.1.2",
+    "version_code": 11,
     "name": "Capsule Marketplace",
     "short_name": "Capsule Marketplace",
     "short_description": "Marketplace for the latest elastOS Capsules",
@@ -23,9 +23,9 @@
         }
     ],
     "author": {
-        "name": "Elastos Foundation",
-        "email": "contact@elastos.org",
-        "website": "https://www.elastos.org"
+        "name": "Trinity Tech Co., Ltd.",
+        "email": "contact@trinity-tech.io",
+        "website": "https://www.trinity-tech.io"
     },
     "default_locale": "en",
     "plugins": [
