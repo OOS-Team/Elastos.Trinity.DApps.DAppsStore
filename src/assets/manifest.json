@@ -1,7 +1,7 @@
 {
     "id": "org.elastos.trinity.dapp.dappstore",
-    "version": "1.1.2",
-    "version_code": 11,
+    "version": "1.1.3",
+    "version_code": 12,
     "name": "Capsule Marketplace",
     "short_name": "Capsule Marketplace",
     "short_description": "Marketplace for the latest elastOS Capsules",
@@ -9,7 +9,7 @@
     "start_url": "index.html",
     "type": "app",
     "start_visible": "hide",
-    "category": "tools",
+    "category": "shopping",
     "icons": [
         {
             "src": "assets/images/logo.png",
