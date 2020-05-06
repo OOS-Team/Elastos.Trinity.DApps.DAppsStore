@@ -36,7 +36,7 @@
 
   <ion-list *ngIf="appsLoaded" class="ion-no-padding">
     <div *ngFor="let category of categories">
-      <ion-row class="section" *ngIf="getApps(category).length > 0">
+      <ion-row class="section" *ngIf="getApps(category).length > 0 && category !== 'techdemo'">
         <ion-col offset="0.75" size="7.5" class="section-title ion-no-padding">
           <ng-template [ngIf]="category === 'new'" [ngIfElse]='rest'>
             <p>{{ category.charAt(0).toUpperCase() + category.slice(1) }} Releases</p>

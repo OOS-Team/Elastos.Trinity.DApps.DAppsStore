@@ -40,12 +40,12 @@ export class SearchPage implements OnInit {
     }
   }
 
-  ionViewDidEnter() {
+  ionViewWillEnter() {
     setTimeout(() => {
       this.search.setFocus();
     }, 200);
 
-    titleBarManager.setTitle("Search");
+    titleBarManager.setTitle("Search Capsule");
     titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.BACK);
   }
 

@@ -36,7 +36,8 @@ export class DappsService {
     'casino',
     'travel',
     'lifestyle',
-    'health'
+    'health',
+    'techdemo'
   ];
 
   private handledIntentId: Number;
@@ -157,7 +158,7 @@ export class DappsService {
 
   getCategory(category: string) {
     if (category === 'new') {
-      return [...this._dapps];
+      return [...this._dapps.filter((dapp) => dapp.category !== 'techdemo')];
     }
     if (category === 'popular') {
       return [...this.dapps].sort((a, b) => {
@@ -187,7 +188,7 @@ export class DappsService {
       (res) => {
         this.dappBeingLaunched = null;
       },
-      (err) => { 
+      (err) => {
         console.log('Failed to launch app using /app intent: ' + err);
         this.dappBeingLaunched = null;
       }
@@ -202,7 +203,7 @@ export class DappsService {
       return app == this.dappBeingLaunched;
     }
     else {
-      return this.dappBeingLaunched != null;
+      return this.dappBeingLaunched !== null;
     }
   }
 

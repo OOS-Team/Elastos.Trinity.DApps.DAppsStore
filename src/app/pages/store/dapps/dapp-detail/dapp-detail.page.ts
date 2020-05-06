@@ -43,10 +43,13 @@ export class DappDetailPage implements OnInit {
     this.imageLoader.preload('/../../../assets/store/appbanner.jpg');
   }
 
-  ionViewDidEnter() {
-    appManager.setVisible("show");
+  ionViewWillEnter() {
     titleBarManager.setTitle("Capsule Info");
     titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.BACK);
+  }
+
+  ionViewDidEnter() {
+    appManager.setVisible("show");
   }
 
   //// Website clicked ////

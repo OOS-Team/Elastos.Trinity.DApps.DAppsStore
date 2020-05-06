@@ -45,7 +45,7 @@ export class DappsPage implements OnInit {
     }
   }
 
-  ionViewDidEnter() {
+  ionViewWillEnter() {
     titleBarManager.setTitle("Capsules");
     titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.BACK);
   }
@@ -78,7 +78,7 @@ export class DappsPage implements OnInit {
   //// Filter apps for each category ////
   getApps(cat: string) {
     if (cat === 'new') {
-      return this.dappsService.dapps;
+      return this.dappsService.dapps.filter((dapp) => dapp.category !== 'techdemo');
     }
     if (cat === 'popular') {
       return this.applications.sort((a, b) => {

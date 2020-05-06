@@ -51,14 +51,16 @@ export class HomePage implements OnInit {
     }
   }
 
-  ionViewDidEnter() {
-    appManager.setVisible("show");
-
+  ionViewWillEnter() {
     titleBarManager.setTitle("Capsule Marketplace");
     titleBarManager.setBackgroundColor("#FFFFFF");
     titleBarManager.setForegroundMode(TitleBarPlugin.TitleBarForegroundMode.DARK);
     titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.HOME);
     titleBarManager.setupMenuItems([{key: 'registerApp', iconPath: '/assets/images/register.png', title: 'Register Capsule'}], this.askToRegister);
+  }
+
+  ionViewDidEnter() {
+    appManager.setVisible("show");
   }
 
   askToRegister = () => {
