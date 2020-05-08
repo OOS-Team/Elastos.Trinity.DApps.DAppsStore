@@ -1,7 +1,7 @@
 {
     "id": "org.elastos.trinity.dapp.dappstore",
     "version": "1.1.4",
-    "version_code": 13,
+    "version_code": 14,
     "name": "Capsule Marketplace",
     "short_name": "Capsule Marketplace",
     "short_description": "Marketplace for the latest elastOS Capsules",

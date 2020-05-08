@@ -16,7 +16,7 @@
       <ion-card-header>
         <ion-card-title>Capsule <br>Showcase</ion-card-title>
       </ion-card-header>
-      <ion-row class="showcase-app" *ngIf="randomDapp">
+      <ion-row class="showcase-app" *ngIf="randomDapp"  [routerLink]="['/', 'store', 'tabs', 'dapps', randomDapp._id]">
         <ion-col size="2.5" class="img-container">
           <img-loader [src]="dappsService.getAppIcon(randomDapp)" useImg></img-loader>
         </ion-col>
@@ -41,7 +41,7 @@
         <ion-spinner name="bubbles" color="primary"></ion-spinner>
       </ion-card-title>
       <div *ngIf="appsLoaded">
-        <ion-item *ngFor="let app of applications.slice(0, 3)" lines="none">
+        <ion-item *ngFor="let app of getApps().slice(0, 3)" lines="none">
           <ion-grid class="ion-no-padding">
             <ion-row>
               <ion-col

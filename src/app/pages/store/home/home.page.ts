@@ -77,6 +77,10 @@ export class HomePage implements OnInit {
     console.log('App showcase', this.randomDapp);
   }
 
+  getApps(): Dapp[] {
+    return this.applications.filter((app) => app.category !== 'techdemo');
+  }
+
   //// Organize categories by the most apps ////
   getTopCats() {
     this.applications.map(app => {
