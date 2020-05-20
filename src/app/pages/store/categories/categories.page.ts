@@ -20,6 +20,10 @@ export class CategoriesPage implements OnInit {
 
   ionViewWillEnter() {
     titleBarManager.setTitle("Categories");
-    titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.BACK);
+    this.dappsService.setTitleBarBackKeyShown(true);
+  }
+
+  ionViewWillLeave() {
+    this.dappsService.setTitleBarBackKeyShown(false);
   }
 }

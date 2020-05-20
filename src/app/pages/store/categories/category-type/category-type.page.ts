@@ -50,8 +50,12 @@ export class CategoryTypePage implements OnInit {
   }
 
   ionViewWillEnter() {
-    titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.BACK);
     titleBarManager.setTitle(this.categoryType.charAt(0).toUpperCase() + this.categoryType.slice(1));
+    this.dappsService.setTitleBarBackKeyShown(true);
+  }
+
+  ionViewWillLeave() {
+    this.dappsService.setTitleBarBackKeyShown(false);
   }
 
   //// Change category tab ////

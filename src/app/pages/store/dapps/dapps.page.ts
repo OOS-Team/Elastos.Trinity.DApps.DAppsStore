@@ -47,7 +47,11 @@ export class DappsPage implements OnInit {
 
   ionViewWillEnter() {
     titleBarManager.setTitle("Capsules");
-    titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.BACK);
+    this.dappsService.setTitleBarBackKeyShown(true);
+  }
+
+  ionViewWillLeave() {
+    this.dappsService.setTitleBarBackKeyShown(false);
   }
 
   getAppIcon(app: Dapp) {

@@ -4,10 +4,11 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { Dapp } from '../models/dapps.model';
-import { Platform, NavController } from '@ionic/angular';
+import { Platform, NavController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 declare let appManager: AppManagerPlugin.AppManager;
+declare let titleBarManager: TitleBarPlugin.TitleBarManager;
 let managerService: any;
 
 @Injectable({
@@ -47,6 +48,7 @@ export class DappsService {
     private platform: Platform,
     private router: Router,
     private zone: NgZone,
+    private alertController: AlertController,
     private navController: NavController
   ) {
   }
@@ -58,18 +60,19 @@ export class DappsService {
     // Load app manager only on real device, not in desktop browser - beware: ionic 4 bug with "desktop" or "android"/"ios"
     if(this.platform.platforms().indexOf("cordova") >= 0) {
       console.log("Listening to intent events")
-      appManager.setListener((msg)=>{
-        this.onMessageReceived(msg);
-      });
       appManager.setIntentListener(
         this.onReceiveIntent
       );
-    }
-  }
-
-  onMessageReceived(msg: AppManagerPlugin.ReceivedMessage) {
-    if (msg.message =="navback") {
-      this.navController.back();
+      titleBarManager.setOnItemClickedListener((menuIcon)=>{
+        switch (menuIcon.key) {
+          case "back":
+            this.navController.back();
+            break;
+          case "registerApp":
+            this.registerAppAlert();
+            break;
+        }
+      });
     }
   }
 
@@ -86,6 +89,18 @@ export class DappsService {
 
         // For shipping in-store apps to 3rd party apps //
         // this.sendAppsIntent(ret.params);
+    }
+  }
+
+  setTitleBarBackKeyShown(show: boolean) {
+    if (show) {
+        titleBarManager.setIcon(TitleBarPlugin.TitleBarIconSlot.INNER_LEFT, {
+            key: "back",
+            iconPath: TitleBarPlugin.BuiltInIcon.BACK
+        });
+    }
+    else {
+        titleBarManager.setIcon(TitleBarPlugin.TitleBarIconSlot.INNER_LEFT, null);
     }
   }
 
@@ -210,5 +225,33 @@ export class DappsService {
   goToLink(site: string) {
     console.log(site);
     appManager.sendUrlIntent(site, () => {}, ()=> {});
+  }
+
+  async registerAppAlert() {
+    const alert = await this.alertController.create({
+      mode: 'ios',
+      header: 'Would you like to add Capsule Marketplace to your profile?',
+      message: 'Registering a capsule will allow your followers via Contacts to effortlessly browse your favorite capsules!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('No thanks');
+          }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            appManager.sendIntent("registerapplicationprofile", {
+              identifier: "Capsule Browser",
+              connectactiontitle: "Find the latest and greatest Capsules!"
+            }, {});
+          }
+        },
+      ]
+    });
+    alert.present();
   }
 }

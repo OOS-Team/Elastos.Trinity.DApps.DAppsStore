@@ -46,7 +46,11 @@ export class SearchPage implements OnInit {
     }, 200);
 
     titleBarManager.setTitle("Search Capsule");
-    titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.BACK);
+    this.dappsService.setTitleBarBackKeyShown(true);
+  }
+
+  ionViewWillLeave() {
+    this.dappsService.setTitleBarBackKeyShown(false);
   }
 
   getAppIcon(app: Dapp) {
