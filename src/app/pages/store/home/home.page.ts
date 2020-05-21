@@ -71,7 +71,7 @@ export class HomePage implements OnInit {
   }
 
   ionViewWillLeave() {
-    titleBarManager.addOnItemClickedListener(this.onItemClickedListener);
+    titleBarManager.removeOnItemClickedListener(this.onItemClickedListener);
   }
 
   getAppIcon(app: Dapp) {
