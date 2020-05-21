@@ -19,6 +19,7 @@ export class HomePage implements OnInit {
   categories: Category[] = [];
   randomDapp: Dapp;
   appsLoaded: boolean = false;
+  onItemClickedListener: any;
 
   constructor(
     public dappsService: DappsService,
@@ -57,16 +58,21 @@ export class HomePage implements OnInit {
     titleBarManager.setForegroundMode(TitleBarPlugin.TitleBarForegroundMode.DARK);
     titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.HOME);
     titleBarManager.setupMenuItems([{key: 'registerApp', iconPath: '/assets/images/register.png', title: 'Register Capsule'}]);
+    titleBarManager.addOnItemClickedListener(this.onItemClickedListener = (menuIcon)=>{
+      if (menuIcon.key === "registerApp") {
+        console.log('Menu item clicked');
+        this.registerAppAlert();
+      }
+    });
   }
 
   ionViewDidEnter() {
     appManager.setVisible("show");
   }
 
-  // askToRegister = () => {
-  //   console.log('Menu item clicked');
-  //   this.registerAppAlert();
-  // }
+  ionViewWillLeave() {
+    titleBarManager.addOnItemClickedListener(this.onItemClickedListener);
+  }
 
   getAppIcon(app: Dapp) {
     return this.dappsService.getAppIcon(app);
@@ -95,31 +101,31 @@ export class HomePage implements OnInit {
     });
   }
 
-  // async registerAppAlert() {
-  //   const alert = await this.alertController.create({
-  //     mode: 'ios',
-  //     header: 'Would you like to add Capsule Marketplace to your profile?',
-  //     message: 'Registering a capsule will allow your followers via Contacts to effortlessly browse your favorite capsules!',
-  //     buttons: [
-  //       {
-  //         text: 'Cancel',
-  //         role: 'cancel',
-  //         cssClass: 'secondary',
-  //         handler: () => {
-  //           console.log('No thanks');
-  //         }
-  //       },
-  //       {
-  //         text: 'Yes',
-  //         handler: () => {
-  //           appManager.sendIntent("registerapplicationprofile", {
-  //             identifier: "Capsule Browser",
-  //             connectactiontitle: "Find the latest and greatest Capsules!"
-  //           }, {});
-  //         }
-  //       },
-  //     ]
-  //   });
-  //   alert.present();
-  // }
+  async registerAppAlert() {
+    const alert = await this.alertController.create({
+      mode: 'ios',
+      header: 'Would you like to add Capsule Marketplace to your profile?',
+      message: 'Registering a capsule will allow your followers via Contacts to effortlessly browse your favorite capsules!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('No thanks');
+          }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            appManager.sendIntent("registerapplicationprofile", {
+              identifier: "Capsule Browser",
+              connectactiontitle: "Find the latest and greatest Capsules!"
+            }, {});
+          }
+        },
+      ]
+    });
+    alert.present();
+  }
 }

@@ -1,10 +1,10 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { Dapp } from '../models/dapps.model';
-import { Platform, NavController, AlertController } from '@ionic/angular';
+import { Platform, NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 declare let appManager: AppManagerPlugin.AppManager;
@@ -47,8 +47,6 @@ export class DappsService {
     private http: HttpClient,
     private platform: Platform,
     private router: Router,
-    private zone: NgZone,
-    private alertController: AlertController,
     private navController: NavController
   ) {
   }
@@ -63,14 +61,9 @@ export class DappsService {
       appManager.setIntentListener(
         this.onReceiveIntent
       );
-      titleBarManager.setOnItemClickedListener((menuIcon)=>{
-        switch (menuIcon.key) {
-          case "back":
+      titleBarManager.addOnItemClickedListener((menuIcon)=>{
+        if (menuIcon.key === "back") {
             this.navController.back();
-            break;
-          case "registerApp":
-            this.registerAppAlert();
-            break;
         }
       });
     }
@@ -225,33 +218,5 @@ export class DappsService {
   goToLink(site: string) {
     console.log(site);
     appManager.sendUrlIntent(site, () => {}, ()=> {});
-  }
-
-  async registerAppAlert() {
-    const alert = await this.alertController.create({
-      mode: 'ios',
-      header: 'Would you like to add Capsule Marketplace to your profile?',
-      message: 'Registering a capsule will allow your followers via Contacts to effortlessly browse your favorite capsules!',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-            console.log('No thanks');
-          }
-        },
-        {
-          text: 'Yes',
-          handler: () => {
-            appManager.sendIntent("registerapplicationprofile", {
-              identifier: "Capsule Browser",
-              connectactiontitle: "Find the latest and greatest Capsules!"
-            }, {});
-          }
-        },
-      ]
-    });
-    alert.present();
   }
 }
