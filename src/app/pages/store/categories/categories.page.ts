@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DappsService } from 'src/app/services/dapps.service';
+import { TranslateService } from '@ngx-translate/core';
 
 declare let titleBarManager: TitleBarPlugin.TitleBarManager;
 
@@ -12,14 +13,14 @@ export class CategoriesPage implements OnInit {
 
   categories: any[];
 
-  constructor(private dappsService: DappsService) { }
+  constructor(private dappsService: DappsService, public translate: TranslateService) { }
 
   ngOnInit() {
     this.categories = this.dappsService.categories;
   }
 
   ionViewWillEnter() {
-    titleBarManager.setTitle("Categories");
+    titleBarManager.setTitle(this.translate.instant("cats"));
     this.dappsService.setTitleBarBackKeyShown(true);
   }
 

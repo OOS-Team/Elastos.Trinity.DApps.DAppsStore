@@ -3,6 +3,7 @@ import { ToastController, IonInput } from '@ionic/angular';
 
 import { DappsService } from '../../../services/dapps.service';
 import { Dapp } from '../../../models/dapps.model';
+import { TranslateService } from '@ngx-translate/core';
 
 declare let titleBarManager: TitleBarPlugin.TitleBarManager;
 
@@ -20,10 +21,12 @@ export class SearchPage implements OnInit {
   filteredApps: Dapp[] = [];
   dapp: string = '';
   appsLoaded: boolean = false;
+  startedSearching: boolean = false;
 
   constructor(
     public dappsService: DappsService,
-    public toastController: ToastController
+    public toastController: ToastController,
+    public translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -59,6 +62,7 @@ export class SearchPage implements OnInit {
 
   //// Search ////
   filterDapps(search: string) {
+    this.startedSearching = true;
     this.appsLoaded = false;
     if (!search) {
       this.appsLoaded = true;

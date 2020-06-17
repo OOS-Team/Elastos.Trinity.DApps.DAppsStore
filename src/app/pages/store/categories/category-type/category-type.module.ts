@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { IonicImageLoader } from 'ionic-image-loader';
 
 import { CategoryTypePage } from './category-type.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     IonicImageLoader,
+    TranslateModule,
     RouterModule.forChild(routes)
   ],
   declarations: [CategoryTypePage]

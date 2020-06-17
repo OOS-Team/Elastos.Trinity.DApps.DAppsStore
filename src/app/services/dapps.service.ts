@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -6,10 +6,23 @@ import { tap } from 'rxjs/operators';
 import { Dapp } from '../models/dapps.model';
 import { Platform, NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 declare let appManager: AppManagerPlugin.AppManager;
 declare let titleBarManager: TitleBarPlugin.TitleBarManager;
+
 let managerService: any;
+
+enum MessageType {
+    INTERNAL = 1,
+    IN_RETURN = 2,
+    IN_REFRESH = 3,
+
+    EXTERNAL = 11,
+    EX_LAUNCHER = 12,
+    EX_INSTALL = 13,
+    EX_RETURN = 14,
+};
 
 @Injectable({
   providedIn: 'root'
@@ -47,17 +60,22 @@ export class DappsService {
     private http: HttpClient,
     private platform: Platform,
     private router: Router,
-    private navController: NavController
+    private navController: NavController,
+    private translate: TranslateService,
+    private zone: NgZone
   ) {
   }
 
-  //// Initial render ////
+  /********** Initial Render **********/
   init() {
     console.log("AppmanagerService init");
+    this.getLanguage();
 
-    // Load app manager only on real device, not in desktop browser - beware: ionic 4 bug with "desktop" or "android"/"ios"
     if(this.platform.platforms().indexOf("cordova") >= 0) {
-      console.log("Listening to intent events")
+      console.log("Listening to intent and message events");
+      appManager.setListener((msg) => {
+        this.onMessageReceived(msg);
+      });
       appManager.setIntentListener(
         this.onReceiveIntent
       );
@@ -69,7 +87,42 @@ export class DappsService {
     }
   }
 
-  //// Listen to intent ////
+  getLanguage() {
+    appManager.getLocale(
+      (defaultLang, currentLang, systemLang) => {
+        this.setCurLang(currentLang);
+      }
+    );
+  }
+
+  setCurLang(lang: string) {
+    console.log("Setting current language to "+ lang);
+
+    this.zone.run(()=>{
+      this.translate.use(lang);
+    });
+  }
+
+  /********** Message Listener **********/
+  onMessageReceived(msg: AppManagerPlugin.ReceivedMessage) {
+    var params: any = msg.message;
+    if (typeof (params) == "string") {
+      try {
+          params = JSON.parse(params);
+      } catch (e) {
+          console.log('Params are not JSON format: ', params);
+      }
+    }
+    switch (msg.type) {
+      case MessageType.IN_REFRESH:
+        if (params.action === "currentLocaleChanged") {
+            this.setCurLang(params.data);
+        }
+        break;
+    }
+  }
+
+  /********** Intent Listener **********/
   onReceiveIntent = (ret) => {
     console.log("Intent received", ret);
 
@@ -85,6 +138,7 @@ export class DappsService {
     }
   }
 
+  /********** Titlebar Management **********/
   setTitleBarBackKeyShown(show: boolean) {
     if (show) {
         titleBarManager.setIcon(TitleBarPlugin.TitleBarIconSlot.INNER_LEFT, {

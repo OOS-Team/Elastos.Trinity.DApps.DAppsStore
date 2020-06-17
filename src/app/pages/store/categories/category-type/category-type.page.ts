@@ -5,6 +5,7 @@ import { ToastController } from '@ionic/angular';
 
 import { DappsService } from '../../../../services/dapps.service';
 import { Dapp } from '../../../../models/dapps.model';
+import { TranslateService } from '@ngx-translate/core';
 
 declare let titleBarManager: TitleBarPlugin.TitleBarManager;
 
@@ -31,7 +32,8 @@ export class CategoryTypePage implements OnInit {
     public dappsService: DappsService,
     private route: ActivatedRoute,
     private navCtrl: NavController,
-    public toastController: ToastController
+    public toastController: ToastController,
+    public translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -50,7 +52,7 @@ export class CategoryTypePage implements OnInit {
   }
 
   ionViewWillEnter() {
-    titleBarManager.setTitle(this.categoryType.charAt(0).toUpperCase() + this.categoryType.slice(1));
+    titleBarManager.setTitle(this.translate.instant(this.categoryType));
     this.dappsService.setTitleBarBackKeyShown(true);
   }
 

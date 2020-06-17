@@ -4,6 +4,7 @@ import { ToastController, AlertController } from '@ionic/angular';
 import { DappsService } from 'src/app/services/dapps.service';
 import { Dapp } from 'src/app/models/dapps.model';
 import { Category } from 'src/app/models/categories.model';
+import { TranslateService } from '@ngx-translate/core';
 
 declare let appManager: AppManagerPlugin.AppManager;
 declare let titleBarManager: TitleBarPlugin.TitleBarManager;
@@ -23,6 +24,7 @@ export class HomePage implements OnInit {
 
   constructor(
     public dappsService: DappsService,
+    public translate: TranslateService,
     public toastController: ToastController,
     private alertController: AlertController,
     private zone: NgZone
@@ -53,7 +55,7 @@ export class HomePage implements OnInit {
   }
 
   ionViewWillEnter() {
-    titleBarManager.setTitle("Capsule Marketplace");
+    titleBarManager.setTitle(this.translate.instant("capsule-market"));
     titleBarManager.setBackgroundColor("#FFFFFF");
     titleBarManager.setForegroundMode(TitleBarPlugin.TitleBarForegroundMode.DARK);
     titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.HOME);

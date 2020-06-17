@@ -6,6 +6,7 @@ import { ToastController } from '@ionic/angular';
 
 import { Dapp } from '../../../../models/dapps.model';
 import { DappsService } from '../../../../services/dapps.service';
+import { TranslateService } from '@ngx-translate/core';
 
 declare let appManager: AppManagerPlugin.AppManager;
 declare let titleBarManager: TitleBarPlugin.TitleBarManager;
@@ -26,7 +27,8 @@ export class DappDetailPage implements OnInit {
     private route: ActivatedRoute,
     private navCtrl: NavController,
     private imageLoader: ImageLoaderService,
-    public toastController: ToastController
+    public toastController: ToastController,
+    public translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -39,12 +41,13 @@ export class DappDetailPage implements OnInit {
       this.dappIcon = this.dappsService.getAppIcon(this.dapp);
       this.dappBanner = this.dappsService.getAppBanner(this.dapp);
       console.log('Dapp', this.dapp);
+      console.log('Dapp banner', this.dappBanner);
     });
     this.imageLoader.preload('/../../../assets/store/appbanner.jpg');
   }
 
   ionViewWillEnter() {
-    titleBarManager.setTitle("Capsule Info");
+    titleBarManager.setTitle(this.translate.instant('capsule-info'));
     this.dappsService.setTitleBarBackKeyShown(true);
   }
 

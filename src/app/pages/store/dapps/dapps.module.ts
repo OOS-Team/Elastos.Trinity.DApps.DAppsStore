@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { IonicImageLoader } from 'ionic-image-loader';
 
 import { DappsPage } from './dapps.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     IonicImageLoader,
+    TranslateModule,
     RouterModule.forChild(routes)
   ],
   declarations: [

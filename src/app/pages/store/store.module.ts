@@ -4,12 +4,14 @@ import { IonicModule } from '@ionic/angular';
 
 import { StorePage } from './store.page';
 import { StoreRoutingModule } from './store-routing.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     IonicModule,
-    StoreRoutingModule
+    StoreRoutingModule,
+    TranslateModule
   ],
   declarations: [
     StorePage

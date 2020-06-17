@@ -3,6 +3,7 @@ import { ToastController } from '@ionic/angular';
 
 import { DappsService } from '../../../services/dapps.service';
 import { Dapp } from '../../../models/dapps.model';
+import { TranslateService } from '@ngx-translate/core';
 
 declare let titleBarManager: TitleBarPlugin.TitleBarManager;
 
@@ -28,6 +29,7 @@ export class DappsPage implements OnInit {
   constructor(
     public dappsService: DappsService,
     public toastController: ToastController,
+    public translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -46,7 +48,7 @@ export class DappsPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    titleBarManager.setTitle("Capsules");
+    titleBarManager.setTitle(this.translate.instant("capsules"));
     this.dappsService.setTitleBarBackKeyShown(true);
   }
 

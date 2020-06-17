@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 declare let appManager: AppManagerPlugin.AppManager;
 
@@ -9,7 +10,9 @@ declare let appManager: AppManagerPlugin.AppManager;
 })
 export class StorePage implements OnInit {
 
-  constructor() { }
+  constructor(
+    public translate: TranslateService
+  ) { }
 
   ngOnInit() {
   }

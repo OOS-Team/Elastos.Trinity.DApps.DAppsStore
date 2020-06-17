@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { CategoriesPage } from './categories.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -18,6 +19,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule,
     RouterModule.forChild(routes)
   ],
   declarations: [CategoriesPage]
