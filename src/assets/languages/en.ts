@@ -27,7 +27,7 @@ export const en = {
   'entertainment': 'Entertainment',
   'travel': 'Travel',
   'health': 'Health',
-  'techdemo': 'Techdemo',
+  'techdemo': 'Demo',
 
   /********** Home Page ***********/
   'welcome': 'Welcome',

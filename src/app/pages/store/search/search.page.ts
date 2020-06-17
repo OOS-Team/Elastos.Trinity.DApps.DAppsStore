@@ -38,6 +38,7 @@ export class SearchPage implements OnInit {
       this.dappsService.fetchDapps().subscribe((apps: Dapp[]) => {
         console.log("DApps fetched", apps);
         this.appsLoaded = true;
+        this.dappsService.removeDuplicates();
         this.dapps = apps;
       });
     }
@@ -48,7 +49,7 @@ export class SearchPage implements OnInit {
       this.search.setFocus();
     }, 200);
 
-    titleBarManager.setTitle("Search Capsule");
+    titleBarManager.setTitle(this.translate.instant('search-capsule'));
     this.dappsService.setTitleBarBackKeyShown(true);
   }
 

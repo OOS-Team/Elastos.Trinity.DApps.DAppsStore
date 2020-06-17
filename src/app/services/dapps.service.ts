@@ -273,4 +273,15 @@ export class DappsService {
     console.log(site);
     appManager.sendUrlIntent(site, () => {}, ()=> {});
   }
+
+  removeDuplicates() {
+    this._dapps = this._dapps.reduce((apps, current) => {
+        const x = apps.find(app => app._id === current._id);
+        if (!x) {
+            return this._dapps.concat([current]);
+        } else {
+            return this._dapps;
+        }
+    }, []);
+  }
 }
