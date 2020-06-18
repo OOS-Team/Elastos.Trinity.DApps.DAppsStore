@@ -38,7 +38,6 @@ export class SearchPage implements OnInit {
       this.dappsService.fetchDapps().subscribe((apps: Dapp[]) => {
         console.log("DApps fetched", apps);
         this.appsLoaded = true;
-        this.dappsService.removeDuplicates();
         this.dapps = apps;
       });
     }

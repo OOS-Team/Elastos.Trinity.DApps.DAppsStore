@@ -185,7 +185,7 @@ export class DappsService {
     this._dapps = [];
     return this.http.get<Dapp[]>('https://dapp-store.elastos.org/apps/list').pipe(
       tap(response => {
-        this._dapps = this._dapps.concat(response);
+        this._dapps = response;
         console.log("DApps concat", this._dapps);
         return this._dapps;
       })
@@ -272,16 +272,5 @@ export class DappsService {
   goToLink(site: string) {
     console.log(site);
     appManager.sendUrlIntent(site, () => {}, ()=> {});
-  }
-
-  removeDuplicates() {
-    this._dapps = this._dapps.reduce((apps, current) => {
-        const x = apps.find(app => app._id === current._id);
-        if (!x) {
-            return this._dapps.concat([current]);
-        } else {
-            return this._dapps;
-        }
-    }, []);
   }
 }
