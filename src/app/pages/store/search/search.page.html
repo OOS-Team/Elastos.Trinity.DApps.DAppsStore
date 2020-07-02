@@ -33,6 +33,7 @@
                 'dapps',
                 app._id
               ]">
+              <img *ngIf="!getAppIcon(app)" src="assets/images/card2.svg">
               <img *ngIf="getAppIcon(app)" [src]="getAppIcon(app)">
             </ion-col>
             <ion-col
