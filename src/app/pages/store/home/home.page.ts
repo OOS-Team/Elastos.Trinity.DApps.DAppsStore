@@ -59,7 +59,7 @@ export class HomePage implements OnInit {
     titleBarManager.setBackgroundColor("#FFFFFF");
     titleBarManager.setForegroundMode(TitleBarPlugin.TitleBarForegroundMode.DARK);
     titleBarManager.setNavigationMode(TitleBarPlugin.TitleBarNavigationMode.HOME);
-    titleBarManager.setupMenuItems([{key: 'registerApp', iconPath: '/assets/images/register.png', title: 'Register Capsule'}]);
+    titleBarManager.setupMenuItems([{key: 'registerApp', iconPath: TitleBarPlugin.BuiltInIcon.EDIT, title: 'Register Capsule'}]);
     titleBarManager.addOnItemClickedListener(this.onItemClickedListener = (menuIcon)=>{
       if (menuIcon.key === "registerApp") {
         console.log('Menu item clicked');

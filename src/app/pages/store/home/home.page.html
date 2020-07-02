@@ -18,7 +18,7 @@
       </ion-card-header>
       <ion-row class="showcase-app" *ngIf="randomDapp"  [routerLink]="['/', 'store', 'tabs', 'dapps', randomDapp._id]">
         <ion-col size="2.5" class="img-container">
-          <img-loader [src]="dappsService.getAppIcon(randomDapp)" useImg></img-loader>
+          <img [src]="dappsService.getAppIcon(randomDapp)">
         </ion-col>
         <ion-col size="9.5" class="dapp-content ion-align-items-center">
           <ion-label>
@@ -50,7 +50,7 @@
                 class="img-container"
                 [routerLink]="['/', 'store', 'tabs', 'dapps', app._id]"
               >
-                  <img-loader [src]="getAppIcon(app)" useImg></img-loader>
+                <img *ngIf="getAppIcon(app)" [src]="getAppIcon(app)">
               </ion-col>
               <ion-col
                 size="6"
