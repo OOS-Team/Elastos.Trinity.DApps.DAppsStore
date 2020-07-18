@@ -68,17 +68,10 @@ export class SearchPage implements OnInit {
       this.appsLoaded = true;
       this.filteredApps = [];
     } else {
-      this.filteredApps = [];
       this.dappsService.fetchFilteredDapps(search).subscribe((apps: Dapp[]) => {
         console.log('Searched apps', apps);
         this.appsLoaded = true;
-        this.dapps.map(dapp => {
-          apps.map(app => {
-            if(dapp.packageName === app.packageName) {
-              this.filteredApps = this.filteredApps.concat(dapp);
-            }
-          });
-        });
+        this.filteredApps = apps;
       });
     }
   }

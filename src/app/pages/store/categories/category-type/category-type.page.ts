@@ -72,20 +72,20 @@ export class CategoryTypePage implements OnInit {
   }
 
   //// Search ////
-  filterDapps(search: string) {
+ /*  filterDapps(search: string) {
     this.appsLoaded = false;
     if (!search) {
       this.appsLoaded = true;
       this.dapps = this.dappsService.getCategory(this.categoryType);
     } else {
-      this.dapps = [];
       this.dappsService.fetchFilteredDapps(search).subscribe((apps: Dapp[]) => {
         this.appsLoaded = true;
+        this.dapps = [];
         let searchedApps = [];
         this.dappsService.dapps.map(dapp => {
           apps.map(app => {
             if(dapp.packageName === app.packageName) {
-              searchedApps = searchedApps.concat(dapp);
+              searchedApps.push(dapp);
               this.dapps = searchedApps.filter(app => app.category === this.categoryType);
               if (this.categoryType === 'new') {
                 this.dapps = searchedApps;
@@ -96,6 +96,26 @@ export class CategoryTypePage implements OnInit {
             }
           });
         });
+      });
+    }
+  } */
+
+  filterDapps(search: string) {
+    this.appsLoaded = false;
+    if (!search) {
+      this.appsLoaded = true;
+      this.dapps = this.dappsService.getCategory(this.categoryType);
+    } else {
+      this.dappsService.fetchFilteredDapps(search).subscribe((apps: Dapp[]) => {
+        this.appsLoaded = true;
+        this.dapps = [];
+        this.dapps = apps.filter(app => app.category === this.categoryType);
+        if (this.categoryType === 'new') {
+          this.dapps = apps;
+        }
+        if (this.categoryType === 'popular') {
+          this.dapps = apps;
+        }
       });
     }
   }

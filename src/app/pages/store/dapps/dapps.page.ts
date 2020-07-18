@@ -67,16 +67,9 @@ export class DappsPage implements OnInit {
       this.appsLoaded = true;
       this.applications = this.dappsService.dapps;
     } else {
-      this.applications = [];
       this.dappsService.fetchFilteredDapps(search).subscribe((apps: Dapp[]) => {
         this.appsLoaded = true;
-        this.dappsService.dapps.map(dapp => {
-          apps.map(app => {
-            if(dapp.packageName === app.packageName) {
-              this.applications = this.applications.concat(dapp);
-            }
-          });
-        });
+        this.applications = apps;
       });
     }
   }
@@ -84,7 +77,7 @@ export class DappsPage implements OnInit {
   //// Filter apps for each category ////
   getApps(cat: string) {
     if (cat === 'new') {
-      return this.dappsService.dapps.filter((dapp) => dapp.category !== 'techdemo');
+      return this.applications.filter((dapp) => dapp.category !== 'techdemo');
     }
     if (cat === 'popular') {
       return this.applications.sort((a, b) => {

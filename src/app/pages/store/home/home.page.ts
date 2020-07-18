@@ -82,7 +82,7 @@ export class HomePage implements OnInit {
 
   getRandomApp() {
     this.randomDapp = this.applications[Math.floor(Math.random() * this.applications.length)];
-    console.log('App showcase', this.randomDapp);
+    console.log('Showcase app', this.randomDapp);
   }
 
   getApps(): Dapp[] {
