@@ -16,15 +16,15 @@
       <ion-card-header>
         <ion-card-title>{{ 'capsule' | translate }} <br>{{ 'showcase' | translate }}</ion-card-title>
       </ion-card-header>
-      <ion-row class="showcase-app" *ngIf="randomDapp"  [routerLink]="['/', 'store', 'tabs', 'dapps', randomDapp._id]">
+      <ion-row class="showcase-app" *ngIf="showcaseDapp"  [routerLink]="['/', 'store', 'tabs', 'dapps', showcaseDapp._id]">
         <ion-col size="2.5" class="img-container">
-          <img *ngIf="!dappsService.getAppIcon(randomDapp)" src="assets/images/card2.svg">
-          <img *ngIf="dappsService.getAppIcon(randomDapp)" [src]="dappsService.getAppIcon(randomDapp)">
+          <img *ngIf="!dappsService.getAppIcon(showcaseDapp)" src="assets/images/card2.svg">
+          <img *ngIf="dappsService.getAppIcon(showcaseDapp)" [src]="dappsService.getAppIcon(showcaseDapp)">
         </ion-col>
         <ion-col size="9.5" class="dapp-content ion-align-items-center">
           <ion-label>
-            <h2>{{ randomDapp.appName }}</h2>
-            <p>{{ randomDapp.appShortDescription }}</p>
+            <h2>{{ showcaseDapp.appName }}</h2>
+            <p>{{ showcaseDapp.appShortDescription }}</p>
           </ion-label>
         </ion-col>
       </ion-row>

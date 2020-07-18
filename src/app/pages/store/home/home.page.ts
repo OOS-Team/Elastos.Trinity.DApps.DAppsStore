@@ -16,9 +16,10 @@ declare let titleBarManager: TitleBarPlugin.TitleBarManager;
 })
 export class HomePage implements OnInit {
 
-  applications: Dapp[] = [];
-  categories: Category[] = [];
-  randomDapp: Dapp;
+  dapps: Dapp[] = [];
+  topCategoriesByAppCount: Category[] = [];
+  showcaseDapp: Dapp;
+
   appsLoaded: boolean = false;
   onItemClickedListener: any;
 
@@ -33,22 +34,22 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     this.appsLoaded = true;
-    this.applications = this.dappsService.dapps;
+    this.dapps = this.dappsService.dapps;
     this.getRandomApp();
 
-    this.dappsService.categories.map(cat => {
-      this.categories.push({
+    this.dappsService.categories.forEach(cat => {
+      this.topCategoriesByAppCount.push({
         name: cat,
         appCount: null
       });
     });
 
-    if(this.applications.length === 0) {
+    if(this.dapps.length === 0) {
       this.appsLoaded = false;
-      this.dappsService.fetchDapps().subscribe((apps: Dapp[]) => {
-        console.log("DApps fetched", apps);
+      this.dappsService.fetchDapps().subscribe((fetchedApps: Dapp[]) => {
+        console.log("DApps fetched", fetchedApps);
         this.appsLoaded = true;
-        this.applications = apps;
+        this.dapps = fetchedApps;
         this.getRandomApp();
       });
     }
@@ -81,24 +82,25 @@ export class HomePage implements OnInit {
   }
 
   getRandomApp() {
-    this.randomDapp = this.applications[Math.floor(Math.random() * this.applications.length)];
-    console.log('Showcase app', this.randomDapp);
+    // Select a random app as a showcase dapp
+    this.showcaseDapp = this.dapps[Math.floor(Math.random() * this.dapps.length)];
+    console.log('Showcase app', this.showcaseDapp);
   }
 
   getApps(): Dapp[] {
-    return this.applications.filter((app) => app.category !== 'techdemo');
+    return this.dapps.filter((app) => app.category !== 'techdemo');
   }
 
   //// Organize categories by the most apps ////
-  getTopCats() {
-    this.applications.map(app => {
-      this.categories.map(cat => {
+  getTopCats(): Category[] {
+    this.dapps.map(app => {
+      this.topCategoriesByAppCount.map(cat => {
         if(app.category === cat.name) {
           cat.appCount++;
         }
-      })
-    })
-    return this.categories.sort((cat1, cat2) => {
+      });
+    });
+    return this.topCategoriesByAppCount.sort((cat1, cat2) => {
       return cat2.appCount - cat1.appCount;
     });
   }

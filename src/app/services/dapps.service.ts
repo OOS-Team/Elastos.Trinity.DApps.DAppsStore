@@ -35,7 +35,7 @@ export class DappsService {
   private catIndex: number;
   private dappBeingLaunched: Dapp = null;
 
-  private _categories = [
+  private _categories: string[] = [
     'new',
     'popular',
     'finance',
@@ -198,15 +198,15 @@ export class DappsService {
     return this.http.get<Dapp[]>(`${this.searchUrl}${this.search}`);
   }
 
-  get dapps() {
+  get dapps(): Dapp[] {
     return [...this._dapps];
   }
 
-  get categories() {
+  get categories(): string[] {
     return [...this._categories];
   }
 
-  getDapp(id: string) {
+  getDapp(id: string): Dapp {
     return {...this._dapps.find(dapp => dapp._id === id)};
   }
 
@@ -218,7 +218,7 @@ export class DappsService {
     return "https://dapp-store.elastos.org/apps/"+app._id+"/banner";
   }
 
-  getCategory(category: string) {
+  getCategory(category: string): Dapp[] {
     if (category === 'new') {
       return [...this._dapps.filter((dapp) => dapp.category !== 'techdemo')];
     }

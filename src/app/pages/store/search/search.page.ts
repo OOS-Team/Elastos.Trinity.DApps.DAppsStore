@@ -19,7 +19,7 @@ export class SearchPage implements OnInit {
   // General
   dapps: Dapp[] = [];
   filteredApps: Dapp[] = [];
-  dapp: string = '';
+  searchInput: string = '';
   appsLoaded: boolean = false;
   startedSearching: boolean = false;
 
@@ -35,10 +35,10 @@ export class SearchPage implements OnInit {
 
     if(this.dapps.length === 0) {
       this.appsLoaded = false;
-      this.dappsService.fetchDapps().subscribe((apps: Dapp[]) => {
-        console.log("DApps fetched", apps);
+      this.dappsService.fetchDapps().subscribe((fetchedApps: Dapp[]) => {
+        console.log("DApps fetched", fetchedApps);
         this.appsLoaded = true;
-        this.dapps = apps;
+        this.dapps = fetchedApps;
       });
     }
   }
@@ -68,10 +68,10 @@ export class SearchPage implements OnInit {
       this.appsLoaded = true;
       this.filteredApps = [];
     } else {
-      this.dappsService.fetchFilteredDapps(search).subscribe((apps: Dapp[]) => {
-        console.log('Searched apps', apps);
+      this.dappsService.fetchFilteredDapps(search).subscribe((searchedApps: Dapp[]) => {
+        console.log('Searched apps', searchedApps);
         this.appsLoaded = true;
-        this.filteredApps = apps;
+        this.filteredApps = searchedApps;
       });
     }
   }

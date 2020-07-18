@@ -15,9 +15,10 @@ declare let titleBarManager: TitleBarPlugin.TitleBarManager;
 export class DappsPage implements OnInit {
 
   // General
-  applications: Dapp[] = [];
-  categories: any[];
-  dapp: string = '';
+  dapps: Dapp[] = [];
+  searchedApps: Dapp[] = [];
+  categories: string[];
+  searchInput: string = '';
   appsLoaded: boolean = false;
 
   slideOpts = {
@@ -34,15 +35,15 @@ export class DappsPage implements OnInit {
 
   ngOnInit() {
     this.appsLoaded = true;
-    this.applications = this.dappsService.dapps;
+    this.dapps = this.dappsService.dapps;
     this.categories = this.dappsService.categories;
 
-    if(this.applications.length === 0) {
+    if(this.dapps.length === 0) {
       this.appsLoaded = false;
-      this.dappsService.fetchDapps().subscribe((apps: Dapp[]) => {
-        console.log("DApps fetched", apps);
+      this.dappsService.fetchDapps().subscribe((fetchedApps: Dapp[]) => {
+        console.log("DApps fetched", fetchedApps);
         this.appsLoaded = true;
-        this.applications = apps;
+        this.dapps = fetchedApps;
       });
     }
   }
@@ -65,11 +66,12 @@ export class DappsPage implements OnInit {
     this.appsLoaded = false;
     if (!search) {
       this.appsLoaded = true;
-      this.applications = this.dappsService.dapps;
+      this.dapps = this.dappsService.dapps;
     } else {
-      this.dappsService.fetchFilteredDapps(search).subscribe((apps: Dapp[]) => {
+      this.dappsService.fetchFilteredDapps(search).subscribe((searchedApps: Dapp[]) => {
         this.appsLoaded = true;
-        this.applications = apps;
+        this.searchedApps = searchedApps;
+        this.dapps = searchedApps;
       });
     }
   }
@@ -77,14 +79,18 @@ export class DappsPage implements OnInit {
   //// Filter apps for each category ////
   getApps(cat: string) {
     if (cat === 'new') {
-      return this.applications.filter((dapp) => dapp.category !== 'techdemo');
+      if (this.searchInput) {
+        return this.searchedApps.filter((dapp) => dapp.category !== 'techdemo');
+      } else {
+        return this.dappsService.dapps.filter((dapp) => dapp.category !== 'techdemo');
+      }
     }
     if (cat === 'popular') {
-      return this.applications.sort((a, b) => {
+      return this.dapps.sort((a, b) => {
         return b.downloadsCount - a.downloadsCount;
       });
     } else {
-      return this.applications.filter(app => app.category === cat);
+      return this.dapps.filter(app => app.category === cat);
     }
   }
 

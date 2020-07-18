@@ -11,7 +11,7 @@ declare let titleBarManager: TitleBarPlugin.TitleBarManager;
 })
 export class CategoriesPage implements OnInit {
 
-  categories: any[];
+  categories: string[];
 
   constructor(private dappsService: DappsService, public translate: TranslateService) { }
 
