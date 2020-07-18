@@ -77,7 +77,7 @@ export class DappsPage implements OnInit {
   }
 
   //// Filter apps for each category ////
-  getApps(cat: string) {
+  getApps(cat: string): Dapp[] {
     if (cat === 'new') {
       if (this.searchInput) {
         return this.searchedApps.filter((dapp) => dapp.category !== 'techdemo');
