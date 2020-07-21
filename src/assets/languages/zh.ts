@@ -6,6 +6,7 @@ export const zh = {
   'new-releases': 'New Releases',
   'see-all': 'See All',
   'browse': 'Browse',
+  'open': 'Open',
   'search-capsule': 'Search for Capsule',
   'no-results': 'No Results Found',
   'cats': 'Categories',

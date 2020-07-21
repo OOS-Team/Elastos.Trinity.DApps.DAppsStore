@@ -18,12 +18,12 @@ export class SplashscreenPage implements OnInit {
 
   ngOnInit() {}
 
-  ionViewDidEnter() {
+/*   ionViewDidEnter() {
     this.splashScreen.hide();
     setTimeout(() => {
       this.modalCtrl.dismiss();
     }, 3000);
 
     appManager.setVisible("show", ()=>{}, (err)=>{});
-  }
+  } */
 }

@@ -26,7 +26,6 @@ ion-list {
   padding: 0;
 
   .section {
-
     .section-title {
       p {
         margin: 12px 0;
@@ -73,6 +72,10 @@ ion-list {
         }
       }
     }
+  }
+
+  .removeBorder {
+    border-bottom: none;
   }
 
   ion-spinner {

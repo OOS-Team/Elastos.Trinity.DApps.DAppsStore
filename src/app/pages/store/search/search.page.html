@@ -19,7 +19,11 @@
 
   <ion-list *ngIf="appsLoaded && filteredApps.length > 0" class="ion-no-padding">
     <ion-virtual-scroll [items]="filteredApps" approxItemHeight="240px">
-      <ion-item *virtualItem="let app" lines="none">
+      <ion-item
+        *virtualItem="let app"
+        [class.removeBorder]="app === filteredApps[filteredApps.length - 1]"
+        lines="none"
+      >
         <ion-grid class="ion-no-padding">
           <ion-row>
             <ion-col
@@ -54,7 +58,7 @@
             </ion-col>
             <ion-col size="3.75" size-xs="3.75" class="btn-container">
               <ion-button  color="tertiary" (click)="dappsService.startApp(app)">
-                <ion-label>{{ 'browse' | translate }}</ion-label>
+                <ion-label>{{ 'open' | translate }}</ion-label>
               </ion-button>
             </ion-col>
           </ion-row>

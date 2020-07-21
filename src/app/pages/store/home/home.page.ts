@@ -54,6 +54,18 @@ export class HomePage implements OnInit {
       });
     }
   }
+/*
+  async getAppInfo() {
+    if(this.dapps.length === 0) {
+      this.appsLoaded = false;
+      this.dappsService.fetchDapps().subscribe((fetchedApps: Dapp[]) => {
+        console.log("DApps fetched", fetchedApps);
+        this.appsLoaded = true;
+        this.dapps = await this.dappsService.getAppInfo(fetchedApps);
+        this.getRandomApp();
+      });
+    }
+  }  */
 
   ionViewWillEnter() {
     titleBarManager.setTitle(this.translate.instant("capsule-market"));

@@ -6,6 +6,8 @@ ion-grid {
     border-radius: 20px;
     box-shadow: 0 0 20px 20px #F2F2F2;
     margin-bottom: 30px;
+    // box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    box-shadow: 0 3px 15px 0 #ededf0;
 
     ion-card-title {
       font-weight: 900;
@@ -166,6 +168,10 @@ ion-grid {
           }
         }
       }
+    }
+
+    .removeBorder {
+      border-bottom: none;
     }
   }
 

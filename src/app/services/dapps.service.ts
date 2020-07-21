@@ -187,6 +187,7 @@ export class DappsService {
       tap(response => {
         this._dapps = response;
         console.log("DApps concat", this._dapps);
+        // this.getAppInfo(this._dapps);
         return this._dapps;
       })
     );
@@ -272,5 +273,64 @@ export class DappsService {
   goToLink(site: string) {
     console.log(site);
     appManager.sendUrlIntent(site, () => {}, ()=> {});
+  }
+
+  /************* Under construction *************/
+
+ /*  getAppInfo(dapps: Dapp[]) {
+    return new Promise((resolve, reject) => {
+      appManager.getAppInfos((appInfo) => {
+        console.log("App infos", appInfo)
+        let installedApps = Object.values(appInfo);
+        let storeApps = dapps;
+
+        for(let i = 0; i < installedApps.length; i++) {
+          storeApps.forEach((storeApp) => {
+            if(storeApp._id === installedApps[i].id) {
+              storeApp.installed = true;
+              storeApp.updateAvailable = storeApp.versionCode <= installedApps.version ? false : true;
+            }
+          });
+        }
+        resolve(storeApps);
+      });
+    });
+  }
+ */
+
+ /*  getAppInfo(dapps: Dapp[]) {
+    appManager.getAppInfos((info) => {
+      console.log("App infos", info)
+      let installedApps = Object.values(info);
+
+      dapps.map(dapp => {
+        installedApps.map(app => {
+          if (dapp.packageName === app.id) {
+            dapp.installed = true;
+
+            if (app.id && dapp.versionName !== app.version) {
+              console.log(
+                'Versions are different', dapp.packageName,
+                ' Store version =', dapp.versionName,
+                ' Current version =', app.version
+              );
+              dapp.updateAvailable = this.checkVersion(app.version, dapp.versionName);
+            }
+          }
+        });
+      });
+    });
+  } */
+
+  // Since versions aren't numbers nor can they be converted, we need to loop through each number of each version and compare them
+  checkVersion(installedVer, storeVer): boolean {
+    const oldVer = installedVer.split('.')
+    const newVer = storeVer.split('.')
+    for (var i = 0; i < storeVer.length; i++) {
+      const a = parseInt(newVer[i]) || 0
+      const b = parseInt(oldVer[i]) || 0
+      if (a > b) return true // If new version is bigger than old version
+      if (a < b) return false // If new version is smaller than old version
+    }
   }
 }

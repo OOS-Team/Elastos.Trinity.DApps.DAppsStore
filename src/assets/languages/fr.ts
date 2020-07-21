@@ -6,6 +6,7 @@ export const fr = {
   'new-releases': 'Nouvelles Capsules',
   'see-all': 'Voir tout',
   'browse': 'Lancer',
+  'open': 'Ouvrir',
   'search-capsule': 'Rechercher une capsule',
   'no-results': 'Aucune capsule trouvée',
   'cats': 'Catégories',

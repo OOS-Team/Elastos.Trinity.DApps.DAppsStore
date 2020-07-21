@@ -42,7 +42,11 @@
         <ion-spinner name="bubbles" color="primary"></ion-spinner>
       </ion-card-title>
       <div *ngIf="appsLoaded">
-        <ion-item *ngFor="let app of getApps().slice(0, 3)" lines="none">
+        <ion-item
+          *ngFor="let app of getApps().slice(0, 3)"
+          [class.removeBorder]="app === getApps()[2]"
+          lines="none"
+        >
           <ion-grid class="ion-no-padding">
             <ion-row>
               <ion-col
@@ -67,7 +71,10 @@
               </ion-col>
               <ion-col size="3.75" size-xs="3.75" class="btn-container">
                 <ion-button  color="tertiary" (click)="dappsService.startApp(app)">
-                  <ion-label>{{ 'browse' | translate }}</ion-label>
+                  <ion-label>{{ 'open' | translate }}</ion-label>
+               <!--    <ion-label *ngIf="!app.installed">Install</ion-label>
+                  <ion-label *ngIf="app.installed && app.updateAvailable">Update</ion-label>
+                  <ion-label *ngIf="app.installed && !app.updateAvailable">Open</ion-label> -->
                 </ion-button>
                 <ion-button color="tertiary" *ngIf="false">
                   <ion-label>

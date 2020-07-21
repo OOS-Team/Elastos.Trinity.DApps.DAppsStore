@@ -6,6 +6,10 @@ ion-list {
   min-height: 100%;
   background: #FAFAFA;
 
+  .removeBorder {
+    border-bottom: none;
+  }
+
   .btn-container {
     display: flex;
     justify-content: center;
