@@ -30,6 +30,8 @@ enum MessageType {
 export class DappsService {
 
   public _dapps: Dapp[] = [];
+  public installedApps: AppManagerPlugin.AppInfo[] = [];
+
   private searchUrl: string = 'https://dapp-store.elastos.org/apps/list?s=';
   private search: string = '';
   private catIndex: number;
@@ -70,6 +72,7 @@ export class DappsService {
   init() {
     console.log("AppmanagerService init");
     this.getLanguage();
+    this.getInstalledApps();
 
     if(this.platform.platforms().indexOf("cordova") >= 0) {
       console.log("Listening to intent and message events");
@@ -100,6 +103,17 @@ export class DappsService {
 
     this.zone.run(()=>{
       this.translate.use(lang);
+    });
+  }
+
+  getInstalledApps() {
+    console.log('Fetching installed apps');
+    appManager.getAppInfos((info) => {
+      console.log("Installed apps", info)
+      this.zone.run(() => {
+        this.installedApps = Object.values(info);
+        console.log('Installed apps', this.installedApps);
+      });
     });
   }
 
@@ -181,13 +195,12 @@ export class DappsService {
   }
 
   fetchDapps(): Observable<Dapp[]> {
-    console.log("Fetching DApps");
+    console.log("Fetching apps from store");
     this._dapps = [];
     return this.http.get<Dapp[]>('https://dapp-store.elastos.org/apps/list').pipe(
       tap(response => {
         this._dapps = response;
-        console.log("DApps concat", this._dapps);
-        // this.getAppInfo(this._dapps);
+        console.log("Apps fetched from service", this._dapps);
         return this._dapps;
       })
     );
@@ -233,6 +246,26 @@ export class DappsService {
     }
   }
 
+  getDisplayableButton(storeApp: Dapp): string {
+    if(this.installedApps.length === 0) {
+      return this.translate.instant('open');
+    } else {
+      let installedApp = this.installedApps.find((installedApp) => installedApp.id === storeApp._id);
+
+      if(installedApp) {
+        let currentVersion: number = installedApp.versionCode;
+        let storeVersion: number = storeApp.versionCode;
+        if (storeVersion > currentVersion) {
+          return this.translate.instant('update');
+        } else {
+          return this.translate.instant('open');
+        }
+      } else {
+        return this.translate.instant('install');
+      }
+    }
+  }
+
   setCatIndex(index: number) {
     this.catIndex = index;
   }
@@ -273,64 +306,5 @@ export class DappsService {
   goToLink(site: string) {
     console.log(site);
     appManager.sendUrlIntent(site, () => {}, ()=> {});
-  }
-
-  /************* Under construction *************/
-
- /*  getAppInfo(dapps: Dapp[]) {
-    return new Promise((resolve, reject) => {
-      appManager.getAppInfos((appInfo) => {
-        console.log("App infos", appInfo)
-        let installedApps = Object.values(appInfo);
-        let storeApps = dapps;
-
-        for(let i = 0; i < installedApps.length; i++) {
-          storeApps.forEach((storeApp) => {
-            if(storeApp._id === installedApps[i].id) {
-              storeApp.installed = true;
-              storeApp.updateAvailable = storeApp.versionCode <= installedApps.version ? false : true;
-            }
-          });
-        }
-        resolve(storeApps);
-      });
-    });
-  }
- */
-
- /*  getAppInfo(dapps: Dapp[]) {
-    appManager.getAppInfos((info) => {
-      console.log("App infos", info)
-      let installedApps = Object.values(info);
-
-      dapps.map(dapp => {
-        installedApps.map(app => {
-          if (dapp.packageName === app.id) {
-            dapp.installed = true;
-
-            if (app.id && dapp.versionName !== app.version) {
-              console.log(
-                'Versions are different', dapp.packageName,
-                ' Store version =', dapp.versionName,
-                ' Current version =', app.version
-              );
-              dapp.updateAvailable = this.checkVersion(app.version, dapp.versionName);
-            }
-          }
-        });
-      });
-    });
-  } */
-
-  // Since versions aren't numbers nor can they be converted, we need to loop through each number of each version and compare them
-  checkVersion(installedVer, storeVer): boolean {
-    const oldVer = installedVer.split('.')
-    const newVer = storeVer.split('.')
-    for (var i = 0; i < storeVer.length; i++) {
-      const a = parseInt(newVer[i]) || 0
-      const b = parseInt(oldVer[i]) || 0
-      if (a > b) return true // If new version is bigger than old version
-      if (a < b) return false // If new version is smaller than old version
-    }
   }
 }

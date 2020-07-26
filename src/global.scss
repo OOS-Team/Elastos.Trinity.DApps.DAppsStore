@@ -70,9 +70,13 @@
   font-family: 'Raleway' !important;
 }
 
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
 // ** Header ** //
 ion-header {
-
   ion-toolbar {
     margin-top: 20px;
 

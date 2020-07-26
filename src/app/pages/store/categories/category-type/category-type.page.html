@@ -37,7 +37,7 @@
         [class.removeBorder]="app === dapps[dapps.length - 1]"
         lines="none"
       >
-        <ion-grid class="ion-no-padding">
+        <ion-grid class="ion-no-padding ion-activatable ripple">
           <ion-row>
             <ion-col
               size="2.25"
@@ -71,10 +71,11 @@
             </ion-col>
             <ion-col size="3.75" size-xs="3.75" class="btn-container">
               <ion-button color="tertiary" (click)="dappsService.startApp(app)">
-                <ion-label>{{ 'open' | translate }}</ion-label>
+                <ion-label>{{ dappsService.getDisplayableButton(app) }}</ion-label>
               </ion-button>
             </ion-col>
           </ion-row>
+          <ion-ripple-effect></ion-ripple-effect>
         </ion-grid>
       </ion-item>
     </ion-virtual-scroll>

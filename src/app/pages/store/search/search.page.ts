@@ -36,7 +36,7 @@ export class SearchPage implements OnInit {
     if(this.dapps.length === 0) {
       this.appsLoaded = false;
       this.dappsService.fetchDapps().subscribe((fetchedApps: Dapp[]) => {
-        console.log("DApps fetched", fetchedApps);
+        console.log("Apps fetched from search page", fetchedApps);
         this.appsLoaded = true;
         this.dapps = fetchedApps;
       });

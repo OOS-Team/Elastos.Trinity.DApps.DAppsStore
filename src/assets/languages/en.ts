@@ -7,6 +7,8 @@ export const en = {
   'see-all': 'See All',
   'browse': 'Browse',
   'open': 'Open',
+  'update': 'Update',
+  'install': 'Install',
   'search-capsule': 'Search for Capsule',
   'no-results': 'No Results Found',
   'cats': 'Categories',

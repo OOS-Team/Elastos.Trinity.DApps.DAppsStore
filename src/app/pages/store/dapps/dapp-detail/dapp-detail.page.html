@@ -17,7 +17,7 @@
     <ion-row class="ion-padding-top">
       <ion-col size="12" class="btn-container">
         <ion-button  color="tertiary" (click)="dappsService.startApp(dapp)">
-          <ion-label>{{ 'open' | translate }}</ion-label>
+          <ion-label>{{ dappsService.getDisplayableButton(dapp) }}</ion-label>
         </ion-button>
       </ion-col>
     </ion-row>
