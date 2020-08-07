@@ -250,7 +250,7 @@ export class DappsService {
     if(this.installedApps.length === 0) {
       return this.translate.instant('open');
     } else {
-      let installedApp = this.installedApps.find((installedApp) => installedApp.id === storeApp._id);
+      let installedApp = this.installedApps.find((installedApp) => installedApp.id === storeApp.packageName);
 
       if(installedApp) {
         let currentVersion: number = installedApp.versionCode;
@@ -282,7 +282,9 @@ export class DappsService {
       { id: dapp.packageName },
       {},
       (res) => {
-        this.dappBeingLaunched = null;
+          console.log('app intent success', res);
+          this.getInstalledApps();
+          this.dappBeingLaunched = null;
       },
       (err) => {
         console.log('Failed to launch app using /app intent: ' + err);
